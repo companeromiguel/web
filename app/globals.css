@@ -1,26 +1,164 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
+/* ─────────────────────────────────────────────
+   TMCWD Brand Palette + shadcn design tokens
+───────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Fonts (variables set by next/font in layout.tsx) */
+  --font-sans:    var(--font-inter);
+  --font-heading: var(--font-source-serif);
+  --font-mono:    var(--font-geist-mono);
+
+  /* ── TMCWD named colors ── */
+  --color-brand-indigo:  #370A77; /* primary brand — hero/header backgrounds */
+  --color-brand-blue:    #0591D4; /* primary interactive — buttons, icons     */
+  --color-brand-sky:     #24B2EA; /* secondary accent                         */
+  --color-brand-charcoal:#2A2A29; /* body text                                */
+  --color-brand-black:   #000000; /* utility bar, footer                      */
+  --color-brand-ice:     #DEEEFA; /* light section backgrounds                */
+  --color-brand-steel:   #A1CBE1; /* borders, secondary backgrounds           */
+  --color-brand-mauve:   #D7CCCD; /* alert/notice banners                     */
+
+  /* ── shadcn semantic tokens (light mode defaults) ── */
+  --color-background:    var(--background);
+  --color-foreground:    var(--foreground);
+  --color-primary:       var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary:     var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted:         var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent:        var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive:   var(--destructive);
+  --color-border:        var(--border);
+  --color-input:         var(--input);
+  --color-ring:          var(--ring);
+  --color-card:          var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover:       var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-sidebar:       var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring:  var(--sidebar-ring);
+  --color-chart-1:       var(--chart-1);
+  --color-chart-2:       var(--chart-2);
+  --color-chart-3:       var(--chart-3);
+  --color-chart-4:       var(--chart-4);
+  --color-chart-5:       var(--chart-5);
+
+  --radius-sm:  calc(var(--radius) * 0.6);
+  --radius-md:  calc(var(--radius) * 0.8);
+  --radius-lg:  var(--radius);
+  --radius-xl:  calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─────────────────────────────────────────────
+   shadcn :root variables — wired to TMCWD brand
+───────────────────────────────────────────── */
+:root {
+  --background:           oklch(1 0 0);
+  --foreground:           #2A2A29; /* brand-charcoal */
+
+  --card:                 oklch(1 0 0);
+  --card-foreground:      #2A2A29;
+  --popover:              oklch(1 0 0);
+  --popover-foreground:   #2A2A29;
+
+  /* Primary → brand indigo */
+  --primary:              #370A77;
+  --primary-foreground:   oklch(0.985 0 0);
+
+  /* Secondary → brand ice */
+  --secondary:            #DEEEFA;
+  --secondary-foreground: #2A2A29;
+
+  --muted:                #DEEEFA;
+  --muted-foreground:     oklch(0.48 0 0);
+
+  /* Accent → brand blue */
+  --accent:               #0591D4;
+  --accent-foreground:    oklch(0.985 0 0);
+
+  --destructive:          oklch(0.577 0.245 27.325);
+
+  --border:               #A1CBE1; /* brand-steel */
+  --input:                #A1CBE1;
+  --ring:                 #0591D4; /* brand-blue  */
+
+  --radius:               0.375rem; /* slightly tighter than default — civic feel */
+
+  --chart-1: #370A77;
+  --chart-2: #0591D4;
+  --chart-3: #24B2EA;
+  --chart-4: #A1CBE1;
+  --chart-5: #D7CCCD;
+
+  --sidebar:                     #370A77;
+  --sidebar-foreground:          oklch(0.985 0 0);
+  --sidebar-primary:             #0591D4;
+  --sidebar-primary-foreground:  oklch(0.985 0 0);
+  --sidebar-accent:              #24B2EA;
+  --sidebar-accent-foreground:   oklch(0.985 0 0);
+  --sidebar-border:              oklch(1 0 0 / 15%);
+  --sidebar-ring:                #0591D4;
+}
+
+/* No dark-mode override for now — public utility site defaults to light */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    color: #2A2A29;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), Georgia, serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Water wave animations ─────────────────────────────────────────── */
+@keyframes wave-slide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-wave-slow {
+  animation: wave-slide 10s linear infinite;
+}
+
+.animate-wave-fast {
+  animation: wave-slide 6s linear infinite;
+}
+
+.animate-wave-mid {
+  animation: wave-slide 8s linear infinite reverse;
+}
+
+/* ── Hero background position — right side on mobile, center on desktop ── */
+.hero-section {
+  background-position: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-section {
+    background-position: center;
+  }
 }
