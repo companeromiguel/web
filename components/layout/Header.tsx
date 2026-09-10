@@ -10,6 +10,7 @@ export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -25,7 +26,7 @@ export default function Header() {
       <div
         className={[
           "backdrop-blur-2xl transition-all duration-500",
-          scrolled ? "bg-[#1a6a9a]/75" : "bg-white/5",
+          scrolled || !isHome ? "bg-[#1a6a9a]/75" : "bg-white/5",
         ].join(" ")}
       >
         <div

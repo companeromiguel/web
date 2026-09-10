@@ -46,7 +46,7 @@ export default function HomePage() {
         aria-labelledby="hero-heading"
         className="hero-section relative text-white overflow-hidden min-h-screen flex flex-col"
         style={{
-          backgroundImage: "url('/bgv2.jpg')",
+          backgroundImage: "url('/bgv4.png')",
           backgroundSize: "cover",
         }}
       >
