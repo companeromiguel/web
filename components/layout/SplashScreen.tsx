@@ -4,16 +4,13 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function SplashScreen() {
-  const [phase, setPhase] = useState<"visible" | "fading" | "done">("visible");
+  const [phase, setPhase] = useState<"enter" | "hold" | "exit" | "done">("enter");
 
   useEffect(() => {
-    // Logo appears → hold → fade out
-    const fadeTimer = setTimeout(() => setPhase("fading"), 2200);
-    const doneTimer = setTimeout(() => setPhase("done"), 3000);
-    return () => {
-      clearTimeout(fadeTimer);
-      clearTimeout(doneTimer);
-    };
+    const t1 = setTimeout(() => setPhase("hold"), 800);
+    const t2 = setTimeout(() => setPhase("exit"), 2000);
+    const t3 = setTimeout(() => setPhase("done"), 2700);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
 
   if (phase === "done") return null;
@@ -21,48 +18,39 @@ export default function SplashScreen() {
   return (
     <div
       className={[
-        "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#370A77]",
+        "fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white",
         "transition-opacity duration-700 ease-in-out",
-        phase === "fading" ? "opacity-0 pointer-events-none" : "opacity-100",
+        phase === "exit" ? "opacity-0" : "opacity-100",
       ].join(" ")}
       aria-hidden="true"
     >
-      {/* Logo */}
+      {/* Logo — fades and scales in */}
       <div
         className={[
           "transition-all duration-700 ease-out",
-          phase === "visible" ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4",
+          phase === "enter"
+            ? "opacity-0 scale-90"
+            : "opacity-100 scale-100",
         ].join(" ")}
-        style={{ animationFillMode: "both" }}
       >
         <Image
           src="/logo.png"
           alt=""
-          width={96}
-          height={96}
-          className="size-24 drop-shadow-xl animate-splash-logo"
+          width={72}
+          height={72}
+          className="size-[72px]"
           priority
         />
       </div>
 
-      {/* Org name */}
-      <div
-        className={[
-          "mt-5 text-center transition-all duration-700 delay-300 ease-out",
-          phase === "visible" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
-        ].join(" ")}
-      >
-        <p className="text-white font-bold text-lg tracking-tight leading-snug">
-          Trece Martires City
-        </p>
-        <p className="text-white/70 text-sm mt-0.5 tracking-wide">
-          Water District
-        </p>
-      </div>
-
-      {/* Progress bar */}
-      <div className="absolute bottom-0 left-0 w-full h-[3px] bg-white/10">
-        <div className="h-full bg-[#24B2EA] animate-splash-bar" />
+      {/* Thin animated line below logo */}
+      <div className="mt-8 w-12 h-px bg-[#E8EEF2] overflow-hidden relative">
+        <div
+          className={[
+            "absolute inset-y-0 left-0 bg-[#0591D4] transition-all ease-in-out",
+            phase === "enter" ? "w-0 duration-0" : "w-full duration-[1400ms]",
+          ].join(" ")}
+        />
       </div>
     </div>
   );

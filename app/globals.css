@@ -134,6 +134,156 @@
   }
 }
 
+/* ── Services dropdown — liquid glass panel ───────────────────────── */
+.services-glass {
+  /* Prominent navy-blue tint — clearly frosted, still lets blur show through */
+  background: rgba(15, 60, 100, 0.55);
+  -webkit-backdrop-filter: blur(100px) saturate(180%) brightness(0.95);
+  backdrop-filter: blur(100px) saturate(180%) brightness(0.95);
+  /* Brighter perimeter line to sell the glass edge */
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 18px;
+  box-shadow:
+    /* Outer depth */
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 4px  12px rgba(0, 0, 0, 0.22),
+    /* Glass-edge double inset: strong top highlight + dark bottom rim */
+    inset 0  1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0,   0,   0,   0.20);
+}
+
+/* Caret / triangular pointer — rendered as a JSX sibling element (.dropdown-caret)
+   so each dropdown can position it under its own trigger label independently.   */
+.dropdown-caret {
+  position: absolute;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  background: rgba(140, 150, 160, 0.30);
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  border-top:  1px solid rgba(255, 255, 255, 0.25);
+  transform: rotate(45deg);
+  border-radius: 2px 0 0 0;
+  pointer-events: none;
+}
+
+/* ── Services dropdown — list items ──────────────────────────────── */
+.services-menu-list {
+  max-height: 420px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(5, 145, 212, 0.30) transparent;
+}
+
+.services-menu-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.services-menu-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.services-menu-list::-webkit-scrollbar-thumb {
+  background: rgba(5, 145, 212, 0.30);
+  border-radius: 99px;
+}
+
+.services-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  transition:
+    background  120ms ease,
+    transform   120ms ease,
+    color       120ms ease,
+    box-shadow  120ms ease;
+  /* Suppress browser default; focus-visible rule below re-adds a styled ring */
+  outline: none;
+}
+
+.services-menu-item:hover {
+  /* Nav bar is #1a6a9a — low-opacity tint keeps the glass visible behind */
+  background: rgba(26, 106, 154, 0.25);
+  transform: translateX(2px);
+  color: #ffffff;
+}
+
+.services-menu-item:focus-visible {
+  background: rgba(26, 106, 154, 0.25);
+  transform: translateX(2px);
+  color: #ffffff;
+  /* 2px solid brand-blue ring, inset so it doesn't overlap adjacent rows */
+  box-shadow: inset 0 0 0 2px #0591D4;
+}
+
+.services-menu-item:active {
+  background: rgba(26, 106, 154, 0.42);
+  transform: translateX(1px);
+  color: #ffffff;
+}
+
+/* No-scroll variant — used for short lists (e.g. Transparency: 5 items) */
+.services-menu-list--no-scroll {
+  max-height: none;
+  overflow-y: visible;
+}
+
+/* ── Announcement dropdown — heavy liquid-glass two-layer panel ───── */
+.announcement-dropdown {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* Layer 1: pure blur + tint — sits behind the content so text stays crisp.
+   Values exactly match .services-glass so all dropdowns read as one system. */
+.announcement-blur {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 60, 100, 0.55);
+  -webkit-backdrop-filter: blur(100px) saturate(180%) brightness(0.95);
+  backdrop-filter: blur(100px) saturate(180%) brightness(0.95);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 18px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 4px  12px rgba(0, 0, 0, 0.22),
+    inset 0  1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0,   0,   0,   0.20);
+  z-index: 0;
+}
+
+/* Layer 2: content — floats above the blur layer */
+.announcement-content {
+  position: relative;
+  z-index: 1;
+  padding: 8px;
+}
+
+/* Triangular caret — sibling of .announcement-dropdown, anchored to the
+   relative wrapper so it sits in the pt-3 gap above the glass panel and
+   is never clipped by overflow:hidden. Matches .dropdown-caret geometry. */
+.announcement-caret {
+  position: absolute;
+  top: 6px;             /* sits in the pt-3 (12px) gap, visually touching panel top */
+  left: 20px;           /* aligns roughly under the "Announcement" label text */
+  width: 12px;
+  height: 12px;
+  background: rgba(140, 150, 160, 0.30);
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  border-top:  1px solid rgba(255, 255, 255, 0.25);
+  transform: rotate(45deg);
+  border-radius: 2px 0 0 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
 /* ── Water wave animations ─────────────────────────────────────────── */
 @keyframes wave-slide {
   0%   { transform: translateX(0); }
@@ -152,9 +302,9 @@
   animation: wave-slide 8s linear infinite reverse;
 }
 
-/* ── Hero background position — right side on mobile, center on desktop ── */
+/* ── Hero background position — left on mobile, center on desktop ── */
 .hero-section {
-  background-position: center;
+  background-position: left center;
 }
 
 @media (min-width: 1024px) {
@@ -163,22 +313,49 @@
   }
 }
 
-/* ── Splash screen animations ──────────────────────────────────────── */
-@keyframes splash-logo {
-  0%   { opacity: 0; transform: scale(0.8); }
-  60%  { opacity: 1; transform: scale(1.05); }
-  100% { opacity: 1; transform: scale(1); }
+
+/* ── About TMCWD — seamless vertical auto-scroll ─────────────────── */
+.about-scroller-window {
+  height: 8rem;           /* visible viewport — adjust to show more/less text */
+  overflow: hidden;
+  position: relative;
+  /* Soft fade at top and bottom edges */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
 }
 
-@keyframes splash-bar {
-  0%   { width: 0%; }
-  100% { width: 100%; }
+/*
+ * The track holds BOTH copies back-to-back in normal flow.
+ * Animating translateY(-50%) moves exactly one copy's height upward,
+ * at which point the second copy is pixel-identical to where the first
+ * started — so the snap-back at 0% is completely invisible.
+ */
+.about-scroller-track {
+  animation: about-loop-up 22s linear infinite;
 }
 
-.animate-splash-logo {
-  animation: splash-logo 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.about-scroller-window:hover .about-scroller-track {
+  animation-play-state: paused;
 }
 
-.animate-splash-bar {
-  animation: splash-bar 2s ease-in-out forwards;
+/* Gap between the two copies so they don't run together */
+.about-scroller-copy {
+  padding-bottom: 2.5rem;
+}
+
+@keyframes about-loop-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
 }
