@@ -180,7 +180,14 @@ const sections: GallerySection[] = [
   {
     id: "team-building-2013",
     title: "2013 TMCWD Team Building",
-    images: [], // photos to be added
+    images: [
+      { src: "/gallery/2013 TMCWD TEAM BUILDING/copy-of-dsc05499_orig.jpg", alt: "2013 TMCWD Team Building" },
+      { src: "/gallery/2013 TMCWD TEAM BUILDING/dsc03609_orig.jpg",         alt: "2013 TMCWD Team Building" },
+      { src: "/gallery/2013 TMCWD TEAM BUILDING/dsc03610_orig.jpg",         alt: "2013 TMCWD Team Building" },
+      { src: "/gallery/2013 TMCWD TEAM BUILDING/dsc03611_orig.jpg",         alt: "2013 TMCWD Team Building" },
+      { src: "/gallery/2013 TMCWD TEAM BUILDING/dsc03617_orig.jpg",         alt: "2013 TMCWD Team Building" },
+      { src: "/gallery/2013 TMCWD TEAM BUILDING/dsc03621_orig.jpg",         alt: "2013 TMCWD Team Building" },
+    ],
   },
   {
     id: "world-water-day-2012",
