@@ -366,3 +366,52 @@
   background-size: cover;
   background-position: 70% center; /* match objectPosition in HeroBackground.tsx */
 }
+
+/* ── Hero crossfade slideshow ────────────────────────────────────── */
+/*
+ * Two image layers crossfade in a loop.
+ * Total cycle = 13s:  5s hold → 1.5s fade-out → 5s hold → 1.5s fade-in
+ *
+ * Layer 1 starts visible (opacity 1) and fades out at the halfway point.
+ * Layer 2 starts invisible (opacity 0) and fades in at the halfway point.
+ * Because they are stacked, the top layer fading out reveals the one below.
+ *
+ * Percentage math for 13s cycle:
+ *   0%          → start of hold
+ *   38.46%      → end of hold  (5s / 13s)
+ *   50%         → end of fade  (6.5s / 13s)
+ *   88.46%      → end of hold  (11.5s / 13s)
+ *   100%        → back to start
+ */
+
+@keyframes hero-fade-1 {
+  0%,    38.46% { opacity: 1; }
+  50%,   88.46% { opacity: 0; }
+  100%           { opacity: 1; }
+}
+
+@keyframes hero-fade-2 {
+  0%,    38.46% { opacity: 0; }
+  50%,   88.46% { opacity: 1; }
+  100%           { opacity: 0; }
+}
+
+.hero-slide {
+  background-size: cover;
+  /* Mobile: favour right-of-centre to keep subject visible */
+  background-position: 70% center;
+}
+
+@media (min-width: 1024px) {
+  .hero-slide {
+    background-position: center center;
+  }
+}
+
+.hero-slide-1 {
+  animation: hero-fade-1 13s ease-in-out infinite;
+}
+
+.hero-slide-2 {
+  animation: hero-fade-2 13s ease-in-out infinite;
+}
