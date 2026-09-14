@@ -369,32 +369,46 @@
 
 /* ── Hero crossfade slideshow — 3 images ────────────────────────── */
 /*
- * Total cycle = 12s  (3s hold + 1s fade) × 3 images
+ * Technique: all 3 layers are stacked. The TOP layer (z-index highest)
+ * animates opacity 1→0. The layer beneath is always opaque.
+ * This means the combined opacity across the stack is ALWAYS 1 —
+ * no gray flash, no dark gap, ever.
  *
- * Percentage math for 12s cycle:
- *   0%      → 0s   start of hold
- *   25%     → 3s   end of hold      (3  / 12)
- *   33.33%  → 4s   end of fade-out  (4  / 12)
- *   99.99%  → stay invisible
- *   100%    → snap back to 1 for seamless loop
+ * Layer stacking order (highest on top):
+ *   .hero-slide-1  z-index 3  — animates out first
+ *   .hero-slide-2  z-index 2  — animates out second
+ *   .hero-slide-3  z-index 1  — always visible as base (never fades)
  *
- * Negative delays pre-advance each layer so there's no blank frame on load:
- *   Layer 1: 0s   (its slot starts at  0s)
- *   Layer 2: -8s  (its slot starts at  4s, pre-advanced by 12-8=4s... delay = -(12-4) = -8s)
- *   Layer 3: -4s  (its slot starts at  8s, pre-advanced by 4s)
+ * Sequence: bgv1 fades out → bgv2 visible → bgv2 fades out → bgv3 visible
+ *           → bgv3 fades out → bgv1 fades in → repeat
+ *
+ * Cycle = 12s  (3s hold + 1s fade) × 3 slots
+ *
+ * Percentage math (12s):
+ *   0–25%     hold at 1          (0–3s)
+ *   25–33.33% fade 1→0           (3–4s)
+ *   33.33–99% stay at 0          (4–12s)
+ *   100%      snap back to 1
+ *
+ * Delays:
+ *   Layer 1: 0s    (fades out first, revealing layer 2)
+ *   Layer 2: -8s   (fades out second, revealing layer 3)
+ *   Layer 3: stays at opacity 1 with its own 12s cycle starting pre-advanced
+ *            so it fades in after layer 2 exits (delay -4s, but starts at 0)
  */
 
-@keyframes hero-fade {
-  0%,    25%    { opacity: 1; }   /* hold visible   */
-  33.33%        { opacity: 0; }   /* finish fade-out */
-  99.99%        { opacity: 0; }   /* stay hidden     */
-  100%          { opacity: 1; }   /* snap back       */
+@keyframes hero-fade-out {
+  0%,    25%    { opacity: 1; }   /* hold                */
+  33.33%        { opacity: 0; }   /* fade out            */
+  99.99%        { opacity: 0; }   /* stay hidden         */
+  100%          { opacity: 1; }   /* snap back           */
 }
 
 .hero-slide {
   background-size: cover;
   background-position: 70% center;
-  opacity: 0;
+  position: absolute;
+  inset: 0;
 }
 
 @media (min-width: 1024px) {
@@ -403,17 +417,26 @@
   }
 }
 
-.hero-slide-1 {
-  animation: hero-fade 12s ease-in-out infinite;
-  animation-delay: 0s;
+/* Layer 3 — bgv3 — bottom of stack, always the base */
+.hero-slide-3 {
+  z-index: 1;
+  opacity: 1;
+  animation: hero-fade-out 12s linear infinite;
+  animation-delay: -4s;
 }
 
+/* Layer 2 — bgv2 — middle, covers bgv3 until it fades */
 .hero-slide-2 {
-  animation: hero-fade 12s ease-in-out infinite;
+  z-index: 2;
+  opacity: 1;
+  animation: hero-fade-out 12s linear infinite;
   animation-delay: -8s;
 }
 
-.hero-slide-3 {
-  animation: hero-fade 12s ease-in-out infinite;
-  animation-delay: -4s;
+/* Layer 1 — bgv1 — top, covers bgv2 until it fades */
+.hero-slide-1 {
+  z-index: 3;
+  opacity: 1;
+  animation: hero-fade-out 12s linear infinite;
+  animation-delay: 0s;
 }

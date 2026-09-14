@@ -40,8 +40,8 @@ export default function HeroBackground() {
         aria-hidden="true"
       />
 
-      {/* ── Dark overlay ──────────────────────────────────────────── */}
-      <div className="absolute inset-0 bg-gray-700 opacity-60" aria-hidden="true" />
+      {/* ── Dark overlay — sits above all image layers ───────────── */}
+      <div className="absolute inset-0 bg-gray-700 opacity-60" style={{ zIndex: 4 }} aria-hidden="true" />
     </>
   );
 }
