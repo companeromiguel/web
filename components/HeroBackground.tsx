@@ -1,39 +1,46 @@
 "use client";
 
 /**
- * HeroBackground — CSS crossfade slideshow between static images.
+ * HeroBackground — CSS crossfade slideshow cycling through 3 images.
  *
- * Each image layer sits stacked at absolute inset-0.
- * Layer 1 (bgv1.jpg) fades out then back in on a loop.
- * Layer 2 (bgv2.jpg) is offset by half the cycle so it's visible
- * while layer 1 is invisible — producing a seamless A→B→A crossfade.
+ * Three layers are stacked at absolute inset-0.
+ * Each layer runs the same keyframe animation but with a staggered
+ * animation-delay so only one image is visible at a time.
  *
- * Timing: 5s visible → 1.5s fade → 5s visible → 1.5s fade = 13s total cycle.
- * Controlled entirely by the CSS animations defined in globals.css.
+ * Timing per cycle (19.5s total):
+ *   5s hold → 1.5s fade-out → 5s hold → 1.5s fade-out → 5s hold → 1.5s fade-out
+ *   Layer offsets: bgv1 = 0s, bgv2 = 6.5s, bgv3 = 13s
  *
- * To add more slides, duplicate a layer and adjust animation-delay and the
- * keyframe percentages to divide the cycle evenly across N images.
+ * To add a 4th image: set cycle to 26s, add a layer with delay 19.5s,
+ * and update the @keyframes percentages in globals.css accordingly.
  */
 export default function HeroBackground() {
   return (
     <>
-      {/* ── Image layers ──────────────────────────────────────────── */}
+      {/* ── Image layers — lowest z stacks behind higher ones ─────── */}
 
-      {/* Layer 1 — bgv1.jpg — starts fully visible */}
+      {/* Layer 1 — bgv1.jpg — visible first */}
       <div
-        className="absolute inset-0 bg-cover bg-center hero-slide hero-slide-1"
+        className="absolute inset-0 hero-slide hero-slide-1"
         style={{ backgroundImage: "url('/bgv1.jpg')" }}
         aria-hidden="true"
       />
 
-      {/* Layer 2 — bgv2.jpg — starts invisible, fades in while layer 1 fades out */}
+      {/* Layer 2 — bgv2.jpg — fades in after bgv1 */}
       <div
-        className="absolute inset-0 bg-cover bg-center hero-slide hero-slide-2"
+        className="absolute inset-0 hero-slide hero-slide-2"
         style={{ backgroundImage: "url('/bgv2.jpg')" }}
         aria-hidden="true"
       />
 
-      {/* ── Dark overlay — same as before ─────────────────────────── */}
+      {/* Layer 3 — bgv3.jpg — fades in after bgv2 */}
+      <div
+        className="absolute inset-0 hero-slide hero-slide-3"
+        style={{ backgroundImage: "url('/bgv3.jpg')" }}
+        aria-hidden="true"
+      />
+
+      {/* ── Dark overlay ──────────────────────────────────────────── */}
       <div className="absolute inset-0 bg-gray-700 opacity-60" aria-hidden="true" />
     </>
   );
