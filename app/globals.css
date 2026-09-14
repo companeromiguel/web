@@ -369,42 +369,32 @@
 
 /* ── Hero crossfade slideshow — 3 images ────────────────────────── */
 /*
- * Total cycle = 19.5s  (5s hold + 1.5s fade) × 3 images
- * Each layer runs the same keyframe but is delayed by 6.5s (cycle / 3).
+ * Total cycle = 12s  (3s hold + 1s fade) × 3 images
  *
- * The keyframe controls a single layer's opacity over one full cycle:
- *   - Visible (1) for 5s at the START of its slot
- *   - Fades out over 1.5s
- *   - Invisible (0) for the rest of the cycle while the other two show
- *   - Returns to 1 instantly at 100% (seamless loop)
+ * Percentage math for 12s cycle:
+ *   0%      → 0s   start of hold
+ *   25%     → 3s   end of hold      (3  / 12)
+ *   33.33%  → 4s   end of fade-out  (4  / 12)
+ *   99.99%  → stay invisible
+ *   100%    → snap back to 1 for seamless loop
  *
- * Percentage math for 19.5s cycle:
- *   0%       → 0s   start of hold
- *   25.64%   → 5s   end of hold        (5   / 19.5)
- *   33.33%   → 6.5s end of fade-out    (6.5 / 19.5)
- *   99.99%   → stay invisible until loop restarts
- *   100%     → 1    reset for next cycle
- *
- * Delays:
- *   Layer 1 (bgv1): 0s
- *   Layer 2 (bgv2): -13s  (starts 13s into the cycle → its slot begins at 13s)
- *   Layer 3 (bgv3): -6.5s (starts 6.5s into the cycle → its slot begins at 6.5s)
- *
- * Negative delays mean the animation starts pre-advanced — this avoids a
- * blank frame on page load while waiting for delays to elapse.
+ * Negative delays pre-advance each layer so there's no blank frame on load:
+ *   Layer 1: 0s   (its slot starts at  0s)
+ *   Layer 2: -8s  (its slot starts at  4s, pre-advanced by 12-8=4s... delay = -(12-4) = -8s)
+ *   Layer 3: -4s  (its slot starts at  8s, pre-advanced by 4s)
  */
 
 @keyframes hero-fade {
-  0%,    25.64% { opacity: 1; }   /* hold visible          */
-  33.33%        { opacity: 0; }   /* finish fade-out        */
-  99.99%        { opacity: 0; }   /* stay hidden            */
-  100%          { opacity: 1; }   /* snap back for loop     */
+  0%,    25%    { opacity: 1; }   /* hold visible   */
+  33.33%        { opacity: 0; }   /* finish fade-out */
+  99.99%        { opacity: 0; }   /* stay hidden     */
+  100%          { opacity: 1; }   /* snap back       */
 }
 
 .hero-slide {
   background-size: cover;
-  background-position: 70% center;  /* mobile: show right-of-centre */
-  opacity: 0;                        /* start hidden; animation overrides */
+  background-position: 70% center;
+  opacity: 0;
 }
 
 @media (min-width: 1024px) {
@@ -413,20 +403,17 @@
   }
 }
 
-/* Layer 1 — plays immediately */
 .hero-slide-1 {
-  animation: hero-fade 19.5s ease-in-out infinite;
+  animation: hero-fade 12s ease-in-out infinite;
   animation-delay: 0s;
 }
 
-/* Layer 2 — starts 6.5s into the cycle */
 .hero-slide-2 {
-  animation: hero-fade 19.5s ease-in-out infinite;
-  animation-delay: -13s;
+  animation: hero-fade 12s ease-in-out infinite;
+  animation-delay: -8s;
 }
 
-/* Layer 3 — starts 13s into the cycle */
 .hero-slide-3 {
-  animation: hero-fade 19.5s ease-in-out infinite;
-  animation-delay: -6.5s;
+  animation: hero-fade 12s ease-in-out infinite;
+  animation-delay: -4s;
 }
