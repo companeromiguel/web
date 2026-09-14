@@ -39,6 +39,15 @@ export const metadata: Metadata = {
     "government",
   ],
   metadataBase: new URL("https://tmcwd.gov.ph"),
+  icons: {
+    icon: [
+      { url: "/logo.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/logo.png", type: "image/png" },
+    ],
+    shortcut: "/logo.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_PH",

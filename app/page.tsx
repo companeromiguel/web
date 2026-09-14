@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AnnouncementsFeed from "@/components/AnnouncementsFeed";
 import AboutScroller from "@/components/AboutScroller";
+import StatsCounter from "@/components/StatsCounter";
+import HeroBackground from "@/components/HeroBackground";
 
 export const metadata: Metadata = {
   title: "Trece Martires City Water District",
@@ -47,22 +49,8 @@ export default function HomePage() {
       <section
         aria-labelledby="hero-heading"
         className="hero-section relative text-white overflow-hidden min-h-screen flex flex-col"
-        style={{
-          backgroundImage: "url('/bgv4.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "left center", /* mobile: show left side of image */
-          opacity: 1, /* ← background section opacity (keep at 1, control bg via overlay below) */
-        }}
       >
-        {/* ─────────────────────────────────────────────────────────────
-            HERO OVERLAY — tweak these two values to adjust the look:
-              • bg-gray-[N]  → overlay shade: gray-700 = dark, gray-400 = mid, gray-100 = light
-              • opacity-[N]  → overlay strength: 0 = invisible, 100 = fully opaque
-            ───────────────────────────────────────────────────────────── */}
-        <div
-          className="absolute inset-0 bg-gray-700 opacity-60"
-          aria-hidden="true"
-        />
+        <HeroBackground />
 
 
         <div className="relative w-full px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-32 lg:pb-20 flex flex-col min-h-[inherit]">
@@ -76,11 +64,25 @@ export default function HomePage() {
               Magandang serbisyo&apos;y maipagkakaloob, lalo na&apos;t kaagapay mamamayan ng lungsod
             </p>
             <div className="flex flex-wrap gap-3 items-center justify-end">
+              {/* Primary CTA — solid */}
+              <Link
+                href="/news/"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#0591D4] hover:bg-[#0480bc] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-black/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              >
+                <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+                </svg>
+                Water Advisory
+              </Link>
+              {/* Secondary CTA — ghost */}
               <Link
                 href="/contact/"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-white/80 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg border border-white/40 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-5 py-2.5 text-sm font-semibold text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
-                Contact us →
+                <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                </svg>
+                Apply for Service
               </Link>
             </div>
           </div>
@@ -88,91 +90,57 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Quick actions ────────────────────────────────────── */}
-      <section aria-label="Quick actions" className="bg-[#EEF4F8] border-b border-[#D6E6F0]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ul className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-[#D6E6F0] list-none p-0">
-
-            {/* Pay Bill */}
-            <li>
-              <Link
-                href="/contact/"
-                className="group flex flex-row items-center gap-2.5 py-3.5 px-4 hover:bg-[#E2EEF5] transition-colors"
-              >
-                <span className="flex items-center justify-center size-8 rounded-full bg-[#DEEEFA] group-hover:bg-[#0591D4]/15 transition-colors shrink-0">
-                  <svg className="size-4 text-[#0591D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
-                  </svg>
-                </span>
-                <span className="text-xs font-medium text-[#2A2A29] group-hover:text-[#0591D4] transition-colors leading-tight">
-                  Pay Bill
-                </span>
-              </Link>
-            </li>
-
-            {/* Report a Leak / Outage */}
-            <li>
-              <Link
-                href="/contact/"
-                className="group flex flex-row items-center gap-2.5 py-3.5 px-4 hover:bg-[#E2EEF5] transition-colors"
-              >
-                <span className="flex items-center justify-center size-8 rounded-full bg-[#DEEEFA] group-hover:bg-[#0591D4]/15 transition-colors shrink-0">
-                  <svg className="size-4 text-[#0591D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-                  </svg>
-                </span>
-                <span className="text-xs font-medium text-[#2A2A29] group-hover:text-[#0591D4] transition-colors leading-tight">
-                  Report a Leak / Outage
-                </span>
-              </Link>
-            </li>
-
-            {/* Service Application */}
-            <li>
-              <Link
-                href="/contact/"
-                className="group flex flex-row items-center gap-2.5 py-3.5 px-4 hover:bg-[#E2EEF5] transition-colors"
-              >
-                <span className="flex items-center justify-center size-8 rounded-full bg-[#DEEEFA] group-hover:bg-[#0591D4]/15 transition-colors shrink-0">
-                  <svg className="size-4 text-[#0591D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                  </svg>
-                </span>
-                <span className="text-xs font-medium text-[#2A2A29] group-hover:text-[#0591D4] transition-colors leading-tight">
-                  Service Application
-                </span>
-              </Link>
-            </li>
-
-            {/* Water Advisory */}
-            <li>
-              <Link
-                href="/news/"
-                className="group flex flex-row items-center gap-2.5 py-3.5 px-4 hover:bg-[#E2EEF5] transition-colors"
-              >
-                <span className="flex items-center justify-center size-8 rounded-full bg-[#DEEEFA] group-hover:bg-[#0591D4]/15 transition-colors shrink-0">
-                  <svg className="size-4 text-[#0591D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
-                  </svg>
-                </span>
-                <span className="text-xs font-medium text-[#2A2A29] group-hover:text-[#0591D4] transition-colors leading-tight">
-                  Water Advisory
-                </span>
-              </Link>
-            </li>
-
-          </ul>
-        </div>
-      </section>
 
       {/* ── Announcements ────────────────────────────────────── */}
-      <section aria-labelledby="news-heading" className="bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <section aria-labelledby="news-heading" className="relative overflow-hidden bg-[#EEF4F8]">
+
+        {/* Bluish-grey static wave background */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          {/* Rich layered gradient base */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#e8f4fb] via-[#f2f8fc] to-[#ddeef7]" />
+          {/* Static multi-layer SVG waves */}
+          <svg
+            className="absolute inset-0 w-full h-full"
+            viewBox="0 0 1440 400"
+            preserveAspectRatio="xMidYMid slice"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Deep background swell */}
+            <path
+              d="M0,280 C200,220 400,320 600,260 C800,200 1000,300 1200,250 C1320,225 1400,260 1440,255 L1440,400 L0,400 Z"
+              fill="rgba(5,145,212,0.06)"
+            />
+            {/* Mid layer */}
+            <path
+              d="M0,320 C150,280 350,360 550,310 C750,260 950,340 1150,300 C1300,270 1400,305 1440,300 L1440,400 L0,400 Z"
+              fill="rgba(5,145,212,0.04)"
+            />
+            {/* Foreground crest */}
+            <path
+              d="M0,355 C180,330 360,370 540,348 C720,326 900,362 1080,345 C1260,328 1380,350 1440,348 L1440,400 L0,400 Z"
+              fill="rgba(36,178,234,0.05)"
+            />
+            {/* Top accent ripple */}
+            <path
+              d="M0,40 C240,80 480,10 720,50 C960,90 1200,20 1440,55 L1440,0 L0,0 Z"
+              fill="rgba(55,10,119,0.02)"
+            />
+            {/* Mid-page diagonal sweep */}
+            <path
+              d="M0,160 C300,120 600,200 900,150 C1100,115 1300,160 1440,145 L1440,180 C1300,195 1100,150 900,185 C600,230 300,155 0,195 Z"
+              fill="rgba(5,145,212,0.03)"
+            />
+          </svg>
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+
+          <StatsCounter />
 
           <div className="flex items-center justify-between mb-10">
             <h2
               id="news-heading"
-              className="font-heading text-xs font-semibold uppercase tracking-[0.15em] text-[#2A2A29]/40"
+              className="font-heading text-xs font-semibold uppercase tracking-[0.15em] text-[#2A2A29]/55"
             >
               Announcements
             </h2>
@@ -228,25 +196,57 @@ export default function HomePage() {
           </svg>
         </div>
 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20 relative z-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20 relative z-10">
           <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-start">
 
+            {/* ── Left column ── */}
             <div className="lg:col-span-4">
-              <h2
-                id="about-heading"
-                className="font-heading text-xs font-semibold uppercase tracking-[0.15em] text-white/60 mb-2"
-              >
-                About TMCWD
-              </h2>
-              <Link
-                href="/transparency/"
-                className="mt-4 inline-block text-xs font-medium text-white/80 hover:text-white hover:underline"
-              >
-                Public disclosures →
-              </Link>
+
+              {/* ── Mission & Vision — card style on mobile ── */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+                <div className="rounded-xl bg-white/10 border border-white/20 px-4 py-4">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50 mb-2 flex items-center gap-1.5">
+                    <svg className="size-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>
+                    Mission
+                  </p>
+                  <p className="text-sm text-white/85 leading-relaxed italic">
+                    "To provide safe, adequate, and affordable water services to all concessionaires within the franchise area of Trece Martires City."
+                  </p>
+                </div>
+                <div className="rounded-xl bg-white/10 border border-white/20 px-4 py-4">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50 mb-2 flex items-center gap-1.5">
+                    <svg className="size-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.964-7.178Z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                    Vision
+                  </p>
+                  <p className="text-sm text-white/85 leading-relaxed italic">
+                    "A leading water district delivering excellence in public service, committed to the health and well-being of every household it serves."
+                  </p>
+                </div>
+              </div>
+
+              {/* ── About label + link — below Vision ── */}
+              <div className="mt-6">
+                <h2
+                  id="about-heading"
+                  className="font-heading text-xs font-semibold uppercase tracking-[0.15em] text-white/60 mb-2"
+                >
+                  About TMCWD
+                </h2>
+                <Link
+                  href="/transparency/"
+                  className="inline-block text-xs font-medium text-white/80 hover:text-white hover:underline"
+                >
+                  Public disclosures →
+                </Link>
+              </div>
             </div>
 
-            {/* Auto-scroll text container */}
+            {/* ── Right column: history scroller ── */}
             <div className="mt-8 lg:mt-0 lg:col-span-8 max-w-2xl">
               <AboutScroller />
             </div>

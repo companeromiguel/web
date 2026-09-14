@@ -359,3 +359,9 @@
   0%   { transform: translateY(0); }
   100% { transform: translateY(-50%); }
 }
+
+/* ── Hero background — base position ────────────────────────────── */
+.bg-left-center {
+  background-size: cover;
+  background-position: 70% center; /* match objectPosition in HeroBackground.tsx */
+}

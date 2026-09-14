@@ -305,27 +305,17 @@ export default function Header() {
                       ].join(" ")}
                     >
                       <ul
-                        className={[
-                          "overflow-hidden flex flex-col mt-0.5 mb-1 rounded-xl",
-                          isTransparency || isAnnouncement
-                            ? "bg-[#0f4f78]"
-                            : "bg-white/10",
-                        ].join(" ")}
+                        className="overflow-hidden flex flex-col mt-0.5 mb-1 rounded-xl bg-white/10"
                       >
                         {children.map((item) => (
                           <li key={item.href}>
                             {item.dividerBefore && (
-                              <div aria-hidden="true" className={`mx-3 h-px ${isTransparency || isAnnouncement ? "bg-white/20" : "bg-white/15"}`} />
+                              <div aria-hidden="true" className="mx-3 h-px bg-white/15" />
                             )}
                             <Link
                               href={item.href}
                               onClick={() => { setMenuOpen(false); setServicesOpen(false); setTransparencyOpen(false); setAnnouncementOpen(false); }}
-                              className={[
-                                "flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium transition-colors",
-                                isTransparency || isAnnouncement
-                                  ? "text-white/90 hover:text-white hover:bg-white/10 active:bg-white/15"
-                                  : "text-white/70 hover:text-white hover:bg-white/10",
-                              ].join(" ")}
+                              className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium transition-colors text-white/70 hover:text-white hover:bg-white/10"
                             >
                               {item.label}
                             </Link>

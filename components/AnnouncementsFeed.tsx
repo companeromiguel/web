@@ -158,9 +158,13 @@ export default function AnnouncementsFeed() {
   /* ── Loading skeleton ── */
   if (status === "loading") {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 animate-pulse">
+      /* Mobile: horizontal snap scroll — same structure as the real cards */
+      <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5 overflow-x-auto snap-x snap-mandatory pb-3 sm:pb-0 sm:overflow-visible animate-pulse">
         {[1, 2, 3, 4].map((n) => (
-          <div key={n} className="rounded-xl overflow-hidden border border-[#E8EEF2]">
+          <div
+            key={n}
+            className="rounded-xl overflow-hidden border border-[#E8EEF2] shrink-0 w-[75vw] sm:w-auto snap-start"
+          >
             <div className="bg-[#E8EEF2] aspect-square w-full" />
             <div className="p-4 space-y-2">
               <div className="h-2.5 bg-[#E8EEF2] rounded w-1/3" />
@@ -190,16 +194,23 @@ export default function AnnouncementsFeed() {
     );
   }
 
-  /* ── Card grid ── */
+  /* ── Card grid / carousel ── */
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    /*
+     * Mobile  : horizontal snap carousel — cards are 75vw wide, peek the
+     *           next card to hint that more exist. Negative mx pulls the
+     *           scroll track to full bleed, px restores the inner padding.
+     * sm+     : regular 2-col grid
+     * lg+     : 4-col grid
+     */
+    <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5 overflow-x-auto snap-x snap-mandatory pb-3 sm:pb-0 sm:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0">
       {items.map((item) => (
         <a
           key={item.link}
           href={item.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex flex-col rounded-xl overflow-hidden border border-[#E8EEF2] hover:border-[#A1CBE1] hover:shadow-md transition-all duration-200 bg-white"
+          className="group flex flex-col rounded-xl overflow-hidden border border-[#E8EEF2] hover:border-[#A1CBE1] hover:shadow-md transition-all duration-200 bg-white shrink-0 w-[75vw] sm:w-auto snap-start"
         >
           {/* Image — full natural dimensions */}
           {item.image ? (
