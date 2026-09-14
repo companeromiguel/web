@@ -9,6 +9,7 @@ import { primaryNav } from "@/lib/nav";
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [desktopOpen, setDesktopOpen] = useState<string | null>(null);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [transparencyOpen, setTransparencyOpen] = useState(false);
   const [announcementOpen, setAnnouncementOpen] = useState(false);
@@ -102,13 +103,30 @@ export default function Header() {
               if (hasDropdown) {
                 return (
                   <div
-                    key={href}
-                    className="relative group"
+                    key={label}
+                    className="relative"
+                    onMouseEnter={() => setDesktopOpen(label)}
+                    onMouseLeave={() => setDesktopOpen(null)}
+                    onFocus={(event) => {
+                      if (!event.currentTarget.contains(event.relatedTarget)) setDesktopOpen(label);
+                    }}
+                    onBlur={(event) => {
+                      if (!event.currentTarget.contains(event.relatedTarget)) setDesktopOpen(null);
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key === "Escape") {
+                        event.preventDefault();
+                        event.currentTarget.querySelector("button")?.focus();
+                        setDesktopOpen(null);
+                      }
+                    }}
                   >
                     {/* Trigger */}
                     <button
                       type="button"
                       aria-haspopup="true"
+                      aria-expanded={desktopOpen === label}
+                      onClick={() => setDesktopOpen(label)}
                       className={[
                         "flex items-center gap-1 text-sm transition-colors duration-150 whitespace-nowrap cursor-pointer",
                         active
@@ -119,7 +137,7 @@ export default function Header() {
                       {label}
                       {/* Chevron — rotates 180° on group hover/focus-within */}
                       <svg
-                        className="size-3.5 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                        className={`size-3.5 transition-transform duration-200 ${desktopOpen === label ? "rotate-180" : ""}`}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -133,15 +151,18 @@ export default function Header() {
                     {/* Dropdown panel */}
                     <div
                       role="menu"
+                      inert={desktopOpen !== label}
                       aria-label={`${label} submenu`}
                       className={[
                         // position — pt-3 bridges the gap so hover doesn't break
                         `absolute left-0 top-full pt-3 ${label === "Services" ? "w-[268px]" : "w-[232px]"} z-50`,
                         // visibility / animation
-                        "opacity-0 invisible pointer-events-none translate-y-1",
+                        desktopOpen === label
+                          ? "opacity-100 visible pointer-events-auto translate-y-0"
+                          : "opacity-0 invisible pointer-events-none translate-y-1",
                         "transition-all duration-200 ease-out",
-                        "group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0",
-                        "group-focus-within:opacity-100 group-focus-within:visible group-focus-within:pointer-events-auto group-focus-within:translate-y-0",
+
+
                       ].join(" ")}
                     >
                       {label === "Announcement" ? (
@@ -161,7 +182,7 @@ export default function Header() {
                                     )}
                                     <Link
                                       href={item.href}
-                                      role="menuitem"
+                                      role="menuitem" onClick={() => setDesktopOpen(null)}
                                       className="services-menu-item"
                                     >
                                       {item.label}
@@ -183,7 +204,7 @@ export default function Header() {
                                 )}
                                 <Link
                                   href={item.href}
-                                  role="menuitem"
+                                  role="menuitem" onClick={() => setDesktopOpen(null)}
                                   className="services-menu-item"
                                 >
                                   {item.label}
@@ -200,7 +221,7 @@ export default function Header() {
 
               return (
                 <Link
-                  key={href}
+                  key={label}
                   href={href}
                   aria-current={active ? "page" : undefined}
                   className={[
@@ -271,7 +292,7 @@ export default function Header() {
                 const panelId = `mobile-${label.toLowerCase().replace(/\s+/g, "-")}-menu`;
 
                 return (
-                  <li key={href}>
+                  <li key={label}>
                     {/* Accordion trigger */}
                     <button
                       type="button"
@@ -328,7 +349,7 @@ export default function Header() {
               }
 
               return (
-                <li key={href}>
+                <li key={label}>
                   <Link
                     href={href}
                     onClick={() => setMenuOpen(false)}
