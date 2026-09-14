@@ -170,6 +170,7 @@
 /* ── Services dropdown — list items ──────────────────────────────── */
 .services-menu-list {
   max-height: 420px;
+  overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(5, 145, 212, 0.30) transparent;
