@@ -9,7 +9,7 @@ export interface NavItem {
 export const primaryNav: NavItem[] = [
   {
     label: "Services",
-    href: "#",
+    href: "/services/",
     children: [
       { label: "New Water Application",     href: "/services/new-water-application/" },
       { label: "Meter Reading & Statement", href: "/services/meter-reading/" },
@@ -37,11 +37,11 @@ export const primaryNav: NavItem[] = [
   },
   {
     label: "Announcement",
-    href: "#",
+    href: "/news/",
     children: [
       { label: "Announcement", href: "/news/" },
-      { label: "Event",  href: "/news/#event" },
-      { label: "Gallery", href: "/news/#gallery" },
+      { label: "Event",        href: "/events/" },
+      { label: "Gallery",      href: "/gallery/" },
     ],
   },
   { label: "About us",         href: "/#about-heading" },
