@@ -1,0 +1,24 @@
+.yearBadge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  min-width: 52px;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 999px;
+  background-color: #0591d4;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .yearBadge {
+    top: 12px;
+    left: 12px;
+  }
+}
