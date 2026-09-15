@@ -38,13 +38,14 @@ function useYearsOfService() {
 }
 
 /* ── Years of Service tile ── */
-function ServiceTimer() {
+function ServiceTimer({ animate }: { animate: boolean }) {
   const years = useYearsOfService();
+  const count = useCountUp(years, 0, 1800, animate && years > 0);
 
   return (
     <div className="flex flex-col items-center text-center px-4 py-5">
       <span className="font-heading text-3xl sm:text-4xl font-bold text-[#370A77] leading-none tabular-nums">
-        {years}<span className="text-[#0591D4]">+</span>
+        {Math.round(count)}<span className="text-[#0591D4]">+</span>
       </span>
       <span className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-[#2A2A29]/50 leading-tight">
         Years of Service
@@ -110,7 +111,7 @@ export default function StatsCounter() {
 
   return (
     <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 mb-12">
-      <ServiceTimer />
+      <ServiceTimer animate={animate} />
       {stats.map((stat) => (
         <StatItem key={stat.label} stat={stat} animate={animate} />
       ))}
