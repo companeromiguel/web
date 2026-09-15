@@ -25,7 +25,7 @@ const quickLinks = [
   {
     title: "Citizen's Charter",
     description: "Service standards, turnaround times, how to file a complaint.",
-    href: "/transparency/#citizens-charter",
+    href: "/transparency/citizens-charter/",
   },
   {
     title: "Board Meetings",
