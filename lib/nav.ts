@@ -29,10 +29,10 @@ export const primaryNav: NavItem[] = [
     label: "Transparency",
     href: "/transparency/",
     children: [
-      { label: "Transparency Seal",   href: "/transparency/#seal"  },
-      { label: "Freedom of Information",   href: "/transparency/#foi"              },
-      { label: "Citizen's Charter",        href: "/transparency/#citizens-charter" },
-      { label: "Bidding",        href: "/transparency/#bidding"       },
+      { label: "Transparency Seal",   href: "/transparency/seal/"  },
+      { label: "Freedom of Information",   href: "/transparency/foi/"              },
+      { label: "Citizen's Charter",        href: "/transparency/citizens-charter/" },
+      { label: "Bidding & Procurement",        href: "/transparency/procurement/"       },
     ],
   },
   {
@@ -44,6 +44,6 @@ export const primaryNav: NavItem[] = [
       { label: "Gallery",      href: "/gallery/" },
     ],
   },
-  { label: "About us", href: "/about/" },
+  { label: "About us",         href: "/#about-heading" },
   { label: "Home",             href: "/" }
 ];

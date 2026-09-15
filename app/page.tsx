@@ -25,7 +25,7 @@ const quickLinks = [
   {
     title: "Citizen's Charter",
     description: "Service standards, turnaround times, how to file a complaint.",
-    href: "/transparency/#citizens-charter",
+    href: "/transparency/citizens-charter/",
   },
   {
     title: "Board Meetings",
@@ -229,7 +229,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* ── About label + link — below Vision ── */}
+              {/* ── About label ── */}
               <div className="mt-6">
                 <h2
                   id="about-heading"
@@ -237,12 +237,6 @@ export default function HomePage() {
                 >
                   About TMCWD
                 </h2>
-                <Link
-                  href="/transparency/"
-                  className="inline-block text-xs font-medium text-white/80 hover:text-white hover:underline"
-                >
-                  Public disclosures →
-                </Link>
               </div>
             </div>
 

@@ -1,0 +1,432 @@
+[
+  {
+    "id": "citizen-charter-citizenscharter-2025-1st-revision",
+    "filename": "citizenscharter_2025_1st_revision.pdf",
+    "url": "/documents/transparency/citizen-charter-citizenscharter-2025-1st-revision.pdf?v=0dd6e04eeed5",
+    "pages": 56,
+    "bytes": 4431408,
+    "sha256": "0dd6e04eeed598bda645aa6fb69da12214dca8a5873d5d67cf0c9f2191628a58",
+    "group": "Citizen's Charter",
+    "year": 2025,
+    "sources": [
+      "CITIZEN CHARTER/citizenscharter_2025_1st_revision.pdf",
+      "arta/citizens_charter_handbook_2025.pdf"
+    ]
+  },
+  {
+    "id": "arta-cart-office-order",
+    "filename": "cart_office_order.pdf",
+    "url": "/documents/transparency/arta-cart-office-order.pdf?v=7196b3d48bd9",
+    "pages": 1,
+    "bytes": 1663458,
+    "sha256": "7196b3d48bd963928355dbabb77a21cdc385c254a6c3b998672f4ed1bfd14e45",
+    "group": "Related ARTA documents",
+    "year": 0,
+    "sources": [
+      "arta/cart_office_order.pdf"
+    ]
+  },
+  {
+    "id": "arta-tmcwd-initial-reengineering-plan",
+    "filename": "tmcwd_initial_reengineering_plan.pdf",
+    "url": "/documents/transparency/arta-tmcwd-initial-reengineering-plan.pdf?v=4db318bc4583",
+    "pages": 33,
+    "bytes": 1279289,
+    "sha256": "4db318bc4583e1b7caf107f2c5616835c857f72f7666aea7a284fa1a5f1c7b7d",
+    "group": "Related ARTA documents",
+    "year": 0,
+    "sources": [
+      "arta/tmcwd_initial_reengineering_plan.pdf"
+    ]
+  },
+  {
+    "id": "budget-fy-2018",
+    "filename": "FY 2018.pdf",
+    "url": "/documents/transparency/budget-fy-2018.pdf?v=2b6e5493879f",
+    "pages": 31,
+    "bytes": 9205717,
+    "sha256": "2b6e5493879f5fca32a1ed02a08bb7544ce633776e0c93f499ba1a90169ba354",
+    "group": "Budgets",
+    "year": 2018,
+    "sources": [
+      "budget/FY 2018.pdf"
+    ]
+  },
+  {
+    "id": "budget-fy-2019",
+    "filename": "FY 2019.pdf",
+    "url": "/documents/transparency/budget-fy-2019.pdf?v=7c085672f515",
+    "pages": 16,
+    "bytes": 4864092,
+    "sha256": "7c085672f5155cc0a36db154ffb40d06f107c9e45f507dc7fc9d2ba823d57480",
+    "group": "Budgets",
+    "year": 2019,
+    "sources": [
+      "budget/FY 2019.pdf"
+    ]
+  },
+  {
+    "id": "budget-fy-2020",
+    "filename": "FY 2020.pdf",
+    "url": "/documents/transparency/budget-fy-2020.pdf?v=ac1f7804ff0a",
+    "pages": 24,
+    "bytes": 4253193,
+    "sha256": "ac1f7804ff0ae6016791732b31781b6401ac731477de438db2103a469847b6ef",
+    "group": "Budgets",
+    "year": 2020,
+    "sources": [
+      "budget/FY 2020.pdf"
+    ]
+  },
+  {
+    "id": "budget-fy-2022",
+    "filename": "FY 2022.pdf",
+    "url": "/documents/transparency/budget-fy-2022.pdf?v=e89ecdfee213",
+    "pages": 34,
+    "bytes": 9207826,
+    "sha256": "e89ecdfee213bc0605b3ca995be4286463f992612abe44277228bee8b7d68569",
+    "group": "Budgets",
+    "year": 2022,
+    "sources": [
+      "budget/FY 2022.pdf"
+    ]
+  },
+  {
+    "id": "budget-fy-2023",
+    "filename": "FY 2023.pdf",
+    "url": "/documents/transparency/budget-fy-2023.pdf?v=7d4de5fc92dd",
+    "pages": 46,
+    "bytes": 3329921,
+    "sha256": "7d4de5fc92dd155f0fcf2462a9e2c463a2fdd71fff98e7730efa548dcc8f0055",
+    "group": "Budgets",
+    "year": 2023,
+    "sources": [
+      "budget/FY 2023.pdf"
+    ]
+  },
+  {
+    "id": "budget-fy-2024-1st-supplemental",
+    "filename": "FY 2024 1st Supplemental.pdf",
+    "url": "/documents/transparency/budget-fy-2024-1st-supplemental.pdf?v=8f8e66070576",
+    "pages": 31,
+    "bytes": 1558975,
+    "sha256": "8f8e660705760ab55df28deab7271ef71e6ad656759f29283160409c2072c150",
+    "group": "Budgets",
+    "year": 2024,
+    "sources": [
+      "budget/FY 2024 1st Supplemental.pdf"
+    ]
+  },
+  {
+    "id": "budget-fy-2024-2nd-supplemental",
+    "filename": "FY 2024 2nd Supplemental.pdf",
+    "url": "/documents/transparency/budget-fy-2024-2nd-supplemental.pdf?v=87f2baec5f18",
+    "pages": 29,
+    "bytes": 1505441,
+    "sha256": "87f2baec5f18077d1b8ce0d3b3ff2ee18279d4cf1c2e57abb8312017b768de69",
+    "group": "Budgets",
+    "year": 2024,
+    "sources": [
+      "budget/FY 2024 2nd Supplemental.pdf"
+    ]
+  },
+  {
+    "id": "budget-fy-2024",
+    "filename": "FY 2024.pdf",
+    "url": "/documents/transparency/budget-fy-2024.pdf?v=a32cbb117649",
+    "pages": 73,
+    "bytes": 5086091,
+    "sha256": "a32cbb117649c39ed3c27848cc077155cb79043e5693a18d5e0401dd80ad38df",
+    "group": "Budgets",
+    "year": 2024,
+    "sources": [
+      "budget/FY 2024.pdf"
+    ]
+  },
+  {
+    "id": "financial-statements-financial-statement-2015",
+    "filename": "financial_statement_2015.pdf",
+    "url": "/documents/transparency/financial-statements-financial-statement-2015.pdf?v=75e694501434",
+    "pages": 22,
+    "bytes": 3457748,
+    "sha256": "75e694501434d31a276cf3656485745253dad7bdebb205c2fed9a3d4e3814213",
+    "group": "Financial statements",
+    "year": 2015,
+    "sources": [
+      "financial statements/financial_statement_2015.pdf"
+    ]
+  },
+  {
+    "id": "financial-statements-financial-statement-2016",
+    "filename": "financial_statement_2016.pdf",
+    "url": "/documents/transparency/financial-statements-financial-statement-2016.pdf?v=9263ddbb20e2",
+    "pages": 22,
+    "bytes": 3332058,
+    "sha256": "9263ddbb20e2361e6ed83644d893ae4c895adeb4906c87de67cb285b5bfc6f27",
+    "group": "Financial statements",
+    "year": 2016,
+    "sources": [
+      "financial statements/financial_statement_2016.pdf"
+    ]
+  },
+  {
+    "id": "financial-statements-financial-statement-2017",
+    "filename": "financial_statement_2017.pdf",
+    "url": "/documents/transparency/financial-statements-financial-statement-2017.pdf?v=6e0f9d3732ff",
+    "pages": 24,
+    "bytes": 3715241,
+    "sha256": "6e0f9d3732ff128cb9c30a9ef0a7a7191252d1e06349298dd41c605c99998cd2",
+    "group": "Financial statements",
+    "year": 2017,
+    "sources": [
+      "financial statements/financial_statement_2017.pdf"
+    ]
+  },
+  {
+    "id": "financial-statements-financial-statement-2018",
+    "filename": "financial_statement_2018.pdf",
+    "url": "/documents/transparency/financial-statements-financial-statement-2018.pdf?v=8b4d8c6706f7",
+    "pages": 23,
+    "bytes": 3484298,
+    "sha256": "8b4d8c6706f77ff5d510b35f5b8195612003c27b691c498efa7e55101f575f93",
+    "group": "Financial statements",
+    "year": 2018,
+    "sources": [
+      "financial statements/financial_statement_2018.pdf"
+    ]
+  },
+  {
+    "id": "financial-statements-financial-statement-2019",
+    "filename": "financial_statement_2019.pdf",
+    "url": "/documents/transparency/financial-statements-financial-statement-2019.pdf?v=6a983ba5588b",
+    "pages": 38,
+    "bytes": 506541,
+    "sha256": "6a983ba5588bf71c6653506f6428c3598385d94e153556fbc923a36eba77b98f",
+    "group": "Financial statements",
+    "year": 2019,
+    "sources": [
+      "financial statements/financial_statement_2019.pdf"
+    ]
+  },
+  {
+    "id": "financial-statements-financial-statement-2020",
+    "filename": "financial_statement_2020.pdf",
+    "url": "/documents/transparency/financial-statements-financial-statement-2020.pdf?v=e43d9c9469c2",
+    "pages": 22,
+    "bytes": 4870993,
+    "sha256": "e43d9c9469c2ea79180b45085f877ec55bed305a97ed9cf973caa350667cada3",
+    "group": "Financial statements",
+    "year": 2020,
+    "sources": [
+      "financial statements/financial_statement_2020.pdf"
+    ]
+  },
+  {
+    "id": "foi-07-certification",
+    "filename": "07_-_certification.pdf",
+    "url": "/documents/transparency/foi-07-certification.pdf?v=6f32d9b22221",
+    "pages": 1,
+    "bytes": 1435483,
+    "sha256": "6f32d9b22221ec6200b1bf9403d398208dbc05e7877739cf55d41a9a1dcc25d4",
+    "group": "Certifications",
+    "year": 0,
+    "sources": [
+      "FOI/07_-_certification.pdf"
+    ]
+  },
+  {
+    "id": "foi-iso-certification-of-core-process",
+    "filename": "ISO CERTIFICATION OF CORE PROCESS.pdf",
+    "url": "/documents/transparency/foi-iso-certification-of-core-process.pdf?v=11bba5f23d26",
+    "pages": 1,
+    "bytes": 98853,
+    "sha256": "11bba5f23d269f6a4633786ade0f51e7df66a611050360bb3f0219b15f3df4b5",
+    "group": "Certifications",
+    "year": 0,
+    "sources": [
+      "FOI/ISO CERTIFICATION OF CORE PROCESS.pdf"
+    ]
+  },
+  {
+    "id": "foi-english",
+    "filename": "english.pdf",
+    "url": "/documents/transparency/foi-english.pdf?v=3386279432ee",
+    "pages": 1,
+    "bytes": 204844,
+    "sha256": "3386279432ee6093ba6b85bf7b472037ab86072001486a6ddf1dde17a9e1e663",
+    "group": "FOI documents",
+    "year": 0,
+    "sources": [
+      "FOI/english.pdf"
+    ]
+  },
+  {
+    "id": "foi-peoples-freedom-of-information-manual-2025",
+    "filename": "peoples_freedom_of_information_manual_2025.pdf",
+    "url": "/documents/transparency/foi-peoples-freedom-of-information-manual-2025.pdf?v=7332f7893ba1",
+    "pages": 48,
+    "bytes": 2435217,
+    "sha256": "7332f7893ba10ae363da6816cc5352041d44d70c36fb066f8fdc8474772e4461",
+    "group": "FOI documents",
+    "year": 2025,
+    "sources": [
+      "FOI/peoples_freedom_of_information_manual_2025.pdf"
+    ]
+  },
+  {
+    "id": "foi-tagalog",
+    "filename": "tagalog.pdf",
+    "url": "/documents/transparency/foi-tagalog.pdf?v=343106a61fc5",
+    "pages": 1,
+    "bytes": 329681,
+    "sha256": "343106a61fc586babe8d80a2639d5e8bf3c67e30fbfe1614399b0f4afab6d093",
+    "group": "FOI documents",
+    "year": 0,
+    "sources": [
+      "FOI/tagalog.pdf"
+    ]
+  },
+  {
+    "id": "procurement-app-cse-2022",
+    "filename": "app-cse_2022.pdf",
+    "url": "/documents/transparency/procurement-app-cse-2022.pdf?v=1c487e524cac",
+    "pages": 16,
+    "bytes": 9604447,
+    "sha256": "1c487e524cac55c80463dd21e9e9b08b5b9d007d8312030fa1cd489e896f6bb9",
+    "group": "Annual procurement plans",
+    "year": 2022,
+    "sources": [
+      "procurement/app-cse_2022.pdf"
+    ]
+  },
+  {
+    "id": "procurement-app-cse-2018",
+    "filename": "app_cse_2018.pdf",
+    "url": "/documents/transparency/procurement-app-cse-2018.pdf?v=3b6059fea630",
+    "pages": 10,
+    "bytes": 5727250,
+    "sha256": "3b6059fea630b4e2d8764f9029a425533b81725e54a40a592a6d71867c941b91",
+    "group": "Annual procurement plans",
+    "year": 2018,
+    "sources": [
+      "procurement/app_cse_2018.pdf"
+    ]
+  },
+  {
+    "id": "procurement-app-cse-2019",
+    "filename": "app_cse_2019.pdf",
+    "url": "/documents/transparency/procurement-app-cse-2019.pdf?v=97f409ac5fb4",
+    "pages": 7,
+    "bytes": 3670320,
+    "sha256": "97f409ac5fb459f6b3622678d5fb6a5292b2c4d1161b85f5c748f43062226c38",
+    "group": "Annual procurement plans",
+    "year": 2019,
+    "sources": [
+      "procurement/app_cse_2019.pdf"
+    ]
+  },
+  {
+    "id": "procurement-app-cse-2020",
+    "filename": "app_cse_2020.pdf",
+    "url": "/documents/transparency/procurement-app-cse-2020.pdf?v=94b32a958e5b",
+    "pages": 13,
+    "bytes": 3436313,
+    "sha256": "94b32a958e5b3999209b14eda6f249463637f5ab74ee05030b7347ba63c9aec4",
+    "group": "Annual procurement plans",
+    "year": 2020,
+    "sources": [
+      "procurement/app_cse_2020.pdf"
+    ]
+  },
+  {
+    "id": "procurement-app-cse-2021",
+    "filename": "app_cse_2021.pdf",
+    "url": "/documents/transparency/procurement-app-cse-2021.pdf?v=b5874bc21401",
+    "pages": 9,
+    "bytes": 3190387,
+    "sha256": "b5874bc21401d249a09e2cb0e0b7373df72001cd9be1d035d98ee038528094cf",
+    "group": "Annual procurement plans",
+    "year": 2021,
+    "sources": [
+      "procurement/app_cse_2021.pdf"
+    ]
+  },
+  {
+    "id": "procurement-app-cse-2023",
+    "filename": "app_cse_2023.pdf",
+    "url": "/documents/transparency/procurement-app-cse-2023.pdf?v=8038beb14943",
+    "pages": 13,
+    "bytes": 10474602,
+    "sha256": "8038beb1494347a50bc4b18e11c1b699cd0dadee8c77b7fef8c84a4a9fe48467",
+    "group": "Annual procurement plans",
+    "year": 2023,
+    "sources": [
+      "procurement/app_cse_2023.pdf"
+    ]
+  },
+  {
+    "id": "ranking-fy2018",
+    "filename": "FY2018.pdf",
+    "url": "/documents/transparency/ranking-fy2018.pdf?v=f69e64cf6c0b",
+    "pages": 3,
+    "bytes": 363893,
+    "sha256": "f69e64cf6c0b3d61383ef9b81e0868ce1cb249afacd2be408880af0de92fea4f",
+    "group": "Rankings",
+    "year": 2018,
+    "sources": [
+      "ranking/FY2018.pdf"
+    ]
+  },
+  {
+    "id": "ranking-fy2019",
+    "filename": "FY2019.pdf",
+    "url": "/documents/transparency/ranking-fy2019.pdf?v=4632daaa1082",
+    "pages": 3,
+    "bytes": 4982416,
+    "sha256": "4632daaa1082be7311a2d454ceb202680c56d693e5daf4cb9538ef09cc1315b6",
+    "group": "Rankings",
+    "year": 2019,
+    "sources": [
+      "ranking/FY2019.pdf"
+    ]
+  },
+  {
+    "id": "saln-saln-certification-2018",
+    "filename": "saln_certification_2018.pdf",
+    "url": "/documents/transparency/saln-saln-certification-2018.pdf?v=338376a0d8c9",
+    "pages": 4,
+    "bytes": 403016,
+    "sha256": "338376a0d8c96b63f1792df5be7fe1f2e2e36e8cb6ec9b1370158b4d3872ce3f",
+    "group": "SALN certifications",
+    "year": 2018,
+    "sources": [
+      "saln/saln_certification_2018.pdf"
+    ]
+  },
+  {
+    "id": "saln-saln-certification-2019",
+    "filename": "saln_certification_2019.pdf",
+    "url": "/documents/transparency/saln-saln-certification-2019.pdf?v=4e7b8159ed85",
+    "pages": 1,
+    "bytes": 10415934,
+    "sha256": "4e7b8159ed859d41be8639f52e07a8d24a3f19eb4d49fb961d1d2a13582747dc",
+    "group": "SALN certifications",
+    "year": 2019,
+    "sources": [
+      "saln/saln_certification_2019.pdf"
+    ]
+  },
+  {
+    "id": "saln-saln-certification-2025",
+    "filename": "saln_certification_2025.pdf",
+    "url": "/documents/transparency/saln-saln-certification-2025.pdf?v=32101cc7ddc4",
+    "pages": 3,
+    "bytes": 1479522,
+    "sha256": "32101cc7ddc42010be4c5aa2391194e82a5182e37a3e9d1fd1a691e4a155fc25",
+    "group": "SALN certifications",
+    "year": 2025,
+    "sources": [
+      "saln/saln_certification_2025.pdf"
+    ]
+  }
+]

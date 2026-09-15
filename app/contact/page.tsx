@@ -155,7 +155,7 @@ export default function ContactPage() {
           <p className="text-sm text-[#2A2A29]/65 leading-relaxed">
             Submit feedback in person, by email, or by phone. All complaints are logged
             and handled per TMCWD&apos;s Citizen&apos;s Charter.{" "}
-            <Link href="/transparency/#citizens-charter" className="text-[#0591D4] hover:underline">
+            <Link href="/transparency/citizens-charter/" className="text-[#0591D4] hover:underline">
               View the Citizen&apos;s Charter →
             </Link>
           </p>
