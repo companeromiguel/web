@@ -22,3 +22,37 @@
     left: 12px;
   }
 }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  overflow: hidden;
+  background: rgba(8, 25, 38, 0.76);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  backdrop-filter: blur(16px) saturate(120%);
+  cursor: zoom-out;
+  animation: lightbox-in 240ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.lightboxClosing { animation: lightbox-out 180ms ease-in both; }
+.lightboxImage { position: relative; width: min(90vw, 109vh, 1200px); aspect-ratio: 4 / 3; overflow: hidden; border: 2px solid #0591d4; border-radius: 20px; background: rgba(5, 145, 212, 0.08); box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35); animation: image-in 300ms cubic-bezier(.22, 1, .36, 1) both; }
+.lightboxClosing .lightboxImage { animation: image-out 180ms ease-in both; }
+.lightboxHint { position: absolute; bottom: 20px; left: 50%; margin: 0; transform: translateX(-50%); color: rgba(255, 255, 255, 0.78); font-size: 11px; white-space: nowrap; }
+
+@keyframes lightbox-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lightbox-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes image-in { from { opacity: 0; transform: scale(.94) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes image-out { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(.96); } }
+
+@media (max-width: 640px) {
+  .lightbox { padding: 16px; }
+  .lightboxImage { width: min(94vw, 106vh); border-radius: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox, .lightboxClosing, .lightboxImage, .lightboxClosing .lightboxImage { animation-duration: 1ms; }
+}

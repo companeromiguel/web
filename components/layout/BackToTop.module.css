@@ -6,13 +6,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 54px;
-  height: 54px;
+  width: 46px;
+  height: 46px;
   padding: 0;
-  border: 1px solid #71bff0;
+  border: 1px solid rgba(130, 207, 247, 0.8);
   border-radius: 50%;
-  background: #acd3ef;
-  box-shadow: 0 8px 30px rgba(66, 127, 165, 0.17);
+  background: rgba(45, 153, 215, 0.34);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: 0 8px 30px rgba(36, 104, 145, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.45);
   color: #ffffff;
   cursor: pointer;
   line-height: 1;
@@ -22,7 +24,7 @@
   transition: opacity 120ms ease-out, transform 160ms cubic-bezier(.22, 1, .36, 1), background 200ms, box-shadow 200ms;
 }
 
-.button:hover { background: #8dc5ec; box-shadow: 0 10px 32px rgba(66, 127, 165, 0.23); }
+.button:hover { background: rgba(45, 153, 215, 0.5); box-shadow: 0 10px 32px rgba(36, 104, 145, 0.27), inset 0 1px 0 rgba(255, 255, 255, 0.55); }
 .button:focus-visible { outline: 2px solid #0591d4; outline-offset: 5px; }
 .visible { opacity: 1; pointer-events: auto; transform: translateY(0); transition-duration: 220ms, 280ms, 200ms, 200ms; }
 

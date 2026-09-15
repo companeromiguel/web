@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { ChevronDown, Images, X } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import styles from "./GalleryAlbums.module.css";
 
 export interface GalleryImage { src: string; alt: string; }
@@ -15,10 +16,26 @@ const displayTitle = (title: string) => title.replace(/^20\d{2}\s+/, "");
 export default function GalleryAlbums({ sections }: { sections: GallerySection[] }) {
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
   const [openId, setOpenId] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [closingImage, setClosingImage] = useState(false);
   const panelRef = useRef<HTMLElement>(null);
   const sorted = useMemo(() => [...sections].sort((a, b) => (Number(albumYear(b.title)) || 0) - (Number(albumYear(a.title)) || 0)), [sections]);
   const visible = sorted.filter((album) => filter === "All" || (filter === "Earlier" ? albumYear(album.title) === "Archive" || Number(albumYear(album.title)) < 2017 : albumYear(album.title) === filter));
   const openAlbum = sections.find((album) => album.id === openId);
+
+  useEffect(() => {
+    if (!selectedImage) return;
+    const previousOverflow = document.body.style.overflow;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setClosingImage(true);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [selectedImage]);
 
   const open = (id: string) => {
     setOpenId(id);
@@ -41,7 +58,7 @@ export default function GalleryAlbums({ sections }: { sections: GallerySection[]
         <button type="button" onClick={() => setOpenId(null)} aria-label="Close album" className="inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#C7DCE8] p-0 leading-none text-[#31576E] hover:border-[#0591D4] hover:text-[#0591D4]"><X className="block shrink-0" size={18} aria-hidden="true" /></button>
       </div>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-        {openAlbum.images.map((image, index) => <figure key={image.src} className="relative overflow-hidden rounded-xl bg-[#DDEBF3]" style={{ aspectRatio: "4 / 3" }}><Image src={image.src} alt={image.alt} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover" /><figcaption className="sr-only">Photo {index + 1} of {openAlbum.images.length}</figcaption></figure>)}
+        {openAlbum.images.map((image, index) => <button key={image.src} type="button" onClick={() => { setSelectedImage(image); setClosingImage(false); }} aria-label={`Enlarge photo ${index + 1} of ${openAlbum.images.length}`} className="group relative cursor-zoom-in overflow-hidden rounded-xl bg-[#DDEBF3] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0591D4]" style={{ aspectRatio: "4 / 3" }}><Image src={image.src} alt="" fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover transition-transform duration-300 group-hover:scale-[1.03]" /></button>)}
       </div>
     </section>}
 
@@ -53,5 +70,23 @@ export default function GalleryAlbums({ sections }: { sections: GallerySection[]
         </button>
       </li>; })}
     </ol>
+
+    {selectedImage && createPortal(
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Enlarged gallery photo"
+        tabIndex={-1}
+        className={`${styles.lightbox} ${closingImage ? styles.lightboxClosing : ""}`}
+        onClick={() => setClosingImage(true)}
+        onAnimationEnd={() => { if (closingImage) setSelectedImage(null); }}
+      >
+        <div className={styles.lightboxImage}>
+          <Image src={selectedImage.src} alt={selectedImage.alt} fill sizes="95vw" className="object-contain" priority />
+        </div>
+        <p className={styles.lightboxHint}>Click anywhere or press Esc to close</p>
+      </div>,
+      document.body,
+    )}
   </>;
 }
