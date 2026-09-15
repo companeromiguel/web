@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 certificates
+# Generated PDF viewer assets and local audit output
+/public/pdfjs/
+/.transparency-audit/
+/.transparency-*.mjs

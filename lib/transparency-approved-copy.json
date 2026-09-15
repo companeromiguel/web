@@ -1,0 +1,108 @@
+{
+  "sections": {
+    "Transparency Seal": "Browse the supplied budget, financial and operational, SALN and ranking documents.",
+    "Budgets": "Budget-related submissions and supporting records, organized using the supplied files.",
+    "Financial statements": "Financial and operational report documents from the supplied archive.",
+    "SALN certifications": "SALN-related memoranda and certification documents.",
+    "Rankings": "Documents describing TMCWD's Performance-Based Bonus ranking systems.",
+    "Freedom of Information": "Read the FOI manual and request guides, and view the supplied certification records.",
+    "FOI documents": "The FOI manual and request guides in English and Tagalog.",
+    "Certifications": "Historical certification records supplied in the FOI folder.",
+    "Citizen's Charter": "Read TMCWD's 2025 Citizen's Charter and related anti-red-tape documents.",
+    "Related ARTA documents": "The Committee on Anti-Red Tape office order and initial reengineering plan.",
+    "Bidding & Procurement": "Annual procurement plans for common-use supplies and equipment, grouped by year.",
+    "Annual procurement plans": "Open or download the available APP-CSE documents for 2018–2023."
+  },
+  "documents": {
+    "arta-cart-office-order": {
+      "sha256": "7196b3d48bd963928355dbabb77a21cdc385c254a6c3b998672f4ed1bfd14e45",
+      "title": "Committee on Anti-Red Tape: Office Order 2025-05-018",
+      "summary": "Office order dated 20 May 2025 setting out the new composition of TMCWD's Committee on Anti-Red Tape."
+    },
+    "arta-tmcwd-initial-reengineering-plan": {
+      "sha256": "4db318bc4583e1b7caf107f2c5616835c857f72f7666aea7a284fa1a5f1c7b7d",
+      "title": "Initial Reengineering Plan — April 2025",
+      "summary": "TMCWD's April 2025 initial reengineering plan for streamlining government procedures in delivering public services."
+    },
+    "budget-fy-2018": {
+      "sha256": "2b6e5493879f5fca32a1ed02a08bb7544ce633776e0c93f499ba1a90169ba354",
+      "title": "Annual budget documents — 2018",
+      "summary": "Budget submission for 2018, with the covering letter listing the board resolution, projected cash flow, revenue and expenses, operating expenses and procurement plan."
+    },
+    "budget-fy-2019": {
+      "sha256": "7c085672f5155cc0a36db154ffb40d06f107c9e45f507dc7fc9d2ba823d57480",
+      "title": "Annual budget documents — 2019",
+      "summary": "2019 annual budget submission, beginning with a Department of Budget and Management acknowledgement receipt."
+    },
+    "budget-fy-2020": {
+      "sha256": "ac1f7804ff0ae6016791732b31781b6401ac731477de438db2103a469847b6ef",
+      "title": "Annual budget documents — 2020",
+      "summary": "2020 annual budget submission, beginning with a Department of Budget and Management acknowledgement receipt."
+    },
+    "budget-fy-2023": {
+      "sha256": "7d4de5fc92dd155f0fcf2462a9e2c463a2fdd71fff98e7730efa548dcc8f0055",
+      "title": "Budget and personnel documents — 2023",
+      "summary": "Document set beginning with DBM's acknowledgement of TMCWD's CY 2023 plantilla submission for post-audit."
+    },
+    "budget-fy-2024": {
+      "sha256": "a32cbb117649c39ed3c27848cc077155cb79043e5693a18d5e0401dd80ad38df",
+      "title": "Corporate operating budget documents — 2024",
+      "summary": "FY 2024 corporate operating budget submission, beginning with a DBM acknowledgement receipt."
+    },
+    "foi-07-certification": {
+      "sha256": "6f32d9b22221ec6200b1bf9403d398208dbc05e7877739cf55d41a9a1dcc25d4",
+      "title": "FOI request-status certification — as of 31 December 2024",
+      "summary": "Certification issued on 30 January 2025 stating that TMCWD had no overdue or pending FOI requests as of 31 December 2024, subject to compliance validation."
+    },
+    "foi-english": {
+      "sha256": "3386279432ee6093ba6b85bf7b472037ab86072001486a6ddf1dde17a9e1e663",
+      "title": "Freedom of Information guide — English",
+      "summary": "English-language guide showing electronic and standard FOI request routes, agency contact information and the appeals mechanism."
+    },
+    "foi-tagalog": {
+      "sha256": "343106a61fc586babe8d80a2639d5e8bf3c67e30fbfe1614399b0f4afab6d093",
+      "title": "Freedom of Information guide — Tagalog",
+      "summary": "Tagalog-language guide showing electronic and standard FOI request routes, agency contact information and the appeals mechanism."
+    },
+    "procurement-app-cse-2022": {
+      "sha256": "1c487e524cac55c80463dd21e9e9b08b5b9d007d8312030fa1cd489e896f6bb9",
+      "title": "Annual Procurement Plan for Common-Use Supplies and Equipment — 2022",
+      "summary": "TMCWD's 2022 APP-CSE listing planned supplies and equipment, quantities and amounts."
+    },
+    "procurement-app-cse-2018": {
+      "sha256": "3b6059fea630b4e2d8764f9029a425533b81725e54a40a592a6d71867c941b91",
+      "title": "Annual Procurement Plan for Common-Use Supplies and Equipment — 2018",
+      "summary": "TMCWD's 2018 APP-CSE listing planned supplies and equipment, quantities and amounts."
+    },
+    "procurement-app-cse-2019": {
+      "sha256": "97f409ac5fb459f6b3622678d5fb6a5292b2c4d1161b85f5c748f43062226c38",
+      "title": "Annual Procurement Plan for Common-Use Supplies and Equipment — 2019",
+      "summary": "TMCWD's 2019 APP-CSE listing planned supplies and equipment, quantities and amounts."
+    },
+    "procurement-app-cse-2020": {
+      "sha256": "94b32a958e5b3999209b14eda6f249463637f5ab74ee05030b7347ba63c9aec4",
+      "title": "Annual Procurement Plan for Common-Use Supplies and Equipment — 2020",
+      "summary": "TMCWD's 2020 APP-CSE listing planned supplies and equipment, quantities and amounts."
+    },
+    "procurement-app-cse-2021": {
+      "sha256": "b5874bc21401d249a09e2cb0e0b7373df72001cd9be1d035d98ee038528094cf",
+      "title": "Annual Procurement Plan for Common-Use Supplies and Equipment — 2021",
+      "summary": "TMCWD's 2021 APP-CSE listing planned supplies and equipment, quantities and amounts."
+    },
+    "procurement-app-cse-2023": {
+      "sha256": "8038beb1494347a50bc4b18e11c1b699cd0dadee8c77b7fef8c84a4a9fe48467",
+      "title": "Annual Procurement Plan for Common-Use Supplies and Equipment — 2023",
+      "summary": "TMCWD's 2023 APP-CSE listing planned supplies and equipment, quantities and amounts."
+    },
+    "ranking-fy2018": {
+      "sha256": "f69e64cf6c0b3d61383ef9b81e0868ce1cb249afacd2be408880af0de92fea4f",
+      "title": "Performance-Based Bonus ranking system — FY 2018",
+      "summary": "TMCWD's FY 2018 Performance-Based Bonus ranking policy, including coverage and exclusions."
+    },
+    "ranking-fy2019": {
+      "sha256": "4632daaa1082be7311a2d454ceb202680c56d693e5daf4cb9538ef09cc1315b6",
+      "title": "Performance-Based Bonus ranking system — FY 2019",
+      "summary": "TMCWD's FY 2019 Performance-Based Bonus ranking policy, including coverage and exclusions."
+    }
+  }
+}

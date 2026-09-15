@@ -53,7 +53,7 @@ export default function Footer() {
               Government-owned corporation under P.D. 198, serving Trece Martires City, Cavite.
             </p>
             <address className="not-italic text-[11px] text-white/50 space-y-0.5">
-              <p>2nd Flr., TMCWD Bldg., Governor's Drive, Brgy. San Agustin, Trece Martires City, Cavite 4109</p>
+              <p>2nd Flr., TMCWD Bldg., Governor&apos;s Drive, Brgy. San Agustin, Trece Martires City, Cavite 4109</p>
               <p>
                 <a href="tel:+63464192664" className="hover:text-white transition-colors">(046) 419-2664</a>
                 {" · "}
@@ -95,13 +95,13 @@ export default function Footer() {
             </p>
             <ul className="space-y-1 text-[11px] text-white/50">
               {[
-                ["Full Disclosure Policy", "/transparency/#full-disclosure"],
-                ["Freedom of Information", "/transparency/#foi"],
-                ["Procurement Plans",      "/transparency/#procurement"],
-                ["Citizen's Charter",      "/transparency/#citizens-charter"],
-                ["Financial Reports",      "/transparency/#financials"],
+                ["Transparency Seal", "/transparency/seal/"],
+                ["Freedom of Information", "/transparency/foi/"],
+                ["Bidding & Procurement",      "/transparency/procurement/"],
+                ["Citizen's Charter",      "/transparency/citizens-charter/"],
+                ["Financial Reports",      "/transparency/seal/#documents-1"],
               ].map(([label, href]) => (
-                <li key={href}>
+                <li key={label}>
                   <Link href={href} className="hover:text-white transition-colors">{label}</Link>
                 </li>
               ))}
@@ -118,7 +118,7 @@ export default function Footer() {
               </p>
               <ul className="space-y-1">
                 {primaryNav.map(({ label, href }) => (
-                  <li key={href}>
+                  <li key={label}>
                     <Link href={href} className="text-[11px] text-white/50 hover:text-white transition-colors whitespace-nowrap">
                       {label}
                     </Link>
