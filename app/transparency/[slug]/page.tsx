@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageHeader from "@/components/layout/PageHeader";
 import DocumentLibrary from "@/components/transparency/DocumentLibrary";
+import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
 import { documentsFor, transparencyPages, sectionDescriptions } from "@/lib/transparency";
 
 interface Props { params: Promise<{ slug: string }> }
@@ -28,7 +29,9 @@ export default async function TransparencyDetail({ params }: Props) {
         <span aria-current="page">{page.title}</span>
       </nav>
     </PageHeader>
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="relative isolate overflow-hidden bg-[#EEF4F8]">
+    <TransparencyWaveBackground animated />
+    <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="grid gap-4 sm:grid-cols-3">
         {[["Documents", String(all.length)], ["Format", "PDF"], ["Access", "Preview, open or download"]].map(([label, value]) =>
           <div key={label} className="border border-[#E8EEF2] bg-[#F7FAFB] p-5">
@@ -37,18 +40,19 @@ export default async function TransparencyDetail({ params }: Props) {
           </div>)}
       </div>
       <nav aria-label="Document sections" className="mt-6 flex flex-wrap gap-2">
-        {sections.map(section => <a key={section.id} href={"#" + section.id} className="rounded border border-[#E8EEF2] px-3 py-2 text-sm text-[#0591D4] hover:underline">{section.title}</a>)}
+        {sections.map(section => <a key={section.id} href={"#" + section.id} className="rounded border border-[#A9C6D8] px-3 py-2 text-sm text-[#0591D4] hover:underline">{section.title}</a>)}
       </nav>
       {sections.map(section => <section key={section.id} id={section.id} aria-labelledby={section.id + "-heading"} className="mt-14 scroll-mt-24">
-        <div className="mb-6 border-l-2 border-[#0591D4] pl-4">
+        <div className="mb-6">
           <h2 id={section.id + "-heading"} className="font-heading text-xl font-semibold text-[#2A2A29]">{section.title}</h2>
           <p className="mt-1 text-sm text-[#2A2A29]/60">{sectionDescriptions[slug === "procurement" ? "Annual procurement plans" : section.title]}</p>
         </div>
         <DocumentLibrary documents={section.documents} />
       </section>)}
-      {slug === "seal" && <aside className="mt-10 border-l-2 border-[#0591D4] bg-[#F7FAFB] p-5">
+      {slug === "seal" && <aside className="mt-10 bg-[#F7FAFB] p-5">
         <Link href="/transparency/citizens-charter/#arta" className="text-sm font-medium text-[#0591D4] underline underline-offset-4">Related ARTA documents</Link>
       </aside>}
+    </div>
     </div>
   </>;
 }
