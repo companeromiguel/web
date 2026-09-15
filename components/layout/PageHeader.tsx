@@ -9,14 +9,13 @@ interface PageHeaderProps {
 
 /**
  * Shared minimal page header used on all inner pages.
- * Replaces the heavy indigo full-bleed block with a clean
- * white-background treatment with a single indigo left accent.
+ * Uses blue page titles on a white background.
  */
 export default function PageHeader({ title, description, children }: PageHeaderProps) {
   return (
     <div className="bg-white border-b border-[#E8EEF2] pt-[80px]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
-        <h1 className="font-heading text-3xl lg:text-4xl font-semibold text-[#370A77] tracking-tight leading-tight">
+        <h1 className="font-heading text-3xl lg:text-4xl font-semibold text-[#0591D4] tracking-tight leading-tight">
           {title}
         </h1>
         {description && (
