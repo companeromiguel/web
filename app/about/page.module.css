@@ -52,15 +52,7 @@
 .directoryRole { font-size: 11px; color: #386984; }
 .directoryGrid h4 { font-size: 13px; font-weight: 600; margin-block: 8px; }
 .directoryGrid p { font-size: 10px; }
-.backTop { position: fixed; right: max(40px, env(safe-area-inset-right)); bottom: max(40px, env(safe-area-inset-bottom)); z-index: 40; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; border: 1px solid #71bff0; background: #acd3ef; color: white; box-shadow: 0 8px 30px #427fa52b; opacity: 0; pointer-events: none; transform: translateY(6px); cursor: pointer; transition: opacity .12s ease-out, transform .16s cubic-bezier(.22, 1, .36, 1), background .2s, box-shadow .2s; }
-.backTop:hover { background: #8dc5ec; box-shadow: 0 10px 32px #427fa53b; }
-.backTopVisible { opacity: 1; pointer-events: auto; transform: translateY(0); transition-duration: .22s, .28s, .2s, .2s; }
-.backTop:focus-visible { outline: 2px solid #0591d4; outline-offset: 5px; }
-@media (prefers-reduced-motion: reduce) {
-  .backTop { transition: none; transform: none; }
-}
 @media (max-width: 700px) {
-  .backTop { right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); }
   .container { padding-inline: 20px; }
   .section, .officers { padding-block: 48px; }
   .historyIntro, .valuesGrid, .pledgeLayout, .directory { grid-template-columns: 1fr; gap: 24px; }

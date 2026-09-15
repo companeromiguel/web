@@ -4,8 +4,8 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AlertBanner from "@/components/layout/AlertBanner";
-import SplashScreen from "@/components/layout/SplashScreen";
 import DataPrivacyModal from "@/components/layout/DataPrivacyModal";
+import BackToTop from "@/components/layout/BackToTop";
 
 /* ── Fonts ─────────────────────────────────────────────────────────────
    next/font self-hosts both — no runtime requests to Google.
@@ -64,13 +64,13 @@ export default function RootLayout({
   return (
     <html lang="en-PH" className={`${inter.variable} ${plusJakarta.variable}`}>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
-        {/* <SplashScreen /> */}
         <DataPrivacyModal />
         <AlertBanner />
         <Header />
         <main id="main-content" className="flex-1">
           {children}
         </main>
+        <BackToTop />
         <Footer />
       </body>
     </html>

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Compass, Droplets, Eye, Landmark, UserRound } from "lucide-react";
-import BackToTop from "./BackToTop";
 import PageHeader, { Breadcrumb } from "@/components/layout/PageHeader";
 import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
 import styles from "./page.module.css";
@@ -208,7 +207,6 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-          <BackToTop />
         </div>
       </section>
         </div>
