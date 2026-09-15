@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* ── Change this to the exact TMCWD founding date/time ── */
+/* ── Founding date — update if exact date changes ── */
 const FOUNDED = new Date("1998-07-17T00:00:00");
 
 interface Stat {
@@ -13,90 +13,39 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  {
-    value: 33,
-    suffix: "",
-    label: "Barangays Served",
-  },
-  {
-    value: 24000,
-    suffix: "+",
-    label: "Active Connections",
-  },
-  {
-    value: 24,
-    suffix: "/7",
-    label: "Emergency Response",
-  },
+  { value: 33,    suffix: "",   label: "Barangays Served"   },
+  { value: 24000, suffix: "+",  label: "Active Connections" },
+  { value: 24,    suffix: "/7", label: "Emergency Response" },
 ];
 
-/* ── Elapsed time breakdown from FOUNDED to now ── */
-function useElapsed() {
-  const [elapsed, setElapsed] = useState({ yy: 0, mo: 0, dd: 0, hh: 0, mm: 0, ss: 0 });
+/* ── Years elapsed since founding ── */
+function useYearsOfService() {
+  const [years, setYears] = useState(0);
 
   useEffect(() => {
     function calc() {
       const now = new Date();
-
-      let years  = now.getFullYear() - FOUNDED.getFullYear();
-      let months = now.getMonth()    - FOUNDED.getMonth();
-      let days   = now.getDate()     - FOUNDED.getDate();
-      let hours  = now.getHours()    - FOUNDED.getHours();
-      let mins   = now.getMinutes()  - FOUNDED.getMinutes();
-      let secs   = now.getSeconds()  - FOUNDED.getSeconds();
-
-      if (secs  < 0) { secs  += 60; mins--; }
-      if (mins  < 0) { mins  += 60; hours--; }
-      if (hours < 0) { hours += 24; days--; }
-      if (days  < 0) {
-        months--;
-        // days in the previous month
-        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-        days += prevMonth.getDate();
-      }
-      if (months < 0) { months += 12; years--; }
-
-      setElapsed({ yy: years, mo: months, dd: days, hh: hours, mm: mins, ss: secs });
+      let y = now.getFullYear() - FOUNDED.getFullYear();
+      // subtract 1 if anniversary hasn't occurred yet this year
+      const anniversary = new Date(now.getFullYear(), FOUNDED.getMonth(), FOUNDED.getDate());
+      if (now < anniversary) y--;
+      setYears(y);
     }
-
     calc();
-    const id = setInterval(calc, 1000);
-    return () => clearInterval(id);
   }, []);
 
-  return elapsed;
+  return years;
 }
 
-/* ── Pad a number to 2 digits ── */
-function pad(n: number) {
-  return String(n).padStart(2, "0");
-}
-
-/* ── Live service duration tile ── */
+/* ── Years of Service tile ── */
 function ServiceTimer() {
-  const { yy, mo, dd, hh, mm, ss } = useElapsed();
+  const years = useYearsOfService();
 
   return (
     <div className="flex flex-col items-center text-center px-4 py-5">
-      {/* Timer display */}
-      <div className="font-heading font-bold text-[#370A77] leading-none tabular-nums">
-        {/* Years — larger */}
-        <span className="text-3xl sm:text-4xl">{yy}</span>
-        <span className="text-xl sm:text-2xl text-[#0591D4]">y </span>
-        <span className="text-2xl sm:text-3xl">{pad(mo)}</span>
-        <span className="text-lg sm:text-xl text-[#0591D4]">m </span>
-        <span className="text-2xl sm:text-3xl">{pad(dd)}</span>
-        <span className="text-lg sm:text-xl text-[#0591D4]">d</span>
-        {/* Time on second line */}
-        <div className="text-xl sm:text-2xl mt-0.5">
-          <span>{pad(hh)}</span>
-          <span className="text-[#0591D4]">h </span>
-          <span>{pad(mm)}</span>
-          <span className="text-[#0591D4]">m </span>
-          <span>{pad(ss)}</span>
-          <span className="text-[#0591D4]">s</span>
-        </div>
-      </div>
+      <span className="font-heading text-3xl sm:text-4xl font-bold text-[#370A77] leading-none tabular-nums">
+        {years}<span className="text-[#0591D4]">+</span>
+      </span>
       <span className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-[#2A2A29]/50 leading-tight">
         Years of Service
       </span>
@@ -160,14 +109,8 @@ export default function StatsCounter() {
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className="grid grid-cols-2 lg:grid-cols-4 mb-12"
-    >
-      {/* Live timer occupies the first slot */}
+    <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 mb-12">
       <ServiceTimer />
-
-      {/* Regular count-up stats */}
       {stats.map((stat) => (
         <StatItem key={stat.label} stat={stat} animate={animate} />
       ))}
