@@ -53,7 +53,7 @@ export default function HomePage() {
         <HeroBackground />
 
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-32 lg:pb-20 flex flex-col min-h-[inherit]">
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-32 lg:pb-20 flex flex-col min-h-[inherit]">
 
           {/* Bottom-right: headline + tagline + CTA */}
           <div className="absolute bottom-8 right-4 sm:right-6 lg:right-8 text-right max-w-sm">
