@@ -1,64 +1,60 @@
 "use client";
 
 /**
- * HeroBackground — looping video with a still-image fallback.
+ * HeroBackground — CSS crossfade slideshow cycling through 5 images.
+ * img1.jpg → img2.jpg → img3.jpg → img4.jpg → img5.png → repeat
  *
- * HOW TO USE:
- *   1. Create a video that cycles between your backgrounds with whatever
- *      transition you like (liquid morph, dissolve, etc.) in your video editor.
- *   2. Export as MP4 (H.264, web-optimised / "fast start").
- *      Recommended: 1920×1080, 30fps, ~3–8 MB for a 10–20s loop.
- *   3. Drop the file into /public/ and name it hero.mp4
- *   4. Optionally export a WebM version (hero.webm) for better compression
- *      on Chrome/Firefox — the <source> order below prefers WebM first.
- *   5. The video will autoplay, loop, and be muted (required by all browsers
- *      for autoplay without user interaction).
+ * Technique: layers stacked by z-index, each fades OUT revealing the one below.
+ * Combined opacity across the stack is always 1 — no dark flash ever.
  *
- * FALLBACK:
- *   If the browser can't play video (or the file isn't there yet),
- *   it falls back to bgv1.jpg via the CSS background on the wrapper div.
+ * Cycle = 20s  (3s hold + 1s fade) × 5 images
+ * Delays:
+ *   Layer 5 (bottom): z-index 1, delay -16s
+ *   Layer 4:          z-index 2, delay -12s
+ *   Layer 3:          z-index 3, delay  -8s
+ *   Layer 2:          z-index 4, delay  -4s
+ *   Layer 1 (top):    z-index 5, delay   0s
  */
 export default function HeroBackground() {
   return (
     <>
-      {/* Video layer — covers the full hero, object-fit:cover like background-size:cover */}
+      {/* Layer 5 — img5.png — bottom base */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-[url('/bgv1.jpg')]"
+        className="absolute inset-0 hero-slide hero-slide-5"
+        style={{ backgroundImage: "url('/img5.png')" }}
         aria-hidden="true"
-      >
-        <video
-          className="w-full h-full object-cover"
-          /*
-           * ── ADJUST THIS TO REFRAME THE VIDEO ON MOBILE ──
-           * Format:  object-position: X Y
-           * X = how far from the left  (e.g. 30% = slightly right of center)
-           * Y = how far from the top   (e.g. center = vertically centered)
-           *
-           * Examples:
-           *   "70% center"  → shows right-of-center area
-           *   "80% center"  → shows more to the right
-           *   "60% center"  → a bit right of center
-           *
-           * Current value: 70% — tweak until it looks right on your phone.
-           */
-          style={{ objectPosition: "70% center" }}
-          autoPlay
-          loop
-          muted
-          playsInline          /* required on iOS to prevent fullscreen takeover */
-          preload="auto"       /* start loading immediately */
-          aria-hidden="true"
-        >
-          {/* WebM first — better compression on Chrome/Firefox */}
-          <source src="/hero.webm" type="video/webm" />
-          {/* MP4 fallback — universal support */}
-          <source src="/bg1.mp4"  type="video/mp4"  />
-          {/* If neither plays, the parent div's bg-[url('/bgv1.jpg')] shows */}
-        </video>
-      </div>
+      />
 
-      {/* Dark overlay — sits above the video, same as before */}
-      <div className="absolute inset-0 bg-gray-700 opacity-60" aria-hidden="true" />
+      {/* Layer 4 — img4.jpg */}
+      <div
+        className="absolute inset-0 hero-slide hero-slide-4"
+        style={{ backgroundImage: "url('/img4.jpg')" }}
+        aria-hidden="true"
+      />
+
+      {/* Layer 3 — img3.jpg */}
+      <div
+        className="absolute inset-0 hero-slide hero-slide-3"
+        style={{ backgroundImage: "url('/img3.jpg')" }}
+        aria-hidden="true"
+      />
+
+      {/* Layer 2 — img2.jpg */}
+      <div
+        className="absolute inset-0 hero-slide hero-slide-2"
+        style={{ backgroundImage: "url('/img2.jpg')" }}
+        aria-hidden="true"
+      />
+
+      {/* Layer 1 — img1.jpg — top, visible first */}
+      <div
+        className="absolute inset-0 hero-slide hero-slide-1"
+        style={{ backgroundImage: "url('/img1.jpg')" }}
+        aria-hidden="true"
+      />
+
+      {/* Dark overlay — above all image layers */}
+      <div className="absolute inset-0 bg-gray-700 opacity-60" style={{ zIndex: 6 }} aria-hidden="true" />
     </>
   );
 }
