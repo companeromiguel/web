@@ -53,7 +53,41 @@ export default function HomePage() {
         <HeroBackground />
 
 
-        <div className="relative w-full flex flex-col min-h-[inherit]" />
+        <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-32 lg:pb-20 flex flex-col min-h-[inherit]">
+
+          {/* Bottom-right: headline + tagline + CTA */}
+          <div className="absolute bottom-8 right-4 sm:right-6 lg:right-8 text-right max-w-sm">
+            <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight mb-3">
+              Serbisyong Malinis,<br />Tapat, at Maaasahan.
+            </h1>
+            <p className="text-sm text-white/70 leading-relaxed mb-6">
+              Magandang serbisyo&apos;y maipagkakaloob, lalo na&apos;t kaagapay mamamayan ng lungsod
+            </p>
+            <div className="flex flex-wrap gap-3 items-center justify-end">
+              {/* Primary CTA — solid */}
+              <Link
+                href="/news/"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#0591D4] hover:bg-[#0480bc] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-black/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              >
+                <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+                </svg>
+                Water Advisory
+              </Link>
+              {/* Secondary CTA — ghost */}
+              <Link
+                href="/contact/"
+                className="inline-flex items-center gap-2 rounded-lg border border-white/40 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-5 py-2.5 text-sm font-semibold text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              >
+                <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                </svg>
+                Apply for Service
+              </Link>
+            </div>
+          </div>
+
+        </div>
       </section>
 
 
