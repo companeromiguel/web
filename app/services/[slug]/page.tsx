@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import PageHeader, { Breadcrumb } from "@/components/layout/PageHeader";
 import SummaryCards from "@/components/services/SummaryCards";
+import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
 import { serviceGuides } from "@/lib/service-charter";
 
 interface PageProps {
@@ -37,11 +38,13 @@ export default async function ServicePage({ params }: PageProps) {
         <Breadcrumb current={guide.title} />
       </PageHeader>
 
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="relative isolate overflow-hidden bg-[#EEF4F8]">
+        <TransparencyWaveBackground animated />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <SummaryCards guide={guide} />
 
         <section aria-labelledby="requirements-heading" className="mt-14">
-          <div className="mb-6 border-l-2 border-[#0591D4] pl-4">
+          <div className="mb-6">
             <h2 id="requirements-heading" className="font-heading text-xl font-semibold text-[#2A2A29]">{slug === "feedback" ? "Contact channels" : "What to prepare"}</h2>
             <p className="mt-1 text-sm text-[#2A2A29]/60">{slug === "feedback" ? "Options listed in the Citizen's Charter." : "Documents and account information listed in the Citizen's Charter."}</p>
           </div>
@@ -63,11 +66,11 @@ export default async function ServicePage({ params }: PageProps) {
               </li>
             ))}
           </ul>
-          {guide.requirementsNote && <p className="mt-4 border-l-2 border-[#0591D4] bg-[#F7FAFB] px-4 py-3 text-sm leading-relaxed text-[#2A2A29]/70">{guide.requirementsNote}</p>}
+          {guide.requirementsNote && <p className="mt-4 bg-[#F7FAFB] px-4 py-3 text-sm leading-relaxed text-[#2A2A29]/70">{guide.requirementsNote}</p>}
         </section>
 
         <section aria-labelledby="process-heading" className="mt-14">
-          <div className="mb-6 border-l-2 border-[#0591D4] pl-4">
+          <div className="mb-6">
             <h2 id="process-heading" className="font-heading text-xl font-semibold text-[#2A2A29]">{slug === "feedback" ? "How submissions are handled" : "How it works"}</h2>
             <p className="mt-1 text-sm text-[#2A2A29]/60">{slug === "feedback" ? "The process described in the 2025 Citizen's Charter." : "A plain-language guide to the service steps."}</p>
           </div>
@@ -85,7 +88,7 @@ export default async function ServicePage({ params }: PageProps) {
 
         {guide.extraSection && (
           <section aria-labelledby="extra-heading" className="mt-14">
-            <div className="mb-6 border-l-2 border-[#0591D4] pl-4">
+            <div className="mb-6">
               <h2 id="extra-heading" className="font-heading text-xl font-semibold text-[#2A2A29]">{guide.extraSection.title}</h2>
               <p className="mt-1 text-sm text-[#2A2A29]/60">{guide.extraSection.description}</p>
             </div>
@@ -102,7 +105,7 @@ export default async function ServicePage({ params }: PageProps) {
         )}
 
         <section aria-labelledby="guide-heading" className="mt-14">
-          <div className="mb-6 border-l-2 border-[#0591D4] pl-4">
+          <div className="mb-6">
             <h2 id="guide-heading" className="font-heading text-xl font-semibold text-[#2A2A29]">Citizen&apos;s Charter reference</h2>
             <p className="mt-1 text-sm text-[#2A2A29]/60">The original pages in order. Open an image for a larger view.</p>
           </div>
@@ -121,6 +124,7 @@ export default async function ServicePage({ params }: PageProps) {
               ))}
           </div>
         </section>
+      </div>
       </div>
     </>
   );
