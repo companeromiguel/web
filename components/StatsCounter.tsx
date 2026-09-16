@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
+/* ── Founding date — update if exact date changes ── */
+const FOUNDED = new Date("1998-07-17T00:00:00");
+
 interface Stat {
   value: number;
   suffix: string;
@@ -10,29 +13,48 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  {
-    value: 33,
-    suffix: "",
-    label: "Barangays Served",
-  },
-  {
-    value: 24000,
-    suffix: "+",
-    label: "Active Connections",
-  },
-  {
-    value: 99.8,
-    suffix: "%",
-    label: "Water Quality Compliance",
-    decimals: 1,
-  },
-  {
-    value: 24,
-    suffix: "/7",
-    label: "Emergency Response",
-  },
+  { value: 33,    suffix: "",   label: "Barangays Served"   },
+  { value: 24000, suffix: "+",  label: "Active Connections" },
+  { value: 24,    suffix: "/7", label: "Emergency Response" },
 ];
 
+/* ── Years elapsed since founding ── */
+function useYearsOfService() {
+  const [years, setYears] = useState(0);
+
+  useEffect(() => {
+    function calc() {
+      const now = new Date();
+      let y = now.getFullYear() - FOUNDED.getFullYear();
+      // subtract 1 if anniversary hasn't occurred yet this year
+      const anniversary = new Date(now.getFullYear(), FOUNDED.getMonth(), FOUNDED.getDate());
+      if (now < anniversary) y--;
+      setYears(y);
+    }
+    calc();
+  }, []);
+
+  return years;
+}
+
+/* ── Years of Service tile ── */
+function ServiceTimer({ animate }: { animate: boolean }) {
+  const years = useYearsOfService();
+  const count = useCountUp(years, 0, 1800, animate && years > 0);
+
+  return (
+    <div className="flex flex-col items-center text-center px-4 py-5">
+      <span className="font-heading text-3xl sm:text-4xl font-bold text-[#370A77] leading-none tabular-nums">
+        {Math.round(count)}<span className="text-[#0591D4]">+</span>
+      </span>
+      <span className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-[#2A2A29]/50 leading-tight">
+        Years of Service
+      </span>
+    </div>
+  );
+}
+
+/* ── Count-up animation hook ── */
 function useCountUp(target: number, decimals = 0, duration = 1800, start = false) {
   const [count, setCount] = useState(0);
 
@@ -42,7 +64,6 @@ function useCountUp(target: number, decimals = 0, duration = 1800, start = false
     const step = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(parseFloat((eased * target).toFixed(decimals)));
       if (progress < 1) requestAnimationFrame(step);
@@ -89,10 +110,8 @@ export default function StatsCounter() {
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className="grid grid-cols-2 lg:grid-cols-4 mb-12"
-    >
+    <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 mb-12">
+      <ServiceTimer animate={animate} />
       {stats.map((stat) => (
         <StatItem key={stat.label} stat={stat} animate={animate} />
       ))}
