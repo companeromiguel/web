@@ -409,7 +409,7 @@ html {
 
 .hero-slide {
   background-size: cover;
-  background-position: 70% center;
+  background-position: center center;
   position: absolute;
   inset: 0;
   opacity: 0;
