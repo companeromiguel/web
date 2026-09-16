@@ -9,7 +9,7 @@ const govLinks = [
   { label: "House of Representatives",     href: "https://congress.gov.ph" },
   { label: "Supreme Court",                href: "https://sc.judiciary.gov.ph" },
   { label: "Court of Appeals",             href: "https://ca.judiciary.gov.ph" },
-  { label: "Sandiganbayan",                href: "https://sandiganbayan.judiciary.gov.ph" },
+  { label: "Sandiganbayan",                href: "https://sb.judiciary.gov.ph/" },
 ];
 
 const partners = [

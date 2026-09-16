@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import PageHeader from "@/components/layout/PageHeader";
+import TransparencyHero from "@/components/transparency/TransparencyHero";
 import DocumentLibrary from "@/components/transparency/DocumentLibrary";
 import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
 import { documentsFor, transparencyPages, sectionDescriptions } from "@/lib/transparency";
@@ -21,14 +21,20 @@ export default async function TransparencyDetail({ params }: Props) {
   const sections = slug === "procurement"
     ? [...new Set(all.map(doc => doc.year))].map(year => ({ id: "year-" + year, title: String(year), documents: all.filter(doc => doc.year === year) }))
     : page.groups.map((group, index) => ({ id: group === "Related ARTA documents" ? "arta" : "documents-" + index, title: group, documents: all.filter(doc => doc.group === group) }));
+  const sealHref = slug === "foi"
+    ? "https://www.foi.gov.ph/agencies/tmcwd/"
+    : slug === "seal"
+    ? "/transparency/seal/"
+    : undefined;
+
   return <>
-    <PageHeader title={page.title} description={sectionDescriptions[page.title]}>
-      <nav aria-label="Breadcrumb" className="text-xs text-[#2A2A29]/60">
-        <Link href="/" className="hover:underline">Home</Link><span aria-hidden="true"> / </span>
-        <Link href="/transparency/" className="hover:underline">Transparency</Link><span aria-hidden="true"> / </span>
-        <span aria-current="page">{page.title}</span>
-      </nav>
-    </PageHeader>
+    <TransparencyHero
+      title={page.title}
+      description={sectionDescriptions[page.title]}
+      sealSrc={slug === "foi" ? "/foi-logo_orig.png" : undefined}
+      sealAlt={slug === "foi" ? "Freedom of Information Philippines" : undefined}
+      sealHref={sealHref}
+    />
     <div className="relative isolate overflow-hidden bg-[#EEF4F8]">
     <TransparencyWaveBackground animated />
     <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

@@ -41,8 +41,20 @@
 .officers { scroll-margin-top: 100px; padding-block: 80px; background: radial-gradient(ellipse at 90% 15%,rgba(213,238,251,.82) 0,transparent 50%),linear-gradient(135deg,rgba(241,248,252,.78),rgba(234,245,251,.72)); }
 .leaders { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 800px; margin: 40px auto 64px; }
 .portraitCard { text-align: center; padding: 36px 24px; background: #ffffffb3; border: 1px solid white; border-radius: 22px; box-shadow: 0 12px 32px #26516d08; }
-.portrait { display: grid; place-items: center; width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(140deg,#dceff8,#edf7fb); color: #6d9bb4; margin: 0 auto 12px; border: 5px solid white; }
+.portrait { display: grid; place-items: center; position: relative; overflow: hidden; width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(140deg,#dceff8,#edf7fb); color: #6d9bb4; margin: 0 auto 12px; border: 5px solid white; }
 .photoLabel { font-size: 10px; color: #526472; }
+.leaderPhoto { object-fit: cover; object-position: center top; }
+.directoryGrid article.boardCard { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 16px 20px 20px; }
+.boardDetails { min-width: 0; flex: 1; }
+.boardPhoto { position: relative; flex: 0 0 110px; height: 150px; overflow: hidden; border-radius: 10px; background: #e7f3fa; }
+.boardPhoto img { object-fit: cover; object-position: center top; }
+@media (max-width: 1100px) and (min-width: 601px) {
+  .directoryGrid:has(.boardCard) { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .directoryGrid:has(.boardCard) { grid-template-columns: 1fr; }
+  .boardPhoto { flex-basis: 90px; height: 125px; }
+}
 .portraitCard h3 { margin: 24px 0 8px; font-size: 19px; font-weight: 600; color: #294c61; }
 .portraitCard p { font-size: 12px; }
 .directory { display: grid; grid-template-columns: 1fr 2fr; gap: 36px; padding-block: 32px; border-top: 1px solid #cfe2ed; }

@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 
 const quickLinks = [
   {
-    title: "Water Quality",
-    description: "Consumer Confidence Report and latest test results.",
-    href: "/water-quality/",
+    title: "Payment of Water Bill",
+    description: "Payment options, schedules, and how to settle your water bill.",
+    href: "/services/payment/",
   },
   {
     title: "Transparency",
@@ -28,9 +28,9 @@ const quickLinks = [
     href: "/transparency/citizens-charter/",
   },
   {
-    title: "Board Meetings",
-    description: "Agendas, minutes, and resolutions from Board sessions.",
-    href: "/board-meetings/",
+    title: "Senior Citizen Discount",
+    description: "Eligibility requirements and how to apply for the senior citizen water bill discount.",
+    href: "/services/senior-citizen-discount/",
   },
 ];
 
@@ -48,12 +48,12 @@ export default function HomePage() {
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section
         aria-labelledby="hero-heading"
-        className="hero-section relative text-white overflow-hidden min-h-screen flex flex-col"
+        className="hero-section relative isolate text-white overflow-hidden min-h-screen flex flex-col"
       >
         <HeroBackground />
 
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-32 lg:pb-20 flex flex-col min-h-[inherit]">
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-32 lg:pb-20 flex flex-col min-h-[inherit]">
 
           {/* Bottom-right: headline + tagline + CTA */}
           <div className="absolute bottom-8 right-4 sm:right-6 lg:right-8 text-right max-w-sm">
@@ -76,7 +76,7 @@ export default function HomePage() {
               </Link>
               {/* Secondary CTA — ghost */}
               <Link
-                href="/contact/"
+                href="/services/new-water-application/"
                 className="inline-flex items-center gap-2 rounded-lg border border-white/40 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-5 py-2.5 text-sm font-semibold text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
@@ -230,13 +230,20 @@ export default function HomePage() {
               </div>
 
               {/* ── About label ── */}
-              <div className="mt-6">
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-x-5 gap-y-2">
                 <h2
                   id="about-heading"
-                  className="font-heading text-xs font-semibold uppercase tracking-[0.15em] text-white/60 mb-2"
+                  className="font-heading text-xs font-semibold uppercase tracking-[0.15em] text-white/60"
                 >
                   About TMCWD
                 </h2>
+                <Link
+                  href="/about/"
+                  className="inline-flex min-h-10 items-center gap-1.5 whitespace-nowrap rounded text-xs font-medium text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                >
+                  View full profile
+                  <span aria-hidden="true">→</span>
+                </Link>
               </div>
             </div>
 

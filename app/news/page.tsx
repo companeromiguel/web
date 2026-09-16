@@ -18,7 +18,7 @@ export default function NewsPage() {
         <Breadcrumb current="Announcements" />
       </PageHeader>
 
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
 
         {/* Live Facebook feed */}
         <AllAnnouncementsFeed />

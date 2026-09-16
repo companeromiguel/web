@@ -29,7 +29,7 @@ export default function DocumentLibrary({ documents }: { documents: Transparency
         </div>
       </div>
       <div id={doc.id + "-preview"}>
-        {preview === doc.id && <PdfViewer key={doc.url} url={doc.url} title={doc.filename} />}
+        {preview === doc.id && <PdfViewer key={doc.url} url={doc.url} title={doc.title ?? doc.filename} />}
       </div>
     </article>)}
   </div>;

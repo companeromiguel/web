@@ -405,8 +405,10 @@ html {
 }
 
 .hero-slide {
-  background-size: cover;
-  background-position: 70% center;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #123b60;
   position: absolute;
   inset: 0;
 }
@@ -422,3 +424,9 @@ html {
 .hero-slide-3 { z-index: 3; animation: hero-fade-out 20s linear infinite; animation-delay: -12s; }
 .hero-slide-4 { z-index: 2; animation: hero-fade-out 20s linear infinite; animation-delay: -8s;  }
 .hero-slide-5 { z-index: 1; animation: hero-fade-out 20s linear infinite; animation-delay: -4s;  }
+
+/* Homepage image slideshow */
+.home-slideshow-background { position: absolute; inset: 0; z-index: 0; background: #123b60; pointer-events: none; }
+.home-slideshow-image { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; transition: opacity 1s ease-in-out; }
+.home-slideshow-overlay { position: absolute; inset: 0; background: rgb(31 41 55 / 55%); }
+@media (prefers-reduced-motion: reduce) { .home-slideshow-image { transition: none; } }

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "bidding-2026-tmcwd-veh2026-47",
+    "filename": "tmcwd_veh2026-47.pdf",
+    "url": "/bidding/2026/tmcwd_veh2026-47.pdf",
+    "pages": 87,
+    "bytes": 842163,
+    "sha256": "27d6418145557a4b16826aa501fab348917eecacb9dba27e477fe18ba43ac648",
+    "group": "Bidding",
+    "year": 2026,
+    "sources": [
+      "https://tmcwaterdistrict.weebly.com/2026.html"
+    ]
+  },
+  {
+    "id": "bidding-2026-tmcwd-goods2026-48",
+    "filename": "tmcwd_goods2026-48.pdf",
+    "url": "/bidding/2026/tmcwd_goods2026-48.pdf",
+    "pages": 88,
+    "bytes": 880490,
+    "sha256": "f89f2655598699d52f1fae114e2285eecbe3f266bfd5f1dcde007470b35b011f",
+    "group": "Bidding",
+    "year": 2026,
+    "sources": [
+      "https://tmcwaterdistrict.weebly.com/2026.html"
+    ]
+  },
+  {
+    "id": "bidding-2026-supplemental-bid-bulletin-no.-1",
+    "filename": "supplemental_bid_bulletin_no._1.pdf",
+    "url": "/bidding/2026/supplemental_bid_bulletin_no._1.pdf",
+    "pages": 1,
+    "bytes": 435260,
+    "sha256": "2303dcf18aeeac0ff77b15733b4844a9acbe7ada149e7a6691bb26288cce54ac",
+    "group": "Bidding",
+    "year": 2026,
+    "sources": [
+      "https://tmcwaterdistrict.weebly.com/2026.html"
+    ]
+  }
+]

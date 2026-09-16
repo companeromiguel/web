@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Compass, Droplets, Eye, Landmark, UserRound } from "lucide-react";
-import PageHeader, { Breadcrumb } from "@/components/layout/PageHeader";
+import AboutHero from "@/components/layout/AboutHero";
 import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
 import styles from "./page.module.css";
 
@@ -51,21 +51,21 @@ function Heading({ number, title, description }: { number: string; title: string
   </div>;
 }
 
-function Portrait({ name, role }: { name: string; role: string }) {
+function Portrait({ name, role, photo }: { name: string; role: string; photo?: string }) {
   return <article className={styles.portraitCard}>
-    <div className={styles.portrait}><UserRound size={56} strokeWidth={1} aria-hidden="true" /></div>
-    <span className={styles.photoLabel}>Official portrait to follow</span>
+    <div className={styles.portrait}>
+      {photo ? <Image src={photo} alt={name} fill sizes="140px" className={styles.leaderPhoto} /> : <UserRound size={56} strokeWidth={1} aria-hidden="true" />}
+    </div>
+    {!photo && <span className={styles.photoLabel}>Official portrait to follow</span>}
     <h3>{name}</h3><p>{role}</p>
   </article>;
 }
 
 export default function AboutPage() {
   return (
-    <div className={styles.page} id="about-top">
-      <PageHeader title="About Us" description="Discover our history, our purpose, and the people behind Trece Martires City Water District.">
-        <Breadcrumb current="About Us" />
-      </PageHeader>
-
+    <>
+      <AboutHero title="About Us" description="Discover our history, our purpose, and the people behind Trece Martires City Water District." />
+      <div className={styles.page} id="about-top">
       <div className={styles.contentBackground}>
         <TransparencyWaveBackground animated />
         <div className={styles.contentLayer}>
@@ -164,10 +164,9 @@ export default function AboutPage() {
       <section id="officers" className={styles.officers} aria-label="Officers">
         <div className={styles.container}>
           <Heading number="05" title="The people behind our purpose" />
-          <p className={styles.pendingNote}>Official portraits will be added when available.</p>
           <div className={styles.leaders}>
-            <Portrait name="Ms. Narcisa L. Montano" role="Chairperson, Board of Directors" />
-            <Portrait name="Engr. Joel John M. Ulep" role="General Manager" />
+            <Portrait name="Ms. Narcisa L. Montano" role="Chairperson, Board of Directors" photo="/board/narcisa-montano.png" />
+            <Portrait name="Engr. Joel John M. Ulep" role="General Manager" photo="/gray-man-photo-placeholder-vector-23804672.avif" />
           </div>
           <div className={styles.directory}>
             <div>
@@ -175,15 +174,20 @@ export default function AboutPage() {
             </div>
             <div className={styles.directoryGrid}>
               {[
-                { name: "Ms. Nena V. Lubigan", role: "Vice Chairperson" },
-                { name: "Ms. Eufrosina L. Ortiz", role: "Secretary" },
-                { name: "Engr. Adelaida N. Talatala", role: "Member" },
-                { name: "Ms. Villa C. Rivera", role: "Member" },
-              ].map(({ name, role }) => (
-                <article key={name}>
+                { name: "Ms. Nena V. Lubigan", role: "Vice Chairperson", photo: "/board/nena-lubigan.png" },
+                { name: "Ms. Eufrosina L. Ortiz", role: "Secretary", photo: "/board/eufrosina-ortiz.png" },
+                { name: "Engr. Adelaida N. Talatala", role: "Member", photo: "/gray-female-headshot-placeholder-vector-24276011.avif" },
+                { name: "Ms. Villa C. Rivera", role: "Member", photo: "/gray-female-headshot-placeholder-vector-24276011.avif" },
+              ].map(({ name, role, photo }) => (
+                <article key={name} className={styles.boardCard}>
+                  <div className={styles.boardDetails}>
                   <span className={styles.directoryRole}>{role}</span>
                   <h4>{name}</h4>
                   <p>Office of the Board of Directors</p>
+                  </div>
+                  <div className={styles.boardPhoto}>
+                    <Image src={photo} alt={name} fill sizes="(max-width: 600px) 90px, 110px" />
+                  </div>
                 </article>
               ))}
             </div>
@@ -194,15 +198,20 @@ export default function AboutPage() {
             </div>
             <div className={styles.directoryGrid}>
               {[
-                { name: "Mr. Lorenzo R. Sisante", role: "Division Manager", division: "Construction and Maintenance Division" },
-                { name: "Ms. Michelle V. Patanindagat", role: "Division Manager", division: "Human Resources Division" },
-                { name: "Ms. Elaine L. Liveta, CPA", role: "Division Manager", division: "Accounting and Cash Management Division" },
-                { name: "Engr. Edvan Rhey O. Reyes", role: "Division Manager", division: "Administrative and General Services Division" },
-              ].map(({ name, role, division }) => (
-                <article key={name}>
-                  <span className={styles.directoryRole}>{role}</span>
-                  <h4>{name}</h4>
-                  <p>{division}</p>
+                { name: "Mr. Lorenzo R. Sisante", role: "Division Manager", division: "Construction and Maintenance Division", photo: "/gray-man-photo-placeholder-vector-23804672.avif" },
+                { name: "Ms. Michelle V. Patanindagat", role: "Division Manager", division: "Human Resources Division", photo: "/gray-female-headshot-placeholder-vector-24276011.avif" },
+                { name: "Ms. Elaine L. Liveta, CPA", role: "Division Manager", division: "Accounting and Cash Management Division", photo: "/gray-female-headshot-placeholder-vector-24276011.avif" },
+                { name: "Engr. Edvan Rhey O. Reyes", role: "Division Manager", division: "Administrative and General Services Division", photo: "/gray-man-photo-placeholder-vector-23804672.avif" },
+              ].map(({ name, role, division, photo }) => (
+                <article key={name} className={styles.boardCard}>
+                  <div className={styles.boardDetails}>
+                    <span className={styles.directoryRole}>{role}</span>
+                    <h4>{name}</h4>
+                    <p>{division}</p>
+                  </div>
+                  <div className={styles.boardPhoto}>
+                    <Image src={photo} alt={name} fill sizes="(max-width: 600px) 90px, 110px" />
+                  </div>
                 </article>
               ))}
             </div>
@@ -212,5 +221,6 @@ export default function AboutPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
