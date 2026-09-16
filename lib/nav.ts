@@ -44,6 +44,6 @@ export const primaryNav: NavItem[] = [
       { label: "Gallery",      href: "/gallery/" },
     ],
   },
-  { label: "About us",         href: "/#about-heading" },
+  { label: "About us", href: "/about/" },
   { label: "Home",             href: "/" }
 ];

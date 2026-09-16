@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 const paragraphs = [
@@ -84,6 +85,13 @@ export default function AboutScroller() {
           </>
         )}
       </button>
+      <Link
+        href="/about/"
+        className="ml-5 inline-flex items-center gap-1.5 text-xs font-medium text-white/70 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded"
+      >
+        View full profile
+        <span aria-hidden="true">→</span>
+      </Link>
     </div>
   );
 }
