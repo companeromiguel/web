@@ -79,9 +79,9 @@ export default function AboutPage() {
               <p>During the rapid development of Trece Martires City in the 1990s, population growth increased the need for a dependable supply of safe water. In response, the City Council established TMCWD in 1997.</p>
             </div>
             <figure className={styles.historyPhoto}>
-              <Image src="/gallery/2018%2020TH%20FOUNDING%20ANNIVERSARY/img-3876_orig.jpg" alt="Group photograph of participants holding certificates at a TMCWD anniversary celebration" width={1100} height={733} sizes="(max-width: 700px) 100vw, 560px" />
+              <Image src="/img4.jpg" alt="TMCWD staff group photograph" width={5184} height={2912} sizes="(max-width: 700px) 100vw, 560px" />
               <figcaption>
-                <span>FROM THE DISTRICT ARCHIVES</span>2018 · 20th Founding Anniversary
+                <span>THE PEOPLE BEHIND TMCWD</span>Trece Martires City Water District staff
               </figcaption>
             </figure>
           </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PageHeader, { Breadcrumb } from "@/components/layout/PageHeader";
+import AnnouncementHero from "@/components/layout/AnnouncementHero";
 import AllAnnouncementsFeed from "@/components/AllAnnouncementsFeed";
 
 export const metadata: Metadata = {
@@ -11,12 +11,16 @@ export const metadata: Metadata = {
 export default function NewsPage() {
   return (
     <>
-      <PageHeader
+      <AnnouncementHero
+        slug="news"
+        eyebrow="News & Updates"
         title="Announcements"
         description="Latest posts and advisories from the official TMCWD Facebook page."
-      >
-        <Breadcrumb current="Announcements" />
-      </PageHeader>
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: "Announcements" },
+        ]}
+      />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
 
