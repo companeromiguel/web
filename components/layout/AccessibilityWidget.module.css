@@ -1,0 +1,143 @@
+/* ── Floating root — fixed, just above the Back to Top button ───────── */
+.root {
+  position: fixed;
+  right: 40px;
+  bottom: 96px; /* sits above the 46px Back to Top button + its 40px bottom offset */
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 700px) {
+  .root { right: 20px; bottom: 76px; }
+}
+
+/* ── Trigger button ─────────────────────────────────────────────────── */
+.trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(130, 207, 247, 0.8);
+  border-radius: 50%;
+  background: rgba(45, 153, 215, 0.34);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: 0 8px 30px rgba(36, 104, 145, 0.2), inset 0 1px 0 rgba(255,255,255,0.45);
+  color: #fff;
+  cursor: pointer;
+  transition: background 200ms, box-shadow 200ms;
+}
+
+.trigger svg { width: 22px; height: 22px; }
+.trigger:hover { background: rgba(45, 153, 215, 0.55); box-shadow: 0 10px 32px rgba(36,104,145,0.3), inset 0 1px 0 rgba(255,255,255,0.55); }
+.trigger:focus-visible { outline: 2px solid #0591d4; outline-offset: 5px; }
+.triggerActive { border-color: #ffe293; background: rgba(45, 153, 215, 0.5); }
+
+/* Active dot indicator */
+.dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffe293;
+  border: 1.5px solid rgba(255,255,255,0.7);
+}
+
+/* ── Panel — opens upward above the button ──────────────────────────── */
+.panel {
+  width: 240px;
+  background: #fff;
+  border: 1px solid #e0edf5;
+  border-radius: 14px;
+  box-shadow: 0 16px 48px rgba(6, 46, 87, 0.14), 0 2px 8px rgba(0,0,0,0.06);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* stack above the trigger */
+  order: -1;
+  animation: a11y-panel-in 180ms cubic-bezier(.22,1,.36,1) both;
+}
+
+@media (max-width: 360px) {
+  .panel { width: calc(100vw - 32px); }
+}
+
+@keyframes a11y-panel-in {
+  from { opacity: 0; transform: translateY(8px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.panelHeader { display: flex; align-items: center; justify-content: space-between; }
+.panelTitle  { font-size: 13px; font-weight: 700; color: #0d3d5e; letter-spacing: .01em; }
+
+.closeBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border: none; border-radius: 6px; background: transparent;
+  color: #6b8fa5; cursor: pointer; transition: background 150ms, color 150ms;
+}
+.closeBtn svg { width: 14px; height: 14px; }
+.closeBtn:hover { background: #f0f7fc; color: #0d3d5e; }
+.closeBtn:focus-visible { outline: 2px solid #0591d4; outline-offset: 2px; }
+
+/* ── Option groups ───────────────────────────────────────────────────── */
+.group  { display: flex; flex-direction: column; gap: 6px; }
+.groupLabel {
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .1em; color: #8aacbe; margin-bottom: 2px;
+}
+.btnRow { display: flex; gap: 6px; }
+
+.optBtn {
+  flex: 1; padding: 6px 4px; font-size: 12px; font-weight: 600;
+  border: 1.5px solid #d0e6f1; border-radius: 8px;
+  background: #f5fafd; color: #3a6880; cursor: pointer;
+  transition: background 150ms, border-color 150ms, color 150ms; line-height: 1;
+}
+.optBtn:hover { background: #e4f2fa; border-color: #90c8e8; }
+.optBtn:focus-visible { outline: 2px solid #0591d4; outline-offset: 2px; }
+.optBtn.active { background: #0591d4; border-color: #0591d4; color: #fff; }
+
+/* ── Toggle ─────────────────────────────────────────────────────────── */
+.toggle { display: flex; align-items: center; justify-content: space-between; gap: 8px; cursor: pointer; }
+
+.switch {
+  position: relative; width: 36px; height: 20px;
+  border: none; border-radius: 10px; background: #d0e6f1;
+  cursor: pointer; transition: background 200ms; flex-shrink: 0; padding: 0;
+}
+.switch:focus-visible { outline: 2px solid #0591d4; outline-offset: 2px; }
+.switchOn { background: #0591d4; }
+
+.switchThumb {
+  position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  transition: transform 200ms cubic-bezier(.22,1,.36,1); pointer-events: none;
+}
+.switchOn .switchThumb { transform: translateX(16px); }
+
+/* ── Reset ───────────────────────────────────────────────────────────── */
+.resetBtn {
+  width: 100%; padding: 7px; font-size: 11px; font-weight: 600;
+  border: 1.5px solid #d0e6f1; border-radius: 8px;
+  background: transparent; color: #6b8fa5; cursor: pointer;
+  transition: background 150ms, color 150ms; letter-spacing: .02em;
+}
+.resetBtn:hover { background: #f0f7fc; color: #0d3d5e; }
+.resetBtn:focus-visible { outline: 2px solid #0591d4; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger  { transition: none; }
+  .panel    { animation: none; }
+  .switchThumb { transition: none; }
+}

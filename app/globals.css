@@ -331,7 +331,8 @@ html {
 
 /* ── About TMCWD — seamless vertical auto-scroll ─────────────────── */
 .about-scroller-window {
-  height: 8rem;           /* visible viewport — adjust to show more/less text */
+  height: 8rem;           /* fallback — overridden by JS sync with left column */
+  min-height: 8rem;
   overflow: hidden;
   position: relative;
   /* Soft fade at top and bottom edges */
@@ -434,3 +435,31 @@ html {
 .home-slideshow-image { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; transition: opacity 1s ease-in-out; }
 .home-slideshow-overlay { position: absolute; inset: 0; background: rgb(31 41 55 / 55%); }
 @media (prefers-reduced-motion: reduce) { .home-slideshow-image { transition: none; } }
+
+/* ── Accessibility widget — global overrides applied to <html> ──────── */
+
+/* Font size scale */
+html.a11y-font-large  { font-size: 112%; }
+html.a11y-font-larger { font-size: 125%; }
+
+/* High contrast */
+html.a11y-high-contrast {
+  --foreground: #000;
+  --background: #fff;
+  filter: contrast(1.25);
+}
+
+html.a11y-high-contrast body {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+/* Reduce motion — override all transitions and animations */
+html.a11y-reduce-motion *,
+html.a11y-reduce-motion *::before,
+html.a11y-reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
