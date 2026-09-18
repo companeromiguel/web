@@ -2,6 +2,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* Explicit roots keep route and shared-component utilities in generated CSS. */
+@source "./";
+@source "../components";
+
 html {
   scroll-behavior: smooth;
 }

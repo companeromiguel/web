@@ -39,8 +39,8 @@ export default function NewsPage() {
             official TMCWD Facebook page
           </a>
           . For urgent concerns, call{" "}
-          <a href="tel:+63464191234" className="text-[#0591D4] hover:underline">
-            (046) 419-1234
+          <a href="tel:+63464192664" className="text-[#0591D4] hover:underline">
+            (046) 419-2664
           </a>
           .
         </p>

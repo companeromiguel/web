@@ -1,167 +1,103 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
-import PageHeader, { Breadcrumb } from "@/components/layout/PageHeader";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import AnnouncementHero from "@/components/layout/AnnouncementHero";
+import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
 
 export const metadata: Metadata = {
   title: "Contact & Service Area",
-  description:
-    "Contact the Trece Martires City Water District — office address, telephone numbers, email, and service area coverage.",
+  description: "Contact Trece Martires City Water District by telephone or email, find its office, and inquire about water services and connection availability.",
 };
 
-const departments = [
-  { department: "Customer Service",      contact: "[ADD phone/email]" },
-  { department: "Billing & Collection",  contact: "[ADD phone/email]" },
-  { department: "New Connections",       contact: "[ADD phone/email]" },
-  { department: "Emergency / Leaks",     contact: "[ADD 24-hr hotline]" },
-  { department: "FOI Receiving Officer", contact: "[ADD name and email]" },
+// Published agency contacts, checked September 18, 2026:
+// https://tmcwaterdistrict.weebly.com/contact-us.html (contact-info.jpg)
+// https://tmcwaterdistrict.weebly.com/transparency-seal2.html
+const phoneNumbers = [
+  { label: "(046) 419-2665", href: "tel:+63464192665" },
+  { label: "(046) 419-0054", href: "tel:+63464190054" },
+  { label: "(046) 419-2664", href: "tel:+63464192664" },
+  { label: "(046) 419-0378", href: "tel:+63464190378" },
 ];
-
-const serviceArea: string[] = [
-  "[Barangay 1]",
-  "[Barangay 2]",
-  "[Barangay 3]",
-  "[Barangay 4]",
-  "[Barangay 5]",
-  "[ADD remaining barangays]",
+const emails = ["tmcwd@yahoo.com", "tmcwd@gmail.com"];
+const inquiries = [
+  { title: "Billing & account inquiries", description: "For questions about a water bill or account, contact the office using the telephone numbers or email addresses above.", href: "mailto:tmcwd@yahoo.com", action: "Email the office" },
+  { title: "Leaks & water service concerns", description: "Report the location and a nearby landmark, and describe the leak or water supply concern when contacting the office.", href: "tel:+63464192665", action: "Call the office" },
+  { title: "Freedom of Information", description: "Read the district’s FOI manual for the procedure and requirements for requesting public records.", href: "/transparency/foi/", action: "View FOI information" },
 ];
-
-const thClass = "px-4 py-3 text-left text-xs font-semibold text-[#2A2A29]/50 uppercase tracking-wide border-b border-[#E8EEF2] bg-[#F7FAFB]";
-const tdClass = "px-4 py-3 text-sm text-[#2A2A29] border-b border-[#E8EEF2]";
+const panelClass = "rounded-2xl border border-[#C4DAE7] bg-white p-6 shadow-[0_8px_24px_rgba(35,82,110,0.10)] sm:p-8";
+const linkClass = "text-[#087FB8] hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087FB8]";
 
 export default function ContactPage() {
-  return (
-    <>
-      <PageHeader
-        title="Contact & Service Area"
-        description="Get in touch with TMCWD or verify whether your barangay is within our service franchise area."
-      >
-        <Breadcrumb current="Contact" />
-      </PageHeader>
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-
-        {/* Office + Map */}
+  return <>
+    <AnnouncementHero slug="contact" eyebrow="Get in touch" title="Contact & Service Area"
+      description="Reach our office for water service inquiries, account concerns, and assistance with your connection."
+      breadcrumb={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
+    <div className="relative isolate overflow-hidden bg-[#EEF4F8]">
+      <TransparencyWaveBackground animated />
+      <div className="relative z-10 mx-auto max-w-7xl space-y-10 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <section aria-labelledby="office-heading">
-          <h2 id="office-heading" className="font-heading text-lg font-semibold text-[#2A2A29] mb-6">
-            Main Office
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-            {/* Contact card */}
-            <div className="bg-[#F7FAFB] border border-[#E8EEF2] p-6">
-              <address className="not-italic text-sm text-[#2A2A29] space-y-2">
-                <p className="font-medium">[ADD: Street address]</p>
-                <p className="text-[#2A2A29]/60">Trece Martires City, Cavite</p>
-                <div className="pt-2 space-y-1.5">
-                  <p>
-                    <span className="text-[#2A2A29]/45 text-xs mr-1.5">Tel</span>
-                    <a href="tel:+63464191234" className="hover:text-[#0591D4] transition-colors">
-                      (046) 419-1234
-                    </a>
-                  </p>
-                  <p>
-                    <span className="text-[#2A2A29]/45 text-xs mr-1.5">Email</span>
-                    <a href="mailto:info@tmcwd.gov.ph" className="text-[#0591D4] hover:underline">
-                      info@tmcwd.gov.ph
-                    </a>
-                  </p>
-                  <p>
-                    <span className="text-[#2A2A29]/45 text-xs mr-1.5">Fax</span>
-                    <span className="text-[#2A2A29]/55">[ADD: fax number]</span>
-                  </p>
+          <h2 id="office-heading" className="mb-6 font-heading text-2xl font-semibold text-[#087FB8]">Visit or contact our office</h2>
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className={panelClass}>
+              <div className="flex items-start gap-4">
+                <MapPin className="mt-1 shrink-0 text-[#087FB8]" size={22} aria-hidden="true" />
+                <div>
+                  <h3 className="font-heading text-lg font-semibold text-[#087FB8]">Trece Martires City Water District</h3>
+                  <address className="mt-2 text-sm not-italic leading-7 text-[#52616B]">Barangay San Agustin<br />Trece Martires City, Cavite</address>
                 </div>
-              </address>
-              <div className="mt-4 pt-4 border-t border-[#E8EEF2] text-xs text-[#2A2A29]/50">
-                <p>Office hours: Monday – Friday, 8:00 AM – 5:00 PM</p>
-                <p className="mt-0.5">Closed on official public holidays.</p>
               </div>
+              <div className="mt-6 flex items-start gap-4 border-t border-[#E0EBF2] pt-6">
+                <Phone className="mt-1 shrink-0 text-[#087FB8]" size={22} aria-hidden="true" />
+                <div>
+                  <h3 className="text-sm font-semibold text-[#294C61]">Telephone</h3>
+                  <ul className="mt-3 grid list-none gap-x-8 gap-y-3 p-0 text-sm sm:grid-cols-2">
+                    {phoneNumbers.map((phone) => <li key={phone.href}><a href={phone.href} className={linkClass}>{phone.label}</a></li>)}
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-6 flex items-start gap-4 border-t border-[#E0EBF2] pt-6">
+                <Mail className="mt-1 shrink-0 text-[#087FB8]" size={22} aria-hidden="true" />
+                <div className="min-w-0">
+                  <h3 className="text-sm font-semibold text-[#294C61]">Email</h3>
+                  <ul className="mt-3 list-none space-y-3 p-0 text-sm">
+                    {emails.map((email) => <li key={email}><a href={`mailto:${email}`} className={`${linkClass} break-words`}>{email}</a></li>)}
+                  </ul>
+                </div>
+              </div>
+              <p className="mt-6 rounded-xl bg-[#F1F7FA] p-4 text-sm leading-6 text-[#52616B]">Planning a visit? Contact the office to confirm its current schedule and the requirements for your transaction.</p>
             </div>
-
-            {/* Map placeholder */}
-            <div className="bg-[#F7FAFB] border border-[#E8EEF2] flex flex-col">
-              <div className="flex-1 min-h-52 flex items-center justify-center text-xs text-[#2A2A29]/35">
-                {/*
-                  Replace with a static map image (<Image>) or an <iframe> embed.
-                  For a static export, a Mapbox Static Image or Google Maps embed via
-                  iframe both work; avoid Next.js Image optimization (unoptimized is set).
-                */}
-                [ADD: Map image or iframe embed]
-              </div>
-              <div className="px-5 py-3 border-t border-[#E8EEF2]">
-                <a
-                  href="https://maps.google.com/?q=Trece+Martires+City+Water+District"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-[#0591D4] hover:underline"
-                >
-                  Open in Google Maps →
-                </a>
+            <div className="flex flex-col overflow-hidden rounded-2xl border border-[#C4DAE7] bg-white shadow-[0_8px_24px_rgba(35,82,110,0.10)]">
+              <iframe title="Trece Martires City Water District office location" src="https://maps.google.com/maps?cid=10092507030261381943&output=embed" width="100%" height="420" className="min-h-72 flex-1 border-0" loading="lazy" allowFullScreen referrerPolicy="no-referrer-when-downgrade" />
+              <div className="border-t border-[#E0EBF2] p-5">
+                <a href="https://www.google.com/maps?cid=10092507030261381943" target="_blank" rel="noopener noreferrer" className={`${linkClass} inline-flex items-center gap-2 text-sm font-semibold`}>Open in Google Maps <ArrowUpRight size={16} aria-hidden="true" /></a>
               </div>
             </div>
           </div>
         </section>
-
-        {/* Department contacts */}
-        <section aria-labelledby="departments-heading">
-          <h2 id="departments-heading" className="font-heading text-lg font-semibold text-[#2A2A29] mb-5">
-            Department Contacts
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr>
-                  <th className={thClass}>Department</th>
-                  <th className={thClass}>Contact</th>
-                </tr>
-              </thead>
-              <tbody>
-                {departments.map((d) => (
-                  <tr key={d.department} className="hover:bg-[#F7FAFB] transition-colors">
-                    <td className={`${tdClass} font-medium`}>{d.department}</td>
-                    <td className={`${tdClass} text-[#2A2A29]/55`}>{d.contact}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <section aria-labelledby="inquiries-heading">
+          <h2 id="inquiries-heading" className="mb-6 font-heading text-2xl font-semibold text-[#087FB8]">How can we help?</h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            {inquiries.map((item) => <article key={item.title} className={`${panelClass} flex flex-col`}>
+              <h3 className="font-heading text-lg font-semibold text-[#087FB8]">{item.title}</h3>
+              <p className="mb-6 mt-3 text-sm leading-7 text-[#52616B]">{item.description}</p>
+              <Link href={item.href} className={`${linkClass} mt-auto inline-flex items-center gap-2 self-start text-sm font-semibold`}>{item.action} <ArrowUpRight size={16} aria-hidden="true" /></Link>
+            </article>)}
           </div>
         </section>
-
-        {/* Service area */}
-        <section aria-labelledby="service-area-heading">
-          <h2 id="service-area-heading" className="font-heading text-lg font-semibold text-[#2A2A29] mb-2">
-            Service Area
-          </h2>
-          <p className="text-sm text-[#2A2A29]/55 mb-6 max-w-2xl">
-            TMCWD provides water service to the following barangays in Trece Martires City,
-            Cavite, under its LWUA-granted franchise.
-          </p>
-          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 list-none p-0">
-            {serviceArea.map((brgy) => (
-              <li key={brgy} className="text-sm text-[#2A2A29] bg-[#F7FAFB] border border-[#E8EEF2] px-3 py-2">
-                {brgy}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-4 text-xs text-[#2A2A29]/40">
-            Unsure if your property is covered? Contact our Customer Service department.
-          </p>
-        </section>
-
-        {/* Feedback */}
-        <section aria-labelledby="feedback-heading" className="bg-[#F7FAFB] border-l-2 border-[#0591D4] px-6 py-5 max-w-2xl">
-          <h2 id="feedback-heading" className="font-heading text-base font-semibold text-[#2A2A29] mb-2">
-            Feedback &amp; Complaints
-          </h2>
-          <p className="text-sm text-[#2A2A29]/65 leading-relaxed">
-            Submit feedback in person, by email, or by phone. All complaints are logged
-            and handled per TMCWD&apos;s Citizen&apos;s Charter.{" "}
-            <Link href="/transparency/citizens-charter/" className="text-[#0591D4] hover:underline">
-              View the Citizen&apos;s Charter →
-            </Link>
-          </p>
-        </section>
-
+        <div className="grid gap-6 lg:grid-cols-2">
+          <section aria-labelledby="service-area-heading" className={panelClass}>
+            <h2 id="service-area-heading" className="font-heading text-xl font-semibold text-[#087FB8]">Check connection availability</h2>
+            <p className="mt-3 text-sm leading-7 text-[#52616B]">For a property in Trece Martires City, contact the office with your barangay, subdivision or street, and a nearby landmark to ask whether a water connection is available at your address.</p>
+            <p className="mt-3 text-sm leading-7 text-[#52616B]">Availability should be confirmed for the specific property before applying.</p>
+            <a href="mailto:tmcwd@yahoo.com?subject=Water%20connection%20availability%20inquiry" className={`${linkClass} mt-5 inline-flex items-center gap-2 text-sm font-semibold`}>Ask about your address <ArrowUpRight size={16} aria-hidden="true" /></a>
+          </section>
+          <section aria-labelledby="feedback-heading" className={panelClass}>
+            <h2 id="feedback-heading" className="font-heading text-xl font-semibold text-[#087FB8]">Feedback & complaints</h2>
+            <p className="mt-3 text-sm leading-7 text-[#52616B]">Contact the office by telephone, email, or in person to raise a concern. Include a clear description and your preferred contact details for a reply.</p>
+            <Link href="/transparency/citizens-charter/" className={`${linkClass} mt-5 inline-flex items-center gap-2 text-sm font-semibold`}>View the Citizen&apos;s Charter <ArrowUpRight size={16} aria-hidden="true" /></Link>
+          </section>
+        </div>
       </div>
-    </>
-  );
+    </div>
+  </>;
 }

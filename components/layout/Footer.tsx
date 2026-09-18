@@ -12,23 +12,24 @@ const govLinks = [
   { label: "Sandiganbayan",                href: "https://sb.judiciary.gov.ph/" },
 ];
 
+// CAWD and STAWD remain text until official website URLs are confirmed.
 const partners = [
-  { label: "Cavite Assn. of Water Districts",           href: "#" },
-  { label: "Southern Tagalog Assn. of Water Districts", href: "#" },
-  { label: "Philippine Assn. of Water Districts",       href: "#" },
-  { label: "Philippine Water Works Association",         href: "#" },
-  { label: "Local Water Utilities Administration",       href: "#" },
-  { label: "Local Govt of Trece Martires City",          href: "#" },
-  { label: "Provincial Government of Cavite",            href: "#" },
-  { label: "Office of the Ombudsman",                    href: "#" },
-  { label: "Commission on Audit",                        href: "#" },
-  { label: "Dept. of Budget and Management",             href: "#" },
-  { label: "GSIS",                                       href: "#" },
-  { label: "PhilHealth",                                 href: "#" },
-  { label: "Civil Service Commission",                   href: "#" },
-  { label: "Pag-ibig Fund",                              href: "#" },
-  { label: "Bureau of Internal Revenue",                 href: "#" },
-  { label: "PhiGEPS",                                    href: "#" },
+  { label: "Cavite Assn. of Water Districts",           href: null },
+  { label: "Southern Tagalog Assn. of Water Districts", href: null },
+  { label: "Philippine Assn. of Water Districts",       href: "https://www.pawd.org.ph/" },
+  { label: "Philippine Water Works Association",         href: "https://pwwainc.carrd.co/" },
+  { label: "Local Water Utilities Administration",       href: "https://lwua.gov.ph/" },
+  { label: "Local Govt of Trece Martires City",          href: "https://trecemartirescity.gov.ph/" },
+  { label: "Provincial Government of Cavite",            href: "https://cavite.gov.ph/" },
+  { label: "Office of the Ombudsman",                    href: "https://www.ombudsman.gov.ph/" },
+  { label: "Commission on Audit",                        href: "https://www.coa.gov.ph/" },
+  { label: "Dept. of Budget and Management",             href: "https://www.dbm.gov.ph/" },
+  { label: "GSIS",                                       href: "https://www.gsis.gov.ph/" },
+  { label: "PhilHealth",                                 href: "https://www.philhealth.gov.ph/" },
+  { label: "Civil Service Commission",                   href: "https://csc.gov.ph/" },
+  { label: "Pag-IBIG Fund",                              href: "https://www.pagibigfund.gov.ph/" },
+  { label: "Bureau of Internal Revenue",                 href: "https://www.bir.gov.ph/" },
+  { label: "PhilGEPS",                                    href: "https://notices.philgeps.gov.ph/" },
 ];
 
 export default function Footer() {
@@ -160,14 +161,14 @@ export default function Footer() {
           <div className="flex flex-wrap gap-x-2 gap-y-1">
             {partners.map(({ label, href }, i) => (
               <span key={label} className="flex items-center gap-2">
-                <a
+                {href ? <a
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[11px] text-white/40 hover:text-white transition-colors"
                 >
                   {label}
-                </a>
+                </a> : <span className="text-[11px] text-white/40">{label}</span>}
                 {i < partners.length - 1 && (
                   <span className="text-white/15 select-none" aria-hidden="true">·</span>
                 )}

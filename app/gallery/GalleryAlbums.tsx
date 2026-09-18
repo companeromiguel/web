@@ -24,6 +24,21 @@ export default function GalleryAlbums({ sections }: { sections: GallerySection[]
   const openAlbum = sections.find((album) => album.id === openId);
 
   useEffect(() => {
+    const openLinkedAlbum = () => {
+      const id = window.location.hash.slice(1);
+      if (!sections.some((album) => album.id === id)) return;
+      setOpenId(id);
+      requestAnimationFrame(() => panelRef.current?.scrollIntoView({ block: "start" }));
+    };
+    const frame = requestAnimationFrame(openLinkedAlbum);
+    window.addEventListener("hashchange", openLinkedAlbum);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", openLinkedAlbum);
+    };
+  }, [sections]);
+
+  useEffect(() => {
     if (!selectedImage) return;
     const previousOverflow = document.body.style.overflow;
     const onKeyDown = (event: KeyboardEvent) => {

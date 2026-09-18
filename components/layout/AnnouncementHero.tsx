@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../transparency/TransparencyHero.module.css";
-import { Megaphone, ClipboardList, Images, type LucideIcon } from "lucide-react";
+import { Megaphone, ClipboardList, Images, CalendarDays, Phone, type LucideIcon } from "lucide-react";
 
 const icons: Record<string, LucideIcon> = {
   news: Megaphone,
   "board-meetings": ClipboardList,
   gallery: Images,
+  events: CalendarDays,
+  contact: Phone,
 };
 
 export default function AnnouncementHero({
