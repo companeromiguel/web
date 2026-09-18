@@ -385,8 +385,8 @@ export default function HomePage() {
                       </a>
                     </li>
                     <li>
-                      <a href="tel:[ADD-PHONE]" className="text-white/85 hover:text-white hover:underline transition-colors">
-                        [ADD: Phone number]
+                      <a href="tel:+63 917 805 0391" className="text-white/85 hover:text-white hover:underline transition-colors">
+                        +63 917 805 0391
                       </a>
                     </li>
                   </ul>
