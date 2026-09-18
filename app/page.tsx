@@ -212,7 +212,13 @@ export default function HomePage() {
                     Mission
                   </p>
                   <p className="text-sm text-white/85 leading-relaxed italic">
-                    "To provide safe, adequate, and affordable water services to all concessionaires within the franchise area of Trece Martires City."
+                    "To induce and directly persuade the clientele to actively participate in the responsibility of protecting and preserving the water resources of the City of Trece Martires.
+
+                      Motivate the people to properly utilize this precious nature’s gift for the benefit of the Treceños now and beyond.
+
+                      The organization is amenable to uphold and conserve this valuable commodity as a relevant source of life.
+
+                      To serve the concessionaires with utmost sincerity, honesty, and prompt service."
                   </p>
                 </div>
                 <div className="rounded-xl bg-white/10 border border-white/20 px-4 py-4">
@@ -224,7 +230,7 @@ export default function HomePage() {
                     Vision
                   </p>
                   <p className="text-sm text-white/85 leading-relaxed italic">
-                    "A leading water district delivering excellence in public service, committed to the health and well-being of every household it serves."
+                    "An institution perpetrated to provide the community a sufficient, reliable, sustainable, and affordable supply of drinkable water for the general well-being of the Treceños as its primary concern."
                   </p>
                 </div>
               </div>
