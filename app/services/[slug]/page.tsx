@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import PageHeader, { Breadcrumb } from "@/components/layout/PageHeader";
+import ServiceHero from "@/components/services/ServiceHero";
 import SummaryCards from "@/components/services/SummaryCards";
 import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
 import { serviceGuides } from "@/lib/service-charter";
@@ -34,9 +34,7 @@ export default async function ServicePage({ params }: PageProps) {
 
   return (
     <>
-      <PageHeader title={guide.title} description={guide.description}>
-        <Breadcrumb current={guide.title} />
-      </PageHeader>
+      <ServiceHero title={guide.title} description={guide.description} slug={slug} />
 
       <div className="relative isolate overflow-hidden bg-[#EEF4F8]">
         <TransparencyWaveBackground animated />

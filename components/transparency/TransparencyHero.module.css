@@ -1,0 +1,33 @@
+.hero { position: relative; isolation: isolate; overflow: hidden; padding-top: 80px; color: white; background: radial-gradient(ellipse at 75% 20%, #218ed2aa, transparent 60%), linear-gradient(115deg, #062e57, #075a96 60%, #087eb5); border-bottom: 3px solid #e9c85d; }
+.heroBg::before { content: ''; position: absolute; inset: 0; background-image: url('/img4.jpg'); background-size: cover; background-position: center; opacity: .13; z-index: 0; pointer-events: none; }
+.inner { position: relative; z-index: 1; display: grid; grid-template-columns: 176px minmax(0, 1fr) 176px; align-items: center; gap: clamp(24px, 4vw, 56px); max-width: 1280px; margin: auto; padding: 56px 32px 64px; }
+.seal, .districtSeal { filter: drop-shadow(0 10px 20px #001d3d55); }
+.serviceIcon { aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; border: 1px solid #ffffff66; background: linear-gradient(145deg, #ffffff26, #ffffff08); box-shadow: inset 0 0 0 8px #ffffff06; color: #ffe293; }
+.serviceIcon svg { width: 50%; height: 50%; }
+.seal img, .districtSeal img { display: block; width: 100%; height: auto; }
+.sealLink { display: block; transition: opacity .2s, transform .2s; }
+.sealLink:hover { opacity: .85; transform: scale(1.04); }
+.sealLink:focus-visible { outline: 2px solid #ffe293; outline-offset: 6px; border-radius: 50%; }
+/* Match visible seal diameters: the TMCWD PNG has more internal padding. */
+.districtSeal img { transform: scale(1.14); transform-origin: center; }
+.eyebrow { color: #ffe293; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 14px; }
+.content h1 { font-family: var(--font-heading), sans-serif; font-size: clamp(28px, 3.3vw, 44px); line-height: 1.15; font-weight: 600; letter-spacing: -.035em; text-wrap: balance; }
+.description { margin-top: 16px; max-width: 620px; font-size: 14px; line-height: 1.8; color: #e0effb; }
+.breadcrumb { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; font-size: 12px; color: #c9e2f5; }
+.breadcrumb a:hover { color: white; text-decoration: underline; text-underline-offset: 4px; }
+.breadcrumb a:focus-visible { outline: 2px solid #ffe293; outline-offset: 4px; border-radius: 2px; }
+.breadcrumb [aria-current] { color: white; }
+.orbit { position: absolute; right: -100px; top: 20px; width: 520px; height: 520px; border: 1px solid #f9db7826; border-radius: 50%; box-shadow: 0 0 0 45px #ffffff05, 0 0 0 90px #ffffff04, 0 0 0 135px #ffffff03; }
+.wave { position: absolute; bottom: 0; left: 0; width: 200%; height: 96px; pointer-events: none; animation: waveSlide 10s linear infinite; }
+.waveFast { height: 64px; animation-duration: 6s; }
+.waveTop { top: 0; bottom: auto; height: 48px; animation-duration: 8s; animation-direction: reverse; }
+@keyframes waveSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .wave { animation: none; } }
+@media (max-width: 700px) {
+  .inner { grid-template-columns: 88px 1fr 88px; gap: 24px 16px; padding: 32px 24px 44px; }
+  .seal { grid-column: 1; grid-row: 1; }
+  .districtSeal { grid-column: 3; grid-row: 1; }
+  .content { grid-column: 1 / -1; grid-row: 2; }
+  .eyebrow { font-size: 10px; letter-spacing: .15em; }
+  .breadcrumb { gap: 8px; }
+}

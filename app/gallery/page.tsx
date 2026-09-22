@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PageHeader, { Breadcrumb } from "@/components/layout/PageHeader";
+import AnnouncementHero from "@/components/layout/AnnouncementHero";
 import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
 import GalleryAlbums, { type GallerySection } from "./GalleryAlbums";
 
@@ -190,12 +190,16 @@ const sections: GallerySection[] = [
 export default function GalleryPage() {
   return (
     <>
-      <PageHeader
+      <AnnouncementHero
+        slug="gallery"
+        eyebrow="Announcements"
         title="Gallery"
         description="Browse photos from TMCWD events, programs, and activities through the years."
-      >
-        <Breadcrumb current="Gallery" />
-      </PageHeader>
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: "Gallery" },
+        ]}
+      />
 
       <div className="relative isolate overflow-hidden bg-[#EEF4F8]">
         <TransparencyWaveBackground animated />

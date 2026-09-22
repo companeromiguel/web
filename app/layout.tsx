@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import AlertBanner from "@/components/layout/AlertBanner";
 import DataPrivacyModal from "@/components/layout/DataPrivacyModal";
 import BackToTop from "@/components/layout/BackToTop";
+import AccessibilityWidget from "@/components/layout/AccessibilityWidget";
 
 /* ── Fonts ─────────────────────────────────────────────────────────────
    next/font self-hosts both — no runtime requests to Google.
@@ -71,6 +72,7 @@ export default function RootLayout({
           {children}
         </main>
         <BackToTop />
+        <AccessibilityWidget />
         <Footer />
       </body>
     </html>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PageHeader, { Breadcrumb } from "@/components/layout/PageHeader";
+import AnnouncementHero from "@/components/layout/AnnouncementHero";
 
 export const metadata: Metadata = {
   title: "Board & Meetings",
@@ -27,12 +27,16 @@ const tdClass = "px-4 py-3 text-sm text-[#2A2A29] border-b border-[#E8EEF2]";
 export default function BoardMeetingsPage() {
   return (
     <>
-      <PageHeader
+      <AnnouncementHero
+        slug="board-meetings"
+        eyebrow="Governance"
         title="Board & Meetings"
         description="The TMCWD Board of Directors is constituted and exercises its powers in accordance with Presidential Decree No. 198 and relevant LWUA regulations."
-      >
-        <Breadcrumb current="Board & Meetings" />
-      </PageHeader>
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: "Board & Meetings" },
+        ]}
+      />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 space-y-16">
 

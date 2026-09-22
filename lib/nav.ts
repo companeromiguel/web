@@ -32,7 +32,8 @@ export const primaryNav: NavItem[] = [
       { label: "Transparency Seal",   href: "/transparency/seal/"  },
       { label: "Freedom of Information",   href: "/transparency/foi/"              },
       { label: "Citizen's Charter",        href: "/transparency/citizens-charter/" },
-      { label: "Bidding & Procurement",        href: "/transparency/procurement/"       },
+      { label: "Bidding", href: "/transparency/bidding/" },
+      { label: "Procurement",        href: "/transparency/procurement/"       },
     ],
   },
   {

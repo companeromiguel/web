@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AnnouncementsFeed from "@/components/AnnouncementsFeed";
-import AboutScroller from "@/components/AboutScroller";
+import AboutSection from "@/components/AboutSection";
 import StatsCounter from "@/components/StatsCounter";
 import HeroBackground from "@/components/HeroBackground";
 
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 
 const quickLinks = [
   {
-    title: "Water Quality",
-    description: "Consumer Confidence Report and latest test results.",
-    href: "/water-quality/",
+    title: "Payment of Water Bill",
+    description: "Payment options, schedules, and how to settle your water bill.",
+    href: "/services/payment/",
   },
   {
     title: "Transparency",
@@ -28,9 +28,9 @@ const quickLinks = [
     href: "/transparency/citizens-charter/",
   },
   {
-    title: "Board Meetings",
-    description: "Agendas, minutes, and resolutions from Board sessions.",
-    href: "/board-meetings/",
+    title: "Senior Citizen Discount",
+    description: "Eligibility requirements and how to apply for the senior citizen water bill discount.",
+    href: "/services/senior-citizen-discount/",
   },
 ];
 
@@ -48,12 +48,12 @@ export default function HomePage() {
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section
         aria-labelledby="hero-heading"
-        className="hero-section relative text-white overflow-hidden min-h-screen flex flex-col"
+        className="hero-section relative isolate text-white overflow-hidden min-h-screen flex flex-col"
       >
         <HeroBackground />
 
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-32 lg:pb-20 flex flex-col min-h-[inherit]">
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-32 lg:pb-20 flex flex-col min-h-[inherit]">
 
           {/* Bottom-right: headline + tagline + CTA */}
           <div className="absolute bottom-8 right-4 sm:right-6 lg:right-8 text-right max-w-sm">
@@ -76,7 +76,7 @@ export default function HomePage() {
               </Link>
               {/* Secondary CTA — ghost */}
               <Link
-                href="/contact/"
+                href="/services/new-water-application/"
                 className="inline-flex items-center gap-2 rounded-lg border border-white/40 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-5 py-2.5 text-sm font-semibold text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
@@ -197,55 +197,7 @@ export default function HomePage() {
         </div>
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-20 relative z-10">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-16 items-start">
-
-            {/* ── Left column ── */}
-            <div className="lg:col-span-4">
-
-              {/* ── Mission & Vision — card style on mobile ── */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
-                <div className="rounded-xl bg-white/10 border border-white/20 px-4 py-4">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50 mb-2 flex items-center gap-1.5">
-                    <svg className="size-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                    </svg>
-                    Mission
-                  </p>
-                  <p className="text-sm text-white/85 leading-relaxed italic">
-                    "To provide safe, adequate, and affordable water services to all concessionaires within the franchise area of Trece Martires City."
-                  </p>
-                </div>
-                <div className="rounded-xl bg-white/10 border border-white/20 px-4 py-4">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50 mb-2 flex items-center gap-1.5">
-                    <svg className="size-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.964-7.178Z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                    Vision
-                  </p>
-                  <p className="text-sm text-white/85 leading-relaxed italic">
-                    "A leading water district delivering excellence in public service, committed to the health and well-being of every household it serves."
-                  </p>
-                </div>
-              </div>
-
-              {/* ── About label ── */}
-              <div className="mt-6">
-                <h2
-                  id="about-heading"
-                  className="font-heading text-xs font-semibold uppercase tracking-[0.15em] text-white/60 mb-2"
-                >
-                  About TMCWD
-                </h2>
-              </div>
-            </div>
-
-            {/* ── Right column: history scroller ── */}
-            <div className="mt-8 lg:mt-0 lg:col-span-8 max-w-2xl">
-              <AboutScroller />
-            </div>
-
-          </div>
+          <AboutSection />
         </div>
       </section>
 
@@ -372,8 +324,8 @@ export default function HomePage() {
                       </a>
                     </li>
                     <li>
-                      <a href="tel:[ADD-PHONE]" className="text-white/85 hover:text-white hover:underline transition-colors">
-                        [ADD: Phone number]
+                      <a href="tel:+63 917 805 0391" className="text-white/85 hover:text-white hover:underline transition-colors">
+                        +63 917 805 0391
                       </a>
                     </li>
                   </ul>

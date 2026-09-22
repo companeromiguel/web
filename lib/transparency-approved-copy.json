@@ -10,7 +10,7 @@
     "Certifications": "Historical certification records supplied in the FOI folder.",
     "Citizen's Charter": "Read TMCWD's 2025 Citizen's Charter and related anti-red-tape documents.",
     "Related ARTA documents": "The Committee on Anti-Red Tape office order and initial reengineering plan.",
-    "Bidding & Procurement": "Annual procurement plans for common-use supplies and equipment, grouped by year.",
+    "Procurement": "Annual procurement plans for common-use supplies and equipment, grouped by year.",
     "Annual procurement plans": "Open or download the available APP-CSE documents for 2018–2023."
   },
   "documents": {
@@ -103,6 +103,81 @@
       "sha256": "4632daaa1082be7311a2d454ceb202680c56d693e5daf4cb9538ef09cc1315b6",
       "title": "Performance-Based Bonus ranking system — FY 2019",
       "summary": "TMCWD's FY 2019 Performance-Based Bonus ranking policy, including coverage and exclusions."
+    },
+    "budget-fy-2022": {
+      "sha256": "e89ecdfee213bc0605b3ca995be4286463f992612abe44277228bee8b7d68569",
+      "title": "Annual Budget Documents - Archived as FY 2022",
+      "summary": "Document set filed under FY 2022, beginning with a January 2021 letter submitting the 2021 annual budget, projected cash flow, revenue and expenses, procurement plan, and personnel plantilla."
+    },
+    "budget-fy-2024-1st-supplemental": {
+      "sha256": "8f8e660705760ab55df28deab7271ef71e6ad656759f29283160409c2072c150",
+      "title": "First Supplemental Budget - FY 2024",
+      "summary": "FY 2024 supplemental budget documents, beginning with a DBM acknowledgement receipt dated 30 September 2024."
+    },
+    "budget-fy-2024-2nd-supplemental": {
+      "sha256": "87f2baec5f18077d1b8ce0d3b3ff2ee18279d4cf1c2e57abb8312017b768de69",
+      "title": "Second Supplemental Budget - FY 2024",
+      "summary": "FY 2024 supplemental budget documents, beginning with a DBM acknowledgement receipt dated 10 June 2024."
+    },
+    "citizen-charter-citizenscharter-2025-1st-revision": {
+      "sha256": "0dd6e04eeed598bda645aa6fb69da12214dca8a5873d5d67cf0c9f2191628a58",
+      "title": "Citizen's Charter - 2025",
+      "summary": "TMCWD's 2025 Citizen's Charter, presenting its public services, requirements, and application procedures."
+    },
+    "foi-iso-certification-of-core-process": {
+      "sha256": "11bba5f23d269f6a4633786ade0f51e7df66a611050360bb3f0219b15f3df4b5",
+      "title": "ISO 9001:2015 Stage 1 Audit Letter - 2018",
+      "summary": "NQA letter confirming completion of the Stage 1 audit for water services on 14 December 2018 and recommending a Stage 2 certification audit."
+    },
+    "foi-peoples-freedom-of-information-manual-2025": {
+      "sha256": "7332f7893ba10ae363da6816cc5352041d44d70c36fb066f8fdc8474772e4461",
+      "title": "Freedom of Information Manual",
+      "summary": "Agency manual updated on 29 October 2024, covering information requests, responsible officers, processing procedures, appeals, fees, and request forms."
+    },
+    "saln-saln-certification-2018": {
+      "sha256": "338376a0d8c96b63f1792df5be7fe1f2e2e36e8cb6ec9b1370158b4d3872ce3f",
+      "title": "SALN Memorandum and Filing Procedures - 2018",
+      "summary": "Office memorandum on completing the Statement of Assets, Liabilities and Net Worth, with procedures for filing, submission, and compliance review."
+    },
+    "saln-saln-certification-2019": {
+      "sha256": "4e7b8159ed859d41be8639f52e07a8d24a3f19eb4d49fb961d1d2a13582747dc",
+      "title": "SALN Accomplishment Memorandum - 2019",
+      "summary": "Office Memorandum 2019-12-036 instructing permanent employees to accomplish and submit their Statement of Assets, Liabilities and Net Worth."
+    },
+    "saln-saln-certification-2025": {
+      "sha256": "32101cc7ddc42010be4c5aa2391194e82a5182e37a3e9d1fd1a691e4a155fc25",
+      "title": "SALN Compliance Certification - 2025",
+      "summary": "Certification of compliance with SALN submission requirements for FY 2024, reporting completion by 18 employees and bearing a March 2025 receipt stamp."
+    },
+    "financial-statements-financial-statement-2015": {
+      "sha256": "75e694501434d31a276cf3656485745253dad7bdebb205c2fed9a3d4e3814213",
+      "title": "Financial and Operational Reports - 2015",
+      "summary": "Report set beginning with the December 2015 monthly data sheet, covering service connections, population served, water rates, billing, and collections."
+    },
+    "financial-statements-financial-statement-2016": {
+      "sha256": "9263ddbb20e2361e6ed83644d893ae4c895adeb4906c87de67cb285b5bfc6f27",
+      "title": "Financial and Operational Reports - 2016",
+      "summary": "Report set beginning with the December 2016 monthly data sheet, covering service connections, population served, water rates, billing, and collections."
+    },
+    "financial-statements-financial-statement-2017": {
+      "sha256": "6e0f9d3732ff128cb9c30a9ef0a7a7191252d1e06349298dd41c605c99998cd2",
+      "title": "Financial and Operational Reports - 2017",
+      "summary": "Report set beginning with the December 2017 monthly data sheet, covering service connections, population served, water rates, billing, and collections."
+    },
+    "financial-statements-financial-statement-2018": {
+      "sha256": "8b4d8c6706f77ff5d510b35f5b8195612003c27b691c498efa7e55101f575f93",
+      "title": "Financial and Operational Reports - 2018",
+      "summary": "Report set beginning with the December 2018 monthly data sheet, covering service connections, population served, water rates, billing, and collections."
+    },
+    "financial-statements-financial-statement-2019": {
+      "sha256": "6a983ba5588bf71c6653506f6428c3598385d94e153556fbc923a36eba77b98f",
+      "title": "Financial and Operational Reports - 2019",
+      "summary": "Report set beginning with the December 2019 monthly data sheet, covering service connections, population served, water rates, billing, and collections."
+    },
+    "financial-statements-financial-statement-2020": {
+      "sha256": "e43d9c9469c2ea79180b45085f877ec55bed305a97ed9cf973caa350667cada3",
+      "title": "Financial and Operational Reports - 2020",
+      "summary": "Report set beginning with the December 2020 monthly data sheet, covering service areas, connections, population served, water rates, and billing."
     }
   }
 }
