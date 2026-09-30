@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 
-const slides = ["/img1.jpg", "/img2.jpg", "/img3.jpg", "/img4.jpg", "/img5.png"];
+const slides = ["/imgv1.jpg", "/img2.jpg", "/img3.jpg", "/img4.jpg", "/imgv2.jpg"];
 
 export default function HeroBackground() {
   const [active, setActive] = useState(0);

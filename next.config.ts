@@ -1,10 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  // Removed output:"export" — project now deploys as a Vercel serverless app
+  // so API routes (e.g. /api/announcements) can run as serverless functions.
   images: {
-    // Required for static export — no server-side image optimization
-    unoptimized: true,
+    // Facebook CDN (fbcdn.net) and rss.app images used in announcement feeds
+    remotePatterns: [
+      { protocol: "https", hostname: "**.fbcdn.net" },
+      { protocol: "https", hostname: "**.facebook.com" },
+    ],
   },
   trailingSlash: true,
   // Local dev: allow requests from LAN IP

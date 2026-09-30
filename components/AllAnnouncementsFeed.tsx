@@ -2,6 +2,7 @@
 
 import styles from "./AllAnnouncementsFeed.module.css";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { fetchFeed, type FeedItem } from "@/lib/parseFeed";
 
 function formatDate(dateStr: string): string {
@@ -85,8 +86,7 @@ export default function AllAnnouncementsFeed() {
           className={`group ${styles.card}`}
         >
           {item.image ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img src={item.image} alt="" aria-hidden="true" width={960} height={960}
+            <Image src={item.image} alt="" aria-hidden="true" width={960} height={960}
               className={styles.image} />
           ) : (
             <div className={`${styles.image} flex items-center justify-center bg-[#DEEEFA]`}>

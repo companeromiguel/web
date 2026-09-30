@@ -10,9 +10,8 @@ export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [desktopOpen, setDesktopOpen] = useState<string | null>(null);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [transparencyOpen, setTransparencyOpen] = useState(false);
-  const [announcementOpen, setAnnouncementOpen] = useState(false);
+  // Single state — only one mobile accordion section can be open at a time
+  const [mobileOpen, setMobileOpen] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const isHome = pathname === "/";
 
@@ -244,7 +243,7 @@ export default function Header() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            onClick={() => { setMenuOpen((v) => !v); setServicesOpen(false); setTransparencyOpen(false); setAnnouncementOpen(false); }}
+            onClick={() => { setMenuOpen((v) => !v); setMobileOpen(null); }}
             className="lg:hidden ml-auto text-white/70 hover:text-white transition-colors p-1"
           >
             {menuOpen ? (
@@ -265,7 +264,7 @@ export default function Header() {
         <nav
           id="mobile-menu"
           aria-label="Mobile navigation"
-          className="lg:hidden backdrop-blur-2xl bg-[#1a6a9a]/95 border-t border-white/10"
+          className="lg:hidden backdrop-blur-2xl bg-[#1a6a9a]/95 border-t border-white/10 max-h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain"
         >
           <ul className="w-full px-4 py-2 flex flex-col">
             {primaryNav.map(({ label, href, children }) => {
@@ -273,33 +272,17 @@ export default function Header() {
               const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
 
               if (hasChildren) {
-                const isServices      = label === "Services";
-                const isTransparency  = label === "Transparency";
-                const isAnnouncement  = label === "Announcement";
-                const isOpen          = isServices
-                  ? servicesOpen
-                  : isTransparency
-                    ? transparencyOpen
-                    : isAnnouncement
-                      ? announcementOpen
-                      : false;
-                const toggleOpen      = isServices
-                  ? () => setServicesOpen((v) => !v)
-                  : isTransparency
-                    ? () => setTransparencyOpen((v) => !v)
-                    : isAnnouncement
-                      ? () => setAnnouncementOpen((v) => !v)
-                      : () => {};
+                const isOpen  = mobileOpen === label;
                 const panelId = `mobile-${label.toLowerCase().replace(/\s+/g, "-")}-menu`;
 
                 return (
                   <li key={label}>
-                    {/* Accordion trigger */}
+                    {/* Accordion trigger — opens this section, closes any other */}
                     <button
                       type="button"
                       aria-expanded={isOpen}
                       aria-controls={panelId}
-                      onClick={toggleOpen}
+                      onClick={() => setMobileOpen(isOpen ? null : label)}
                       className="w-full flex items-center justify-between py-2.5 text-sm transition-colors border-b border-white/5 text-white/60 hover:text-white"
                     >
                       <span className={active ? "text-white font-medium" : ""}>{label}</span>
@@ -326,9 +309,7 @@ export default function Header() {
                         isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
                       ].join(" ")}
                     >
-                      <ul
-                        className="overflow-hidden flex flex-col mt-0.5 mb-1 rounded-xl bg-white/10"
-                      >
+                      <ul className="overflow-hidden flex flex-col mt-0.5 mb-1 rounded-xl bg-white/10">
                         {children.map((item) => (
                           <li key={item.href}>
                             {item.dividerBefore && (
@@ -336,7 +317,7 @@ export default function Header() {
                             )}
                             <Link
                               href={item.href}
-                              onClick={() => { setMenuOpen(false); setServicesOpen(false); setTransparencyOpen(false); setAnnouncementOpen(false); }}
+                              onClick={() => { setMenuOpen(false); setMobileOpen(null); }}
                               className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium transition-colors text-white/70 hover:text-white hover:bg-white/10"
                             >
                               {item.label}

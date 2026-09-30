@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { fetchFeed, type FeedItem } from "@/lib/parseFeed";
 
 function formatDate(dateStr: string): string {
@@ -63,8 +64,7 @@ export default function AnnouncementsFeed() {
           className="group flex flex-col rounded-xl overflow-hidden border border-[#E8EEF2] hover:border-[#A1CBE1] hover:shadow-md transition-all duration-200 bg-white shrink-0 w-[75vw] sm:w-auto snap-start"
         >
           {item.image ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img src={item.image} alt="" aria-hidden="true" width={960} height={960} className="w-full h-auto block" />
+            <Image src={item.image} alt="" aria-hidden="true" width={960} height={960} className="w-full h-auto block" />
           ) : (
             <div className="w-full aspect-square bg-[#DEEEFA] flex items-center justify-center shrink-0">
               <svg className="size-10 text-[#A1CBE1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} aria-hidden="true">
