@@ -1,17 +1,17 @@
 /* ── Floating root ───────────────────────────────────────────────── */
 .root {
   position: fixed;
-  right: 40px;
+  left: 40px;
   bottom: 96px;
   z-index: 45;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 8px;
 }
 
 @media (max-width: 700px) {
-  .root { right: 20px; bottom: 76px; }
+  .root { left: 20px; bottom: 76px; }
 }
 
 /* ── Trigger button ─────────────────────────────────────────────── */
@@ -71,6 +71,7 @@
   overflow: hidden;
   /* stack above the trigger */
   order: -1;
+  align-self: flex-start;
   animation: a11y-panel-in 180ms cubic-bezier(.22,1,.36,1) both;
 }
 
