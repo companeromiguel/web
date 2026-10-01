@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { Compass, Droplets, Eye, Landmark, UserRound } from "lucide-react";
 import AboutHero from "@/components/layout/AboutHero";
@@ -119,18 +119,13 @@ export default function AboutPage() {
               {
                 title: "Our mission",
                 icon: Compass,
-                paragraphs: [
-                  "To induce and directly persuade the clientele to actively participate in the responsibility of protecting and preserving the water resources of the City of Trece Martires.",
-                  "Motivate the people to properly utilize this precious nature’s gift for the benefit of the Treceños now and beyond.",
-                  "The organization is amenable to uphold and conserve this valuable commodity as a relevant source of life.",
-                  "To serve the concessionaires with utmost sincerity, honesty, and prompt service.",
-                ],
+                paragraphs: ["As stewards of water resources and environmental care, Trece Martires City Water District is dedicated to provide access to potable, affordable, and sustainable water through digital transformation, fostering a culture of transparency, financial viability, and exceptional customer service."],
               },
               {
                 title: "Our vision",
                 icon: Eye,
                 paragraphs: [
-                  "An institution perpetrated to provide the community a sufficient, reliable, sustainable, and affordable supply of drinkable water for the general well-being of the Treceños as its primary concern.",
+                  "To be a leading Water District in Cavite through innovations and technologically advanced water service for Trece Martires City by 2040.",
                 ],
               },
             ].map(({ title, icon: Icon, paragraphs }) => (

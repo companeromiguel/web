@@ -23,13 +23,7 @@ export default function AboutSection() {
               Mission
             </p>
             <p className="text-sm text-white/85 leading-relaxed italic">
-              &ldquo;To induce and directly persuade the clientele to actively participate in the responsibility of protecting and preserving the water resources of the City of Trece Martires.
-
-              Motivate the people to properly utilize this precious nature&apos;s gift for the benefit of the Treceños now and beyond.
-
-              The organization is amenable to uphold and conserve this valuable commodity as a relevant source of life.
-
-              To serve the concessionaires with utmost sincerity, honesty, and prompt service.&rdquo;
+              &ldquo;As stewards of water resources and environmental care, Trece Martires City Water District is dedicated to provide access to potable, affordable, and sustainable water through digital transformation, fostering a culture of transparency, financial viability, and exceptional customer service.&rdquo;
             </p>
           </div>
           <div className="rounded-xl bg-white/10 border border-white/20 px-4 py-4">
@@ -41,7 +35,7 @@ export default function AboutSection() {
               Vision
             </p>
             <p className="text-sm text-white/85 leading-relaxed italic">
-              &ldquo;An institution perpetrated to provide the community a sufficient, reliable, sustainable, and affordable supply of drinkable water for the general well-being of the Treceños as its primary concern.&rdquo;
+              &ldquo;To be a leading Water District in Cavite through innovations and technologically advanced water service for Trece Martires City by 2040.&rdquo;
             </p>
           </div>
         </div>
