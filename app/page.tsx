@@ -76,7 +76,9 @@ export default function HomePage() {
               </Link>
               {/* Secondary CTA — ghost */}
               <Link
-                href="/services/new-water-application/"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdOYAAlMHWxCidnRe1Z2j7OOFPUYaCTRSpIXc22lUDX89fsZQ/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-white/40 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-5 py-2.5 text-sm font-semibold text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
