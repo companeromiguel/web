@@ -6,6 +6,9 @@ import { useEffect, useRef, useState } from "react";
 // Source: https://tmcwaterdistrict.weebly.com/history-of-tmcwd.html
 const ESTABLISHED_YEAR = 1997;
 
+// Unique key for this site's visit counter via countapi.mileshilliard.com
+const VISIT_COUNTER_KEY = "tmcwd-website-visits-2025";
+
 interface Stat {
   value: number;
   suffix: string;
@@ -16,16 +19,15 @@ interface Stat {
 const stats: Stat[] = [
   // City geography, not a claim about TMCWD service coverage.
   // Source: https://trecemartirescity.gov.ph/history/
-  { value: 13,    suffix: "",   label: "Barangays in Trece Martires City" },
-  { value: 32000, suffix: "+",  label: "Active Connections" },
-  { value: 24,    suffix: "/7", label: "Emergency Response" },
+  { value: 13,    suffix: "",  label: "Barangays in Trece Martires City" },
+  { value: 32000, suffix: "+", label: "Active Connections" },
 ];
 
 function useCountUp(target: number, decimals = 0, duration = 1800, start = false) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!start) return;
+    if (!start || target === 0) return;
     let startTime: number | null = null;
     const step = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
@@ -52,6 +54,45 @@ function StatItem({ stat, animate }: { stat: Stat; animate: boolean }) {
       </span>
       <span className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-[#2A2A29]/50 leading-tight">
         {stat.label}
+      </span>
+    </div>
+  );
+}
+
+function VisitCounterItem({ animate }: { animate: boolean }) {
+  const [visits, setVisits] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const hasFetched = useRef(false);
+
+  useEffect(() => {
+    // Only fetch once per page load
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
+    fetch(`https://countapi.mileshilliard.com/api/v1/hit/${VISIT_COUNTER_KEY}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const count = parseInt(data.value, 10);
+        if (!isNaN(count)) {
+          setVisits(count);
+          setLoaded(true);
+        }
+      })
+      .catch(() => {
+        // Silently fail — don't break the page if the API is down
+      });
+  }, []);
+
+  const count = useCountUp(visits, 0, 1800, animate && loaded);
+  const display = Math.round(count).toLocaleString();
+
+  return (
+    <div className="flex flex-col items-center text-center px-4 py-5">
+      <span className="font-heading text-3xl sm:text-4xl font-bold text-[#370A77] leading-none tabular-nums">
+        {loaded ? display : <span className="text-[#2A2A29]/30">—</span>}
+      </span>
+      <span className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-[#2A2A29]/50 leading-tight">
+        Visits
       </span>
     </div>
   );
@@ -88,6 +129,7 @@ export default function StatsCounter() {
       {stats.map((stat) => (
         <StatItem key={stat.label} stat={stat} animate={animate} />
       ))}
+      <VisitCounterItem animate={animate} />
     </div>
   );
 }
