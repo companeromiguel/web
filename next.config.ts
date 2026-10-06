@@ -40,20 +40,20 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
       // Styles: self + inline styles (Tailwind/CSS-in-JS needs unsafe-inline)
       "style-src 'self' 'unsafe-inline'",
-      // Images: self + Facebook CDN (used in announcement feeds) + data URIs
-      "img-src 'self' data: https://*.fbcdn.net https://*.facebook.com",
-      // Fonts: self
-      "font-src 'self'",
-      // API calls: self + visit counter service
-      "connect-src 'self' https://countapi.mileshilliard.com",
+      // Images: self + Facebook CDN + Google Maps tiles + data URIs
+      "img-src 'self' data: https://*.fbcdn.net https://*.facebook.com https://*.googleapis.com https://*.gstatic.com https://maps.gstatic.com",
+      // Fonts: self + Google Fonts (used inside Maps iframe)
+      "font-src 'self' https://fonts.gstatic.com",
+      // API calls: self + visit counter service + Google Maps API
+      "connect-src 'self' https://countapi.mileshilliard.com https://*.googleapis.com",
       // No plugins (Flash, etc.)
       "object-src 'none'",
       // Base tag restricted to self
       "base-uri 'self'",
       // Forms only submit to self
       "form-action 'self'",
-      // Iframes: allow Google Maps embeds only
-      "frame-src https://maps.google.com",
+      // Iframes: allow Google Maps embeds (all google.com subdomains needed)
+      "frame-src https://maps.google.com https://www.google.com https://google.com",
       // Prevent this site from being embedded in iframes on other domains
       "frame-ancestors 'none'",
     ].join("; "),
