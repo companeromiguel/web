@@ -44,15 +44,17 @@ const securityHeaders = [
       "img-src 'self' data: https://*.fbcdn.net https://*.facebook.com",
       // Fonts: self
       "font-src 'self'",
-      // API calls: self + Facebook (RSS feeds)
-      "connect-src 'self'",
+      // API calls: self + visit counter service
+      "connect-src 'self' https://countapi.mileshilliard.com",
       // No plugins (Flash, etc.)
       "object-src 'none'",
       // Base tag restricted to self
       "base-uri 'self'",
       // Forms only submit to self
       "form-action 'self'",
-      // Iframes: none
+      // Iframes: allow Google Maps embeds only
+      "frame-src https://maps.google.com",
+      // Prevent this site from being embedded in iframes on other domains
       "frame-ancestors 'none'",
     ].join("; "),
   },
