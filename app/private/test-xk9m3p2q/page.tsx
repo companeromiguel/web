@@ -66,7 +66,7 @@ export default function TestPage() {
 
       {/* Button — replace the href below with your target URL */}
       <a
-        href="https://replace-with-your-link.com"
+        href="https://bills.pinas.app/tmcwd"
         target="_blank"
         rel="noopener noreferrer"
         style={{
