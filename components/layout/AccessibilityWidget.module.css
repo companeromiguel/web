@@ -1,8 +1,9 @@
-/* ── Floating root ───────────────────────────────────────────────── */
+/* ── Root — anchored to left side ────────────────────────────────── */
 .root {
   position: fixed;
-  left: 40px;
-  bottom: 96px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 45;
   display: flex;
   flex-direction: column;
@@ -10,78 +11,82 @@
   gap: 8px;
 }
 
-@media (max-width: 700px) {
-  .root { left: 20px; bottom: 76px; }
-}
-
-/* ── Trigger button ─────────────────────────────────────────────── */
+/* ── Trigger — red square tab on the left edge ──────────────────── */
 .trigger {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   padding: 0;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
+  border: none;
+  border-radius: 0 6px 6px 0;
   background: #0591d4;
-  box-shadow:
-    0 4px 16px rgba(5, 145, 212, 0.55),
-    0 8px 32px rgba(5, 145, 212, 0.3),
-    inset 0 1px 0 rgba(255,255,255,0.35);
   color: #fff;
   cursor: pointer;
-  transition: background 200ms, box-shadow 200ms, transform 150ms;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  transition: background 200ms, box-shadow 200ms;
 }
 
-.trigger svg { width: 26px; height: 26px; }
-.trigger:hover {
-  background: #0578b0;
-  box-shadow:
-    0 6px 20px rgba(5, 145, 212, 0.65),
-    0 10px 36px rgba(5, 145, 212, 0.35),
-    inset 0 1px 0 rgba(255,255,255,0.4);
-  transform: scale(1.06);
+.trigger svg {
+  width: 26px;
+  height: 26px;
 }
-.trigger:focus-visible { outline: 3px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 5px #0591d4; }
-.triggerActive { border-color: #ffe293; background: #0578b0; }
+
+.trigger:hover {
+  background: #0480bc;
+  box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.32);
+}
+
+.trigger:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.triggerActive {
+  background: #0480bc;
+}
 
 /* Active dot indicator */
 .dot {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 8px;
-  height: 8px;
+  top: 5px;
+  right: 5px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #ffe293;
-  border: 1.5px solid rgba(255,255,255,0.7);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
 }
 
-/* ── Panel ──────────────────────────────────────────────────────── */
+/* ── Panel — pops out to the right of the trigger ───────────────── */
 .panel {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 52px;
   width: 260px;
   background: #ffffff;
   border: 1px solid #e2edf5;
-  border-radius: 14px;
+  border-radius: 0 14px 14px 0;
   box-shadow:
-    0 20px 60px rgba(6, 46, 87, 0.18),
-    0 4px 12px rgba(0, 0, 0, 0.08);
+    4px 20px 60px rgba(6, 46, 87, 0.18),
+    2px 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  /* stack above the trigger */
-  order: -1;
-  align-self: flex-start;
   animation: a11y-panel-in 180ms cubic-bezier(.22,1,.36,1) both;
-}
-
-@media (max-width: 360px) {
-  .panel { width: calc(100vw - 32px); }
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 @keyframes a11y-panel-in {
-  from { opacity: 0; transform: translateY(8px) scale(.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(-50%) translateX(-10px); }
+  to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+
+@media (max-width: 360px) {
+  .panel { width: calc(100vw - 60px); }
 }
 
 /* ── Panel header ───────────────────────────────────────────────── */
@@ -263,6 +268,6 @@
 
 /* ── Reduced-motion overrides ────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .trigger    { transition: none; }
-  .panel      { animation: none; }
+  .trigger { transition: none; }
+  .panel   { animation: none; }
 }

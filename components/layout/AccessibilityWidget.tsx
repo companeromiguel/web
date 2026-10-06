@@ -218,6 +218,7 @@ export default function AccessibilityWidget() {
           aria-label="Accessibility Tools"
           aria-modal="true"
           className={styles.panel}
+          style={{ zIndex: 46 }}
         >
           {/* Header */}
           <div className={styles.panelHeader}>
