@@ -50,7 +50,12 @@ function loadPos(): WidgetPos {
   if (typeof window === "undefined") return defaultPos();
   try {
     const raw = localStorage.getItem(POSITION_KEY);
-    if (raw) return { ...defaultPos(), ...JSON.parse(raw) };
+    if (raw) {
+      const saved = { ...defaultPos(), ...JSON.parse(raw) };
+      // Clamp in case it was saved before the nav guard was added
+      saved.top = Math.max(72 + BUTTON_SIZE / 2, saved.top);
+      return saved;
+    }
   } catch {}
   return defaultPos();
 }
@@ -233,8 +238,9 @@ export default function AccessibilityWidget() {
     if (!hasMoved.current && Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
     hasMoved.current = true;
 
-    // Button center follows the pointer exactly
-    const snappedY = Math.max(BUTTON_SIZE / 2, Math.min(window.innerHeight - BUTTON_SIZE / 2, e.clientY));
+    // Button center follows the pointer, clamped below the nav bar
+    const NAV_HEIGHT = 72;
+    const snappedY = Math.max(NAV_HEIGHT + BUTTON_SIZE / 2, Math.min(window.innerHeight - BUTTON_SIZE / 2, e.clientY));
     const snappedX = Math.max(BUTTON_SIZE / 2, Math.min(window.innerWidth  - BUTTON_SIZE / 2, e.clientX));
 
     setDragLive({ x: snappedX, y: snappedY });
@@ -248,7 +254,7 @@ export default function AccessibilityWidget() {
       // Snap to nearest edge
       const snapEdge: "left" | "right" = e.clientX < window.innerWidth / 2 ? "left" : "right";
       const clampedTop = Math.max(
-        BUTTON_SIZE / 2,
+        72 + BUTTON_SIZE / 2,
         Math.min(window.innerHeight - BUTTON_SIZE / 2, e.clientY)
       );
       const newPos: WidgetPos = { edge: snapEdge, top: clampedTop };
