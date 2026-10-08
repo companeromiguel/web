@@ -34,10 +34,8 @@ export async function GET() {
   const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, FACEBOOK_PAGE_ID } = process.env;
 
   if (!FACEBOOK_APP_ID || !FACEBOOK_APP_SECRET || !FACEBOOK_PAGE_ID) {
-    return NextResponse.json(
-      { error: "Missing Facebook credentials in environment variables." },
-      { status: 500 }
-    );
+    // Return empty array locally when credentials aren't configured
+    return NextResponse.json([], { status: 200 });
   }
 
   // App Access Token — format: {app_id}|{app_secret}

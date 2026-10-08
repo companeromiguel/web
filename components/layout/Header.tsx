@@ -8,11 +8,10 @@ import { primaryNav } from "@/lib/nav";
 
 export default function Header() {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen]       = useState(false);
   const [desktopOpen, setDesktopOpen] = useState<string | null>(null);
-  // Single state — only one mobile accordion section can be open at a time
-  const [mobileOpen, setMobileOpen] = useState<string | null>(null);
-  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen]   = useState<string | null>(null);
+  const [scrolled, setScrolled]       = useState(false);
   const isHome = pathname === "/";
 
   useEffect(() => {
