@@ -1,17 +1,22 @@
-/* ── Root — anchored to left side ────────────────────────────────── */
+/* ── Root — position is controlled entirely by inline styles ─────── */
+/* (set via JS drag logic; CSS only provides stacking context)        */
 .root {
   position: fixed;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
   z-index: 45;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 8px;
+  /* Smooth snap animation on release */
+  transition: top 180ms cubic-bezier(.22,1,.36,1), left 180ms cubic-bezier(.22,1,.36,1), right 180ms cubic-bezier(.22,1,.36,1);
 }
 
-/* ── Trigger — red square tab on the left edge ──────────────────── */
+.rootDragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+/* ── Trigger — blue tab, edge flush ─────────────────────────────── */
 .trigger {
   position: relative;
   display: inline-flex;
@@ -21,11 +26,14 @@
   height: 44px;
   padding: 0;
   border: none;
-  border-radius: 0 6px 6px 0;
+  /* border-radius set dynamically via inline style based on edge */
   background: #0591d4;
   color: #fff;
-  cursor: pointer;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  /* Prevent the browser from intercepting touch gestures (scroll/pan)
+     so pointer events fire reliably on mobile during drag */
+  touch-action: none;
+  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(255, 255, 255, 0.75);
   transition: background 200ms, box-shadow 200ms;
 }
 
@@ -36,7 +44,8 @@
 
 .trigger:hover {
   background: #0480bc;
-  box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.32);
+  box-shadow: -2px 4px 14px rgba(0, 0, 0, 0.32), 0 0 0 2px rgba(255, 255, 255, 0.75);
+  animation: none;
 }
 
 .trigger:focus-visible {
@@ -52,7 +61,7 @@
 .dot {
   position: absolute;
   top: 5px;
-  right: 5px;
+  left: 5px;
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -60,17 +69,12 @@
   border: 1.5px solid rgba(255, 255, 255, 0.7);
 }
 
-/* ── Panel — pops out to the right of the trigger ───────────────── */
+/* ── Panel — position driven by inline styles ────────────────────── */
 .panel {
   position: fixed;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: 52px;
   width: 260px;
   background: #ffffff;
   border: 1px solid #e2edf5;
-  border-radius: 0 14px 14px 0;
   box-shadow:
     4px 20px 60px rgba(6, 46, 87, 0.18),
     2px 4px 12px rgba(0, 0, 0, 0.08);
@@ -80,9 +84,17 @@
   overflow-y: auto;
 }
 
+@media (min-width: 1024px) {
+  .panel {
+    bottom: auto;
+    top: 35%;
+    transform: translateY(-50%);
+  }
+}
+
 @keyframes a11y-panel-in {
-  from { opacity: 0; transform: translateY(-50%) translateX(-10px); }
-  to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 @media (max-width: 360px) {
