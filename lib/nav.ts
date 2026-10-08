@@ -37,6 +37,14 @@ export const primaryNav: NavItem[] = [
     ],
   },
   {
+    label: "Online Bill Inquiry",
+    href: "/online-bill-inquiry/",
+    children: [
+      { label: "How to Pay Online", href: "/online-bill-inquiry/how-to-pay/" },
+      { label: "SOA",               href: "/online-bill-inquiry/soa/"         },
+    ],
+  },
+  {
     label: "Announcement",
     href: "/news/",
     children: [
