@@ -180,6 +180,18 @@ export default function Header() {
                                     {item.dividerBefore && (
                                       <div aria-hidden="true" className="my-1.5 mx-2 h-px bg-white/15" />
                                     )}
+                                    {item.external ? (
+                                      <a
+                                        href={item.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        role="menuitem"
+                                        onClick={() => setDesktopOpen(null)}
+                                        className="services-menu-item"
+                                      >
+                                        {item.label}
+                                      </a>
+                                    ) : (
                                     <Link
                                       href={item.href}
                                       role="menuitem" onClick={() => setDesktopOpen(null)}
@@ -187,6 +199,7 @@ export default function Header() {
                                     >
                                       {item.label}
                                     </Link>
+                                    )}
                                   </li>
                                 ))}
                               </ul>
@@ -202,6 +215,18 @@ export default function Header() {
                                 {item.dividerBefore && (
                                   <div aria-hidden="true" className="my-1.5 mx-2 h-px bg-white/15" />
                                 )}
+                                {item.external ? (
+                                  <a
+                                    href={item.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    role="menuitem"
+                                    onClick={() => setDesktopOpen(null)}
+                                    className="services-menu-item"
+                                  >
+                                    {item.label}
+                                  </a>
+                                ) : (
                                 <Link
                                   href={item.href}
                                   role="menuitem" onClick={() => setDesktopOpen(null)}
@@ -209,6 +234,7 @@ export default function Header() {
                                 >
                                   {item.label}
                                 </Link>
+                                )}
                               </li>
                             ))}
                           </ul>
@@ -315,6 +341,17 @@ export default function Header() {
                             {item.dividerBefore && (
                               <div aria-hidden="true" className="mx-3 h-px bg-white/15" />
                             )}
+                            {item.external ? (
+                              <a
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => { setMenuOpen(false); setMobileOpen(null); }}
+                                className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium transition-colors text-white/70 hover:text-white hover:bg-white/10"
+                              >
+                                {item.label}
+                              </a>
+                            ) : (
                             <Link
                               href={item.href}
                               onClick={() => { setMenuOpen(false); setMobileOpen(null); }}
@@ -322,6 +359,7 @@ export default function Header() {
                             >
                               {item.label}
                             </Link>
+                            )}
                           </li>
                         ))}
                       </ul>

@@ -4,6 +4,8 @@ export interface NavItem {
   children?: NavItem[];
   /** When true, renders a divider above this item in the dropdown */
   dividerBefore?: boolean;
+  /** When true, opens in a new tab as an external link */
+  external?: boolean;
 }
 
 export const primaryNav: NavItem[] = [
@@ -40,8 +42,9 @@ export const primaryNav: NavItem[] = [
     label: "Online Bill Inquiry",
     href: "/online-bill-inquiry/",
     children: [
-      { label: "How to Pay Online", href: "/online-bill-inquiry/how-to-pay/" },
-      { label: "SOA",               href: "/online-bill-inquiry/soa/"         },
+      { label: "Online Bill Inquiry", href: "https://bills.pinas.app/portal", external: true },
+      { label: "How to Pay Online",   href: "/online-bill-inquiry/how-to-pay/" },
+      { label: "SOA",                 href: "/online-bill-inquiry/soa/" },
     ],
   },
   {
