@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   ],
   metadataBase: new URL("https://tmcwd.gov.ph"),
   verification: {
-    google: "SmrQM3IMKzYxILQRB0FOq_QHoUmDvGymSSPYkBEsshw",
+    google: "4j1wF_pAsF52nzOS_XCbtiULQx7jjSKeFGTsoYVV7Tc",
   },
   icons: {
     icon: [
