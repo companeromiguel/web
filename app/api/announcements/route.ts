@@ -2,20 +2,19 @@
  * GET /api/announcements
  *
  * Server-side proxy to the Facebook Graph API /{page}/posts endpoint.
- * Credentials (App ID + Secret) stay on the server — never exposed to the browser.
+ * Uses a Page Access Token stored in environment variables — never exposed to the browser.
  *
- * Required Vercel environment variables:
- *   FACEBOOK_APP_ID      — from developers.facebook.com → Your App → Settings → Basic
- *   FACEBOOK_APP_SECRET  — same location as above
- *   FACEBOOK_PAGE_ID     — numeric Page ID or vanity name, e.g. "tmcwdCMUHelpDesk"
+ * Required environment variables (in .env.local and Vercel dashboard):
+ *   FB_PAGE_ID           — numeric Page ID (107672617284821)
+ *   FB_PAGE_ACCESS_TOKEN — Page Access Token from Graph API Explorer
+ *   FB_APP_ID            — App ID (for token refresh)
+ *   FB_APP_SECRET        — App Secret (for token refresh)
  *
- * The response is cached for 5 minutes (revalidate: 300) by Vercel's CDN,
- * so the Graph API is not hammered on every page load.
+ * Response is cached for 5 minutes.
  */
 
 import { NextResponse } from "next/server";
 
-// Shape returned by the Graph API for each post
 interface GraphPost {
   id: string;
   message?: string;
@@ -31,24 +30,20 @@ interface GraphResponse {
 }
 
 export async function GET() {
-  const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, FACEBOOK_PAGE_ID } = process.env;
+  const pageId    = process.env.FB_PAGE_ID;
+  const pageToken = process.env.FB_PAGE_ACCESS_TOKEN;
 
-  if (!FACEBOOK_APP_ID || !FACEBOOK_APP_SECRET || !FACEBOOK_PAGE_ID) {
-    // Return empty array locally when credentials aren't configured
+  if (!pageId || !pageToken) {
     return NextResponse.json([], { status: 200 });
   }
 
-  // App Access Token — format: {app_id}|{app_secret}
-  // This is safe to use server-side; it never reaches the browser.
-  const token = `${FACEBOOK_APP_ID}|${FACEBOOK_APP_SECRET}`;
   const fields = "id,message,story,full_picture,permalink_url,created_time";
   const url =
-    `https://graph.facebook.com/v20.0/${FACEBOOK_PAGE_ID}/posts` +
-    `?fields=${fields}&limit=20&access_token=${token}`;
+    `https://graph.facebook.com/v21.0/${pageId}/posts` +
+    `?fields=${fields}&limit=20&access_token=${pageToken}`;
 
   try {
     const res = await fetch(url, {
-      // Cache the Graph API response for 5 minutes on Vercel's CDN edge
       next: { revalidate: 300 },
     });
 
@@ -64,12 +59,14 @@ export async function GET() {
 
     return NextResponse.json(json.data ?? [], {
       headers: {
-        // Allow the client-side fetch in the browser to receive this response
         "Cache-Control": "public, s-maxage=300, stale-while-revalidate=60",
       },
     });
   } catch (err) {
     console.error("[announcements] fetch failed:", err);
-    return NextResponse.json({ error: "Failed to reach Facebook Graph API." }, { status: 502 });
+    return NextResponse.json(
+      { error: "Failed to reach Facebook Graph API." },
+      { status: 502 }
+    );
   }
 }
