@@ -11,11 +11,15 @@ export default function DataPrivacyModal() {
 
   useEffect(() => {
     // Only show if the user hasn't acknowledged before
-    const already = localStorage.getItem(STORAGE_KEY);
-    if (!already) {
-      setVisible(true);
-    }
-    setMounted(true);
+    // Small delay so the page renders first — improves LCP measurement
+    const timer = setTimeout(() => {
+      const already = localStorage.getItem(STORAGE_KEY);
+      if (!already) {
+        setVisible(true);
+      }
+      setMounted(true);
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   function handleContinue() {

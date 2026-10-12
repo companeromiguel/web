@@ -67,6 +67,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-PH" className={`${inter.variable} ${plusJakarta.variable}`}>
+      <head>
+        {/* Preload the first hero image so LCP is fast */}
+        <link rel="preload" as="image" href="/imgv3.jpg" fetchPriority="high" />
+      </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
         <DataPrivacyModal />
         <AlertBanner />
