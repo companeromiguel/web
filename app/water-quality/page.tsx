@@ -4,7 +4,7 @@ import PageHeader, { Breadcrumb } from "@/components/layout/PageHeader";
 export const metadata: Metadata = {
   title: "Water Quality",
   description:
-    "Consumer Confidence Reports, bacteriological and physical-chemical test results for TMCWD water supply.",
+    "TMCWD monitors water quality and reports results annually through the Consumer Confidence Report.",
 };
 
 export default function WaterQualityPage() {
@@ -12,7 +12,7 @@ export default function WaterQualityPage() {
     <>
       <PageHeader
         title="Water Quality"
-        description="TMCWD monitors water quality in accordance with Philippine National Standards for Drinking Water (PNSDW) and reports results annually through the Consumer Confidence Report."
+        description="TMCWD monitors water quality and reports results annually through the Consumer Confidence Report."
       >
         <Breadcrumb current="Water Quality" />
       </PageHeader>
@@ -36,8 +36,7 @@ export default function WaterQualityPage() {
           <p className="text-sm text-[#2A2A29]/60 leading-relaxed mb-8">
             We are preparing our Consumer Confidence Reports and latest water quality test results
             for publication. This page will display bacteriological and physical-chemical
-            parameters tested in accordance with the Philippine National Standards for
-            Drinking Water (PNSDW).
+            parameters tested in accordance with water quality standards.
           </p>
 
           {/* Contact note */}
