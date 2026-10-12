@@ -3,12 +3,3 @@ node_modules
 .git
 .transparency-audit
 *.HEIC
-
-# Large asset folders — served from external storage (Cloudflare R2)
-# Do NOT remove these files locally — they are still needed for reference
-# but should not be bundled into Vercel deployments
-public/documents/
-public/gallery/
-public/bidding/
-public/Service Charter/
-tmp/
