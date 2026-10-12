@@ -40,27 +40,6 @@ export default function WaterQualityPage() {
             Drinking Water (PNSDW).
           </p>
 
-          {/* What to expect */}
-          <div className="w-full bg-[#F7FAFB] border border-[#E8EEF2] rounded-2xl px-6 py-5 text-left space-y-3 mb-8">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#2A2A29]/40 mb-3">
-              What will be available here
-            </p>
-            {[
-              "Annual Consumer Confidence Reports (PDF)",
-              "Latest bacteriological test results",
-              "Physical-chemical parameter results",
-              "Sampling dates and accredited laboratory details",
-              "Comparison against PNSDW standards",
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-3">
-                <svg className="w-4 h-4 text-[#0591D4] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
-                <span className="text-sm text-[#2A2A29]/70">{item}</span>
-              </div>
-            ))}
-          </div>
-
           {/* Contact note */}
           <p className="text-xs text-[#2A2A29]/45 leading-relaxed">
             For water quality concerns, contact us at{" "}
