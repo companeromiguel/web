@@ -7,24 +7,6 @@ export const metadata: Metadata = {
     "Consumer Confidence Reports, bacteriological and physical-chemical test results for TMCWD water supply.",
 };
 
-const reports = [
-  { year: "[YEAR]", period: "Annual", label: "Consumer Confidence Report", fileSize: "[X] MB", href: "#" },
-];
-
-const parameters = [
-  { name: "Total Coliform",         standard: "0 MPN/100 mL", result: "[ADD]", status: "—" },
-  { name: "E. coli",                standard: "0 MPN/100 mL", result: "[ADD]", status: "—" },
-  { name: "Turbidity",              standard: "≤ 5 NTU",       result: "[ADD]", status: "—" },
-  { name: "Free Residual Chlorine", standard: "0.3–1.5 mg/L", result: "[ADD]", status: "—" },
-  { name: "pH",                     standard: "6.5–8.5",       result: "[ADD]", status: "—" },
-  { name: "Total Dissolved Solids", standard: "≤ 500 mg/L",   result: "[ADD]", status: "—" },
-  { name: "Hardness",               standard: "≤ 300 mg/L",   result: "[ADD]", status: "—" },
-  { name: "Iron",                   standard: "≤ 0.3 mg/L",   result: "[ADD]", status: "—" },
-];
-
-const thClass = "px-4 py-3 text-left text-xs font-semibold text-[#2A2A29]/50 uppercase tracking-wide border-b border-[#E8EEF2]";
-const tdClass = "px-4 py-3 text-sm text-[#2A2A29] border-b border-[#E8EEF2]";
-
 export default function WaterQualityPage() {
   return (
     <>
@@ -35,105 +17,63 @@ export default function WaterQualityPage() {
         <Breadcrumb current="Water Quality" />
       </PageHeader>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
+        <div className="flex flex-col items-center text-center max-w-lg mx-auto">
 
-        {/* Consumer Confidence Reports */}
-        <section aria-labelledby="ccr-heading">
-          <h2 id="ccr-heading" className="font-heading text-lg font-semibold text-[#2A2A29] mb-1">
-            Consumer Confidence Reports
+          {/* Icon */}
+          <div className="flex items-center justify-center w-20 h-20 rounded-full bg-[#DEEEFA] mb-6">
+            <svg className="w-10 h-10 text-[#0591D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15M14.25 3.104c.251.023.501.05.75.082M19.8 15l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.5-1.175 2.096a3 3 0 0 1-2.6 1.404H7.975a3 3 0 0 1-2.6-1.404L4.2 15M5 14.5l-1.175.523" />
+            </svg>
+          </div>
+
+          {/* Heading */}
+          <h2 className="font-heading text-2xl font-bold text-[#2A2A29] mb-3">
+            Water Quality Reports Coming Soon
           </h2>
-          <p className="text-sm text-[#2A2A29]/60 mb-6 max-w-2xl">
-            Annual report on drinking water quality delivered to consumers, as required under the
-            Philippine Clean Water Act and LWUA regulations.
+
+          {/* Description */}
+          <p className="text-sm text-[#2A2A29]/60 leading-relaxed mb-8">
+            We are preparing our Consumer Confidence Reports and latest water quality test results
+            for publication. This page will display bacteriological and physical-chemical
+            parameters tested in accordance with the Philippine National Standards for
+            Drinking Water (PNSDW).
           </p>
 
-          {reports.length > 0 ? (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-[#F7FAFB]">
-                    <th className={thClass}>Year</th>
-                    <th className={thClass}>Period</th>
-                    <th className={thClass}>Report</th>
-                    <th className={thClass}>Size</th>
-                    <th className={thClass}>Download</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {reports.map((r, i) => (
-                    <tr key={i} className="hover:bg-[#F7FAFB] transition-colors">
-                      <td className={tdClass}>{r.year}</td>
-                      <td className={tdClass}>{r.period}</td>
-                      <td className={tdClass}>{r.label}</td>
-                      <td className={`${tdClass} text-[#2A2A29]/45`}>{r.fileSize}</td>
-                      <td className={tdClass}>
-                        <a href={r.href} className="text-[#0591D4] hover:underline font-medium text-xs"
-                          aria-label={`Download ${r.label} for ${r.year}`}>
-                          PDF ↓
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <p className="text-sm text-[#2A2A29]/50 bg-[#F7FAFB] border-l-2 border-[#A1CBE1] px-5 py-4">
-              Reports will be posted here once available.
+          {/* What to expect */}
+          <div className="w-full bg-[#F7FAFB] border border-[#E8EEF2] rounded-2xl px-6 py-5 text-left space-y-3 mb-8">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#2A2A29]/40 mb-3">
+              What will be available here
             </p>
-          )}
-        </section>
+            {[
+              "Annual Consumer Confidence Reports (PDF)",
+              "Latest bacteriological test results",
+              "Physical-chemical parameter results",
+              "Sampling dates and accredited laboratory details",
+              "Comparison against PNSDW standards",
+            ].map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <svg className="w-4 h-4 text-[#0591D4] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <span className="text-sm text-[#2A2A29]/70">{item}</span>
+              </div>
+            ))}
+          </div>
 
-        {/* Latest test results */}
-        <section aria-labelledby="results-heading">
-          <h2 id="results-heading" className="font-heading text-lg font-semibold text-[#2A2A29] mb-1">
-            Latest Test Results
-          </h2>
-          <p className="text-sm text-[#2A2A29]/60 mb-6 max-w-2xl">
-            Selected parameters from the most recent laboratory analysis.
-            Full results are in the Consumer Confidence Report.{" "}
-            <strong className="font-medium text-[#2A2A29]/80">Sampling date: [ADD DATE]</strong>
+          {/* Contact note */}
+          <p className="text-xs text-[#2A2A29]/45 leading-relaxed">
+            For water quality concerns, contact us at{" "}
+            <a href="mailto:tmcwd@yahoo.com" className="text-[#0591D4] hover:underline">
+              tmcwd@yahoo.com
+            </a>{" "}
+            or call{" "}
+            <a href="tel:+63917805039" className="text-[#0591D4] hover:underline">
+              +63 917 805 0391
+            </a>.
           </p>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-[#F7FAFB]">
-                  <th className={thClass}>Parameter</th>
-                  <th className={thClass}>PNSDW Limit</th>
-                  <th className={thClass}>Result</th>
-                  <th className={thClass}>Remarks</th>
-                </tr>
-              </thead>
-              <tbody>
-                {parameters.map((p) => (
-                  <tr key={p.name} className="hover:bg-[#F7FAFB] transition-colors">
-                    <td className={`${tdClass} font-medium`}>{p.name}</td>
-                    <td className={`${tdClass} text-[#2A2A29]/55 font-mono text-xs`}>{p.standard}</td>
-                    <td className={tdClass}>{p.result}</td>
-                    <td className={`${tdClass} text-[#2A2A29]/45`}>{p.status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* Monitoring programme */}
-        <section aria-labelledby="monitoring-heading" className="bg-[#F7FAFB] border-l-2 border-[#0591D4] px-6 py-6">
-          <h2 id="monitoring-heading" className="font-heading text-base font-semibold text-[#2A2A29] mb-3">
-            Monitoring Programme
-          </h2>
-          <div className="text-sm text-[#2A2A29]/70 space-y-3 leading-relaxed max-w-2xl">
-            <p>
-              Water samples are collected from [ADD: number] sampling points across the
-              distribution system on a [ADD: frequency] basis and analysed by{" "}
-              [ADD: accredited laboratory name], accredited by the Department of Health.
-            </p>
-            <p>[ADD: Notes on source water, treatment process, or special monitoring activities.]</p>
-          </div>
-        </section>
-
+        </div>
       </div>
     </>
   );
