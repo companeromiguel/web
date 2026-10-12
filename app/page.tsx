@@ -381,12 +381,7 @@ export default function HomePage() {
                   style={{
                     border: 0,
                     display: "block",
-                    /* touchAction auto ensures the browser doesn't suppress pinch-zoom
-                       or tap gestures on touch devices. */
                     touchAction: "auto",
-                    /* Blend the map into the blue section: light desaturation +
-                       a gentle hue push toward brand cyan keeps it readable.   */
-                    filter: "grayscale(15%) contrast(100%) saturate(120%) hue-rotate(185deg)",
                   }}
                   allowFullScreen
                   loading="lazy"
