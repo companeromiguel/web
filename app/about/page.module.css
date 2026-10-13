@@ -41,7 +41,7 @@
 .officers { scroll-margin-top: 100px; padding-block: 80px; background: radial-gradient(ellipse at 90% 15%,rgba(213,238,251,.82) 0,transparent 50%),linear-gradient(135deg,rgba(241,248,252,.78),rgba(234,245,251,.72)); }
 .leaders { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 800px; margin: 40px auto 64px; }
 .portraitCard { text-align: center; padding: 36px 24px; background: #ffffffb3; border: 1px solid white; border-radius: 22px; box-shadow: 0 12px 32px #26516d08; }
-.portrait { display: grid; place-items: center; position: relative; overflow: hidden; width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(140deg,#dceff8,#edf7fb); color: #6d9bb4; margin: 0 auto 12px; border: 5px solid white; }
+.portrait { display: grid; place-items: center; position: relative; overflow: hidden; width: 140px; height: 180px; border-radius: 12px; background: linear-gradient(140deg,#dceff8,#edf7fb); color: #6d9bb4; margin: 0 auto 12px; border: 3px solid white; box-shadow: 0 4px 16px rgba(38,81,109,0.10); }
 .photoLabel { font-size: 10px; color: #526472; }
 .leaderPhoto { object-fit: cover; object-position: center top; }
 .directoryGrid article.boardCard { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 16px 20px 20px; }
@@ -75,7 +75,7 @@
   .valueCard { padding: 28px; }
   .leaders { gap: 16px; margin-bottom: 40px; }
   .portraitCard { padding: 24px 12px; }
-  .portrait { width: 100px; height: 100px; }
+  .portrait { width: 100px; height: 130px; border-radius: 10px; }
   .portraitCard h3 { font-size: 15px; }
   .directoryGrid { gap: 12px; }
   .pledgeQuote { min-height: 270px; padding: 28px; }

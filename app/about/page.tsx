@@ -161,7 +161,7 @@ export default function AboutPage() {
           <Heading number="05" title="The people behind our purpose" />
           <div className={styles.leaders}>
             <Portrait name="Ms. Narcisa L. Montano" role="Chairperson, Board of Directors" photo="/board/narcisa-montano.png" />
-            <Portrait name="Engr. Joel John M. Ulep" role="General Manager" photo="/gray-man-photo-placeholder-vector-23804672.avif" />
+            <Portrait name="Engr. Joel John M. Ulep" role="General Manager" photo="/board/gm.png" />
           </div>
           <div className={styles.directory}>
             <div>
@@ -171,8 +171,8 @@ export default function AboutPage() {
               {[
                 { name: "Ms. Nena V. Lubigan", role: "Vice Chairperson", photo: "/board/nena-lubigan.png" },
                 { name: "Ms. Eufrosina L. Ortiz", role: "Secretary", photo: "/board/eufrosina-ortiz.png" },
-                { name: "Engr. Adelaida N. Talatala", role: "Member", photo: "/gray-female-headshot-placeholder-vector-24276011.avif" },
-                { name: "Ms. Villa C. Rivera", role: "Member", photo: "/gray-female-headshot-placeholder-vector-24276011.avif" },
+                { name: "Engr. Adelaida N. Talatala", role: "Member", photo: "/board/adelaida-talatala.jpg" },
+                { name: "Ms. Villa C. Rivera", role: "Member", photo: "/board/villa-rivera.jpg" },
               ].map(({ name, role, photo }) => (
                 <article key={name} className={styles.boardCard}>
                   <div className={styles.boardDetails}>
@@ -193,10 +193,10 @@ export default function AboutPage() {
             </div>
             <div className={styles.directoryGrid}>
               {[
-                { name: "Mr. Lorenzo R. Sisante", role: "Division Manager", division: "Construction and Maintenance Division", photo: "/gray-man-photo-placeholder-vector-23804672.avif" },
-                { name: "Ms. Michelle V. Patanindagat", role: "Division Manager", division: "Human Resources Division", photo: "/gray-female-headshot-placeholder-vector-24276011.avif" },
-                { name: "Ms. Elaine L. Liveta, CPA", role: "Division Manager", division: "Accounting and Cash Management Division", photo: "/gray-female-headshot-placeholder-vector-24276011.avif" },
-                { name: "Engr. Edvan Rhey O. Reyes", role: "Division Manager", division: "Administrative and General Services Division", photo: "/gray-man-photo-placeholder-vector-23804672.avif" },
+                { name: "Mr. Lorenzo R. Sisante", role: "Division Manager", division: "Construction and Maintenance Division", photo: "/board/sironchie.png" },
+                { name: "Ms. Michelle V. Patanindagat", role: "Division Manager", division: "Human Resources Division", photo: "/board/mich.png" },
+                { name: "Ms. Elaine L. Liveta, CPA", role: "Division Manager", division: "Accounting and Cash Management Division", photo: "/board/maamelaine.png" },
+                { name: "Engr. Edvan Rhey O. Reyes", role: "Division Manager", division: "Administrative and General Services Division", photo: "/board/sired.png" },
               ].map(({ name, role, division, photo }) => (
                 <article key={name} className={styles.boardCard}>
                   <div className={styles.boardDetails}>
