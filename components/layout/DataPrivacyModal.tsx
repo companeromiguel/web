@@ -10,10 +10,8 @@ export default function DataPrivacyModal() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Only show if the user hasn't acknowledged before
-    // Small delay so the page renders first — improves LCP measurement
     const timer = setTimeout(() => {
-      const already = localStorage.getItem(STORAGE_KEY);
+      const already = sessionStorage.getItem(STORAGE_KEY);
       if (!already) {
         setVisible(true);
       }
@@ -23,7 +21,7 @@ export default function DataPrivacyModal() {
   }, []);
 
   function handleContinue() {
-    localStorage.setItem(STORAGE_KEY, "1");
+    sessionStorage.setItem(STORAGE_KEY, "1");
     setVisible(false);
   }
 
