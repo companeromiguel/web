@@ -7,6 +7,7 @@ const slides: { src: string; position?: string }[] = [
   { src: "/imgv3.jpg", position: "45% center" },
   { src: "/img2.jpg" },
   { src: "/img3.jpg" },
+  { src: "/CSC_Month.png", position: "20% center" },
   { src: "/img4.jpg" },
   { src: "/imgv2.jpg" },
 ];
