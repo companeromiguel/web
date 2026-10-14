@@ -61,13 +61,13 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* gov.ph external link */}
+          {/* Bagong Pilipinas logo — links to MC No. 24 s. 2023 */}
           <a
-            href="https://www.gov.ph/"
+            href="https://www.officialgazette.gov.ph/2023/07/03/memorandum-circular-no-24-s-2023/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 shrink-0 group ml-4"
-            aria-label="Visit gov.ph"
+            className="flex items-center shrink-0 ml-4"
+            aria-label="Bagong Pilipinas — Memorandum Circular No. 24 s. 2023"
           >
             <Image
               src="/bago.ph.png"
@@ -80,6 +80,16 @@ export default function Header() {
               ].join(" ")}
               priority
             />
+          </a>
+
+          {/* gov.ph external link */}
+          <a
+            href="https://www.gov.ph/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center shrink-0 group ml-2"
+            aria-label="Visit gov.ph"
+          >
             <span
               className={[
                 "font-semibold text-white/70 tracking-tight transition-all duration-150 group-hover:text-white",
