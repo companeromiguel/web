@@ -56,6 +56,18 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_PH",
     siteName: "Trece Martires City Water District",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Trece Martires City Water District — Serbisyong Malinis, Tapat, at Maaasahan.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.png"],
   },
 };
 
