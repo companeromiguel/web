@@ -87,13 +87,13 @@ export default function Header() {
             href="https://www.gov.ph/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center shrink-0 group ml-2"
+            className="flex items-center shrink-0 group ml-4"
             aria-label="Visit gov.ph"
           >
             <span
               className={[
                 "font-semibold text-white/70 tracking-tight transition-all duration-150 group-hover:text-white",
-                scrolled ? "text-xs" : "text-sm",
+                scrolled ? "text-sm" : "text-base",
               ].join(" ")}
             >
               gov.ph
