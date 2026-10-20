@@ -1,5 +1,4 @@
 ﻿import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import AnnouncementHero from "@/components/layout/AnnouncementHero";
 import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
@@ -13,15 +12,13 @@ export const metadata: Metadata = {
 // https://tmcwaterdistrict.weebly.com/contact-us.html (contact-info.jpg)
 // https://tmcwaterdistrict.weebly.com/transparency-seal2.html
 const phoneNumbers = [
-  { label: "(046) 419-2665", href: "tel:+63464192665" },
-  { label: "(046) 419-0054", href: "tel:+63464190054" },
   { label: "(046) 419-2664", href: "tel:+63464192664" },
-  { label: "(046) 419-0378", href: "tel:+63464190378" },
+  { label: "0917-805-0391", href: "tel:+639178050391" },
 ];
-const emails = ["tmcwd@yahoo.com", "tmcwd@gmail.com"];
+const emails = ["tmcwd@yahoo.com", "tmcwd98@gmail.com", "customercare.tmcwd@gmail.com"];
 const inquiries = [
   { title: "Billing & account inquiries", description: "For questions about a water bill or account, contact the office using the telephone numbers or email addresses above.", href: "mailto:tmcwd@yahoo.com", action: "Email the office" },
-  { title: "Leaks & water service concerns", description: "Report the location and a nearby landmark, and describe the leak or water supply concern when contacting the office.", href: "tel:+63464192665", action: "Call the office" },
+  { title: "Leaks & water service concerns", description: "Report the location and a nearby landmark, and describe the leak or water supply concern when contacting the office.", href: "tel:+63464192664", action: "Call the office" },
   { title: "Freedom of Information", description: "Read the district’s FOI manual for the procedure and requirements for requesting public records.", href: "/transparency/foi/", action: "View FOI information" },
 ];
 const panelClass = "rounded-2xl border border-[#C4DAE7] bg-white p-6 shadow-[0_8px_24px_rgba(35,82,110,0.10)] sm:p-8";
@@ -74,29 +71,6 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-        <section aria-labelledby="inquiries-heading">
-          <h2 id="inquiries-heading" className="mb-6 font-heading text-2xl font-semibold text-[#087FB8]">How can we help?</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {inquiries.map((item) => <article key={item.title} className={`${panelClass} flex flex-col`}>
-              <h3 className="font-heading text-lg font-semibold text-[#087FB8]">{item.title}</h3>
-              <p className="mb-6 mt-3 text-sm leading-7 text-[#52616B]">{item.description}</p>
-              <Link href={item.href} className={`${linkClass} mt-auto inline-flex items-center gap-2 self-start text-sm font-semibold`}>{item.action} <ArrowUpRight size={16} aria-hidden="true" /></Link>
-            </article>)}
-          </div>
-        </section>
-        <div className="grid gap-6 lg:grid-cols-2">
-          <section aria-labelledby="service-area-heading" className={panelClass}>
-            <h2 id="service-area-heading" className="font-heading text-xl font-semibold text-[#087FB8]">Check connection availability</h2>
-            <p className="mt-3 text-sm leading-7 text-[#52616B]">For a property in Trece Martires City, contact the office with your barangay, subdivision or street, and a nearby landmark to ask whether a water connection is available at your address.</p>
-            <p className="mt-3 text-sm leading-7 text-[#52616B]">Availability should be confirmed for the specific property before applying.</p>
-            <a href="mailto:tmcwd@yahoo.com?subject=Water%20connection%20availability%20inquiry" className={`${linkClass} mt-5 inline-flex items-center gap-2 text-sm font-semibold`}>Ask about your address <ArrowUpRight size={16} aria-hidden="true" /></a>
-          </section>
-          <section aria-labelledby="feedback-heading" className={panelClass}>
-            <h2 id="feedback-heading" className="font-heading text-xl font-semibold text-[#087FB8]">Feedback & complaints</h2>
-            <p className="mt-3 text-sm leading-7 text-[#52616B]">Contact the office by telephone, email, or in person to raise a concern. Include a clear description and your preferred contact details for a reply.</p>
-            <Link href="/transparency/citizens-charter/" className={`${linkClass} mt-5 inline-flex items-center gap-2 text-sm font-semibold`}>View the Citizen&apos;s Charter <ArrowUpRight size={16} aria-hidden="true" /></Link>
-          </section>
-        </div>
       </div>
     </div>
   </>;

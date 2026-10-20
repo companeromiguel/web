@@ -57,12 +57,14 @@ export default function Footer() {
               <p>
                 <a href="tel:+63464192664" className="hover:text-white transition-colors">(046) 419-2664</a>
                 {" · "}
-                <a href="tel:+63464190054" className="hover:text-white transition-colors">(046) 419-0054</a>
-                {" · Fax "}
-                <a href="tel:+63464190378" className="hover:text-white transition-colors">(046) 419-0378</a>
+                <a href="tel:+639178050391" className="hover:text-white transition-colors">0917-805-0391</a>
               </p>
               <p>
                 <a href="mailto:tmcwd@yahoo.com" className="hover:text-white transition-colors">tmcwd@yahoo.com</a>
+                {" · "}
+                <a href="mailto:tmcwd98@gmail.com" className="hover:text-white transition-colors">tmcwd98@gmail.com</a>
+                {" · "}
+                <a href="mailto:customercare.tmcwd@gmail.com" className="hover:text-white transition-colors">customercare.tmcwd@gmail.com</a>
                 {" · "}
                 <a href="https://facebook.com/tmcwdCMUHelpDesk" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                   fb.com/tmcwdCMUHelpDesk
@@ -100,7 +102,7 @@ export default function Footer() {
                 {[
                   ["Transparency Seal", "/transparency/seal/"],
                   ["Freedom of Information", "/transparency/foi/"],
-                  ["Bidding & Procurement",      "/transparency/procurement/"],
+                  ["Bidding & Procurement",      "/transparency/bidding/"],
                   ["Citizen's Charter",      "/transparency/citizens-charter/"],
                   ["Financial Reports",      "/transparency/seal/#documents-1"],
                 ].map(([label, href]) => (

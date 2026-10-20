@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, CalendarDays } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
 import AnnouncementHero from "@/components/layout/AnnouncementHero";
 import { districtEvents } from "@/lib/events";
@@ -33,14 +33,7 @@ export default function EventsPage() {
           <Link href={`/gallery/#${featured.albumId}`} className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#087FB8] px-5 py-3 text-sm font-semibold text-white hover:bg-[#066B9C] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#087FB8]">View photos <ArrowUpRight size={17} aria-hidden="true" /></Link>
         </div>
       </section>
-      <section aria-labelledby="upcoming-title" className="flex flex-col gap-5 rounded-2xl border border-[#BBD6E5] border-l-4 border-l-[#087FB8] bg-[#F5FAFD] p-6 shadow-[0_6px_20px_rgba(35,82,110,0.08)] sm:flex-row sm:items-center sm:gap-6 sm:p-8">
-        <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#DDEFF9] text-[#087FB8]"><CalendarDays size={24} aria-hidden="true" /></span>
-        <div className="flex-1">
-          <h2 id="upcoming-title" className="font-heading text-lg font-semibold text-[#087FB8]">Upcoming events</h2>
-          <p className="mt-1 text-sm leading-6 text-[#52616B]">No upcoming events are listed yet. Check our announcements for the latest updates.</p>
-        </div>
-        <Link href="/news/" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-[#087FB8] hover:underline">View announcements <ArrowUpRight size={16} aria-hidden="true" /></Link>
-      </section>
+
       <EventsArchive events={districtEvents} />
     </div>
     </div>

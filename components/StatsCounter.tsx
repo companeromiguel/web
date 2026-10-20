@@ -1,6 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+
+const govLogos = [
+  { src: "/gov.ph.png",                        alt: "gov.ph",                href: "https://www.gov.ph/",          label: "gov.ph",             internal: false },
+  { src: "/bago.ph.png",                       alt: "Bagong Pilipinas",       href: "https://www.officialgazette.gov.ph/2023/07/03/memorandum-circular-no-24-s-2023/", label: "Bagong Pilipinas", internal: false },
+  { src: "/transparency-seal-square_orig.png", alt: "Transparency Seal",      href: "/transparency/seal/",          label: "Transparency Seal",  internal: true  },
+  { src: "/foi.png",                           alt: "Freedom of Information",  href: "https://www.foi.gov.ph/",     label: "FOI",                internal: false },
+];
 
 // Created March 26, 1997; LWUA recognition followed July 17, 1998.
 // Source: https://tmcwaterdistrict.weebly.com/history-of-tmcwd.html
@@ -117,19 +126,69 @@ export default function StatsCounter() {
   }, []);
 
   return (
-    <div ref={ref} className="grid grid-cols-2 lg:grid-cols-4 mb-12">
-      <div className="flex flex-col items-center text-center px-4 py-5">
-        <span className="font-heading text-3xl sm:text-4xl font-bold text-[#370A77] leading-none tabular-nums">
-          {ESTABLISHED_YEAR}
-        </span>
-        <span className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-[#2A2A29]/50 leading-tight">
-          Established
-        </span>
+    <div ref={ref} className="mb-12">
+
+      {/* ── Government logos ─────────────────────────────────────── */}
+      <div className="bg-[#DEEEFA]/40
+                      mx-[calc(-50vw+50%)] w-screen flex justify-evenly items-center flex-wrap py-4">
+        {govLogos.map(({ src, alt, href, label, internal }) => (
+          internal ? (
+            <Link
+              key={src}
+              href={href}
+              className="flex flex-col items-center gap-1.5 shrink-0 group"
+              aria-label={alt}
+            >
+              <Image
+                src={src}
+                alt={alt}
+                width={80}
+                height={80}
+                className="size-20 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-150"
+              />
+            </Link>
+          ) : (
+            <a
+              key={src}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center gap-1.5 shrink-0 group"
+              aria-label={alt}
+            >
+              <Image
+                src={src}
+                alt={alt}
+                width={80}
+                height={80}
+                className="size-20 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-150"
+              />
+              {label === "gov.ph" && (
+                <span className="text-xs font-semibold text-[#370A77]/70 group-hover:text-[#370A77] transition-colors">
+                  {label}
+                </span>
+              )}
+            </a>
+          )
+        ))}
       </div>
-      {stats.map((stat) => (
-        <StatItem key={stat.label} stat={stat} animate={animate} />
-      ))}
-      <VisitCounterItem animate={animate} />
+
+      {/* ── Stats grid ───────────────────────────────────────────── */}
+      <div className="grid grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-col items-center text-center px-4 py-5">
+          <span className="font-heading text-3xl sm:text-4xl font-bold text-[#370A77] leading-none tabular-nums">
+            {ESTABLISHED_YEAR}
+          </span>
+          <span className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-[#2A2A29]/50 leading-tight">
+            Established
+          </span>
+        </div>
+        {stats.map((stat) => (
+          <StatItem key={stat.label} stat={stat} animate={animate} />
+        ))}
+        <VisitCounterItem animate={animate} />
+      </div>
+
     </div>
   );
 }

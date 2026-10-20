@@ -2,17 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./TransparencyHero.module.css";
 
-export default function TransparencyHero({ title, description, breadcrumb = title, isOverview = false, sealSrc, sealAlt, sealHref }: { title: string; description?: string; breadcrumb?: string; isOverview?: boolean; sealSrc?: string; sealAlt?: string; sealHref?: string }) {
+export default function TransparencyHero({ title, description, breadcrumb = title, isOverview = false, sealSrc, sealAlt, sealHref, sealWhiteBg = false }: { title: string; description?: string; breadcrumb?: string; isOverview?: boolean; sealSrc?: string; sealAlt?: string; sealHref?: string; sealWhiteBg?: boolean }) {
   const sealImage = <Image src={sealSrc ?? "/transparency-seal-square_orig.png"} alt={sealAlt ?? "Philippine Transparency Seal"} width={176} height={176} sizes="(max-width: 700px) 88px, 176px" />;
+  const sealWrapped = sealWhiteBg ? <div className={styles.sealWhiteBg}>{sealImage}</div> : sealImage;
   return <header className={styles.hero}>
     <div className={styles.orbit} aria-hidden="true" />
     <div className={styles.inner}>
       <div className={styles.seal}>
         {sealHref
           ? sealHref.startsWith("http")
-            ? <a href={sealHref} target="_blank" rel="noopener noreferrer" className={styles.sealLink}>{sealImage}</a>
-            : <Link href={sealHref} className={styles.sealLink}>{sealImage}</Link>
-          : sealImage}
+            ? <a href={sealHref} target="_blank" rel="noopener noreferrer" className={styles.sealLink}>{sealWrapped}</a>
+            : <Link href={sealHref} className={styles.sealLink}>{sealWrapped}</Link>
+          : sealWrapped}
       </div>
       <div className={styles.content}>
         <p className={styles.eyebrow}>Philippine Transparency Seal</p>

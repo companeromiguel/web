@@ -2,6 +2,7 @@
 .heroBg::before { content: ''; position: absolute; inset: 0; background-image: url('/img4.jpg'); background-size: cover; background-position: center; opacity: .13; z-index: 0; pointer-events: none; }
 .inner { position: relative; z-index: 1; display: grid; grid-template-columns: 176px minmax(0, 1fr) 176px; align-items: center; gap: clamp(24px, 4vw, 56px); max-width: 1280px; margin: auto; padding: 56px 32px 64px; }
 .seal, .districtSeal { filter: drop-shadow(0 10px 20px #001d3d55); }
+.sealWhiteBg { background: white; border-radius: 50%; padding: 10px; }
 .serviceIcon { aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; border: 1px solid #ffffff66; background: linear-gradient(145deg, #ffffff26, #ffffff08); box-shadow: inset 0 0 0 8px #ffffff06; color: #ffe293; }
 .serviceIcon svg { width: 50%; height: 50%; }
 .seal img, .districtSeal img { display: block; width: 100%; height: auto; }

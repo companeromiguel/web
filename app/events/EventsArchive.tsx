@@ -18,7 +18,7 @@ export default function EventsArchive({ events }: { events: DistrictEvent[] }) {
     <div className="flex flex-col gap-6 rounded-2xl border border-[#C4DAE7] bg-white p-6 shadow-[0_6px_24px_rgba(35,82,110,0.08)] sm:p-8 lg:flex-row lg:items-end lg:justify-between">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#43738D]">TMCWD through the years</p>
-        <h2 id="past-events-title" className="mt-2 font-heading text-3xl font-semibold tracking-tight text-[#087FB8]">Past activities</h2>
+        <h2 id="past-events-title" className="mt-2 font-heading text-3xl font-semibold tracking-tight text-[#087FB8]">Activities</h2>
         <p className="mt-3 text-sm leading-6 text-[#52616B]">Explore community programs and district milestones from our photo archive.</p>
       </div>
       <div className="grid shrink-0 grid-cols-1 gap-4 min-[360px]:grid-cols-2">

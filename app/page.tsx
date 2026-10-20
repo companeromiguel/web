@@ -137,7 +137,7 @@ export default function HomePage() {
           </svg>
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 lg:pb-20">
 
           <StatsCounter />
 
@@ -328,8 +328,23 @@ export default function HomePage() {
                       </a>
                     </li>
                     <li>
-                      <a href="tel:+63 917 805 0391" className="text-white/85 hover:text-white hover:underline transition-colors">
-                        +63 917 805 0391
+                      <a href="mailto:tmcwd98@gmail.com" className="text-white/85 hover:text-white hover:underline transition-colors">
+                        tmcwd98@gmail.com
+                      </a>
+                    </li>
+                    <li>
+                      <a href="mailto:customercare.tmcwd@gmail.com" className="text-white/85 hover:text-white hover:underline transition-colors">
+                        customercare.tmcwd@gmail.com
+                      </a>
+                    </li>
+                    <li>
+                      <a href="tel:+63464192664" className="text-white/85 hover:text-white hover:underline transition-colors">
+                        (046) 419-2664
+                      </a>
+                    </li>
+                    <li>
+                      <a href="tel:+639178050391" className="text-white/85 hover:text-white hover:underline transition-colors">
+                        0917-805-0391
                       </a>
                     </li>
                   </ul>

@@ -34,21 +34,20 @@ export const primaryNav: NavItem[] = [
       { label: "Transparency Seal",   href: "/transparency/seal/"  },
       { label: "Freedom of Information",   href: "/transparency/foi/"              },
       { label: "Citizen's Charter",        href: "/transparency/citizens-charter/" },
-      { label: "Bidding", href: "/transparency/bidding/" },
-      { label: "Procurement",        href: "/transparency/procurement/"       },
+      { label: "Bidding Opportunities and Contracts Awarded", href: "/transparency/bidding/" },
     ],
   },
   {
-    label: "Online Bill Inquiry",
+    label: "Online Services",
     href: "/online-bill-inquiry/",
     children: [
       { label: "Online Bill Inquiry", href: "https://bills.pinas.app/portal", external: true },
       { label: "How to Pay Online",   href: "/online-bill-inquiry/how-to-pay/" },
-      { label: "SOA",                 href: "/online-bill-inquiry/soa/" },
+      { label: "Customer's Section",      href: "/online-bill-inquiry/soa/" },
     ],
   },
   {
-    label: "Announcement",
+    label: "Events and Gallery",
     href: "/news/",
     children: [
       { label: "Announcement", href: "/news/" },
@@ -57,6 +56,6 @@ export const primaryNav: NavItem[] = [
     ],
   },
   { label: "About us", href: "/about/" },
-  { label: "Contact", href: "/contact/" },
+  { label: "Contact Us", href: "/contact/" },
   { label: "Home",             href: "/" }
 ];

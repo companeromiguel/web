@@ -7,6 +7,7 @@ import AlertBanner from "@/components/layout/AlertBanner";
 import DataPrivacyModal from "@/components/layout/DataPrivacyModal";
 import BackToTop from "@/components/layout/BackToTop";
 import AccessibilityWidget from "@/components/layout/AccessibilityWidget";
+import MaintenanceOverlay from "@/components/layout/MaintenanceOverlay";
 
 /* ── Fonts ─────────────────────────────────────────────────────────────
    next/font self-hosts both — no runtime requests to Google.
@@ -85,6 +86,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
         <DataPrivacyModal />
+        <MaintenanceOverlay />
         <AlertBanner />
         <Header />
         <main id="main-content" className="flex-1">

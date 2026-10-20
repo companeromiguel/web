@@ -23,7 +23,7 @@ export const searchIndex: SearchResult[] = [
   { kind: "page", title: "Transparency Seal",     description: "Budgets, financial statements, SALN certifications",      href: "/transparency/seal/",         group: "Pages" },
   { kind: "page", title: "Freedom of Information","description": "FOI manual, procedure, and requirements",               href: "/transparency/foi/",          group: "Pages" },
   { kind: "page", title: "Citizen's Charter",     description: "Service standards, turnaround times, complaints process", href: "/transparency/citizens-charter/", group: "Pages" },
-  { kind: "page", title: "Procurement",           description: "Annual procurement plans and related documents",          href: "/transparency/procurement/",  group: "Pages" },
+  { kind: "page", title: "Procurement",           description: "Annual procurement plans and related documents",          href: "/transparency/seal/",         group: "Pages" },
   { kind: "page", title: "Bidding",               description: "Bid opportunities, notices of award, notices to proceed", href: "/transparency/bidding/",      group: "Pages" },
   { kind: "page", title: "Announcements",         description: "Latest news, advisories, and service updates",            href: "/news/",                      group: "Pages" },
   { kind: "page", title: "Events",                description: "Community activities and milestones",                     href: "/events/",                    group: "Pages" },
@@ -62,7 +62,7 @@ export const searchIndex: SearchResult[] = [
   { kind: "document", title: "SALN Certification — 2025",                    description: "SALN certifications",       href: "/transparency/seal/",             group: "Documents" },
   { kind: "document", title: "FOI Manual",                                   description: "Freedom of Information",    href: "/transparency/foi/",              group: "Documents" },
   { kind: "document", title: "Citizen's Charter",                            description: "Service standards guide",   href: "/transparency/citizens-charter/", group: "Documents" },
-  { kind: "document", title: "Annual Procurement Plan",                      description: "Procurement documents",     href: "/transparency/procurement/",      group: "Documents" },
+  { kind: "document", title: "Annual Procurement Plan",                      description: "Procurement documents",     href: "/transparency/seal/",             group: "Documents" },
 
   /* ── Events ───────────────────────────────────────────────────── */
   { kind: "event", title: "Disaster Preparedness and Awareness (2019)", description: "Fire drill and safety activities",              href: "/events/", group: "Events" },

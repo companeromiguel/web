@@ -39,10 +39,9 @@ export const documents: TransparencyDocument[] = inventory.map(doc => {
     : { ...doc, title: sealDocumentTitle(doc) };
 });
 export const transparencyPages = [
-  { slug: "seal", title: "Transparency Seal", groups: ["Budgets", "Financial statements", "SALN certifications", "Rankings"] },
+  { slug: "seal", title: "Transparency Seal", groups: ["Budgets", "Financial statements", "SALN certifications", "Rankings", "Annual procurement plans"] },
   { slug: "foi", title: "Freedom of Information", groups: ["FOI documents", "Certifications"] },
   { slug: "citizens-charter", title: "Citizen's Charter", groups: ["Citizen's Charter", "Related ARTA documents"] },
-  { slug: "procurement", title: "Procurement", groups: ["Annual procurement plans"] },
 ];
 export function documentsFor(groups: string[]) {
   return documents.filter(doc => groups.includes(doc.group)).sort((a, b) => b.year - a.year || a.filename.localeCompare(b.filename));

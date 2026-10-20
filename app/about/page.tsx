@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Compass, Droplets, Eye, Landmark, UserRound } from "lucide-react";
 import AboutHero from "@/components/layout/AboutHero";
 import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
+import HistoryScroller from "@/components/HistoryScroller";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -76,7 +77,7 @@ export default function AboutPage() {
               <span className={styles.eyebrow}>01 / HISTORY OF TMCWD</span>
               <h2 id="history-title">Our History</h2>
               <p className={styles.historyLead}>A water district created for a growing city.</p>
-              <p>During the rapid development of Trece Martires City in the 1990s, population growth increased the need for a dependable supply of safe water. In response, the City Council established TMCWD in 1997.</p>
+              <p>Almost 20 years have passed since Trece Martires City Water District was created. Many concessionaires — particularly newly resettled residents — have wondered how it all began.</p>
             </div>
             <figure className={styles.historyPhoto}>
               <Image src="/img4.jpg" alt="TMCWD staff group photograph" width={5184} height={2912} sizes="(max-width: 700px) 100vw, 560px" />
@@ -86,7 +87,9 @@ export default function AboutPage() {
             </figure>
           </div>
 
-          <h3 className={styles.milestoneHeading}>Milestones along the way</h3>
+          <HistoryScroller />
+
+          <h3 className={styles.milestoneHeading} style={{ marginTop: "48px" }}>Milestones along the way</h3>
           <ol className={styles.milestoneGrid}>
             {milestones.map((item) => (
               <li key={item.date} className={styles.milestoneCard}>
@@ -194,9 +197,9 @@ export default function AboutPage() {
             <div className={styles.directoryGrid}>
               {[
                 { name: "Mr. Lorenzo R. Sisante", role: "Division Manager", division: "Construction and Maintenance Division", photo: "/board/sironchie.png" },
-                { name: "Ms. Michelle V. Patanindagat", role: "Division Manager", division: "Human Resources Division", photo: "/board/mich.png" },
-                { name: "Ms. Elaine L. Liveta, CPA", role: "Division Manager", division: "Accounting and Cash Management Division", photo: "/board/maamelaine.png" },
-                { name: "Engr. Edvan Rhey O. Reyes", role: "Division Manager", division: "Administrative and General Services Division", photo: "/board/sired.png" },
+                { name: "Ms. Michelle V. Patanindagat", role: "Officer in Charge", division: "Human Resources Division", photo: "/board/mich.png" },
+                { name: "Ms. Elaine L. Liveta, CPA", role: "Officer in Charge", division: "Accounting and Cash Management Division", photo: "/board/maamelaine.png" },
+                { name: "Engr. Edvan Rhey O. Reyes", role: "Officer in Charge", division: "Administrative and General Services Division", photo: "/board/sired.png" },
               ].map(({ name, role, division, photo }) => (
                 <article key={name} className={styles.boardCard}>
                   <div className={styles.boardDetails}>

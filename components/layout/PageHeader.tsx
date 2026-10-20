@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Link from "next/link";
 
 interface PageHeaderProps {
@@ -49,14 +50,14 @@ export function Breadcrumb({
           </Link>
         </li>
         {items?.map(({ label, href }) => (
-          <>
-            <li aria-hidden="true" key={`sep-${href}`}>/</li>
-            <li key={href}>
+          <Fragment key={href}>
+            <li aria-hidden="true">/</li>
+            <li>
               <Link href={href} className="hover:text-[#0591D4] transition-colors">
                 {label}
               </Link>
             </li>
-          </>
+          </Fragment>
         ))}
         <li aria-hidden="true">/</li>
         <li className="text-[#2A2A29]/70">{current}</li>

@@ -70,7 +70,7 @@ export default function BiddingPage() {
           </div>
         </section>
         <aside className="mt-10 bg-[#F7FAFB] p-5">
-          <Link href="/transparency/procurement/" className="text-sm font-medium text-[#0591D4] underline underline-offset-4">View annual procurement plans</Link>
+          <Link href="/transparency/seal/#documents-4" className="text-sm font-medium text-[#0591D4] underline underline-offset-4">View annual procurement plans</Link>
         </aside>
         <p className="mt-8 text-xs text-[#2A2A29]/60">Source: <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-[#0591D4] underline underline-offset-4">TMCWD 2026 bid opportunities</a>. Documents open in a new tab.</p>
       </div>
