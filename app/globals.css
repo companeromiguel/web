@@ -901,30 +901,31 @@ html.a11y-reduce-motion *::after {
 
 
 /* ── SOA Image Hotspots ──────────────────────────────────────────── */
-
-/* ── Desktop: side-by-side layout ── */
-.soa-desktop-layout {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
-  max-width: 900px;
+.soa-root {
+  max-width: 520px;
   margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* Receipt column */
+/* Receipt — full width, relative so callout can anchor to it */
 .soa-img-wrap {
   position: relative;
   border-radius: 12px;
-  overflow: hidden;
+  overflow: visible; /* allow callout to spill outside */
   border: 1px solid #C4DAE7;
   box-shadow: 0 8px 32px rgba(35,82,110,0.15);
   -webkit-tap-highlight-color: transparent;
-  flex: 0 0 320px;
-  width: 320px;
 }
-.soa-img { width: 100%; height: auto; display: block; }
+.soa-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
 
-/* Zone button */
+/* Zone buttons */
 .soa-zone {
   position: absolute;
   left: 0;
@@ -942,14 +943,19 @@ html.a11y-reduce-motion *::after {
   transition: background 0.15s;
 }
 .soa-zone--on {
-  background: rgba(5,145,212,0.13);
-  outline: 2px solid rgba(5,145,212,0.65);
+  background: rgba(5,145,212,0.12);
+  outline: 2px solid rgba(5,145,212,0.6);
+  outline-offset: -2px;
+}
+.soa-zone--pinned {
+  background: rgba(5,145,212,0.18) !important;
+  outline: 2px solid #0591D4 !important;
   outline-offset: -2px;
 }
 @media (hover: hover) and (pointer: fine) {
   .soa-zone:hover {
-    background: rgba(5,145,212,0.10);
-    outline: 2px solid rgba(5,145,212,0.5);
+    background: rgba(5,145,212,0.08);
+    outline: 2px solid rgba(5,145,212,0.4);
     outline-offset: -2px;
   }
 }
@@ -961,14 +967,14 @@ html.a11y-reduce-motion *::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: clamp(16px,4vw,20px);
-  height: clamp(16px,4vw,20px);
+  width: clamp(17px, 4.5vw, 22px);
+  height: clamp(17px, 4.5vw, 22px);
   border-radius: 50%;
   background: rgba(255,255,255,0.85);
   border: 1.5px solid rgba(5,145,212,0.4);
   color: #0591D4;
   font-family: sans-serif;
-  font-size: clamp(8px,2vw,10px);
+  font-size: clamp(8px, 2.2vw, 11px);
   font-weight: 700;
   flex-shrink: 0;
   box-shadow: 0 1px 4px rgba(0,0,0,0.18);
@@ -981,134 +987,141 @@ html.a11y-reduce-motion *::after {
   transform: scale(1.25);
 }
 
-/* ── Desktop side panel ── */
-.soa-side-panel {
+/* ── Floating callout bubble (desktop only) ── */
+.soa-callout {
   display: none; /* hidden on mobile */
+  position: absolute;
+  right: calc(100% + 14px); /* float to the LEFT of the receipt */
+  width: 260px;
+  z-index: 20;
+  filter: drop-shadow(0 4px 16px rgba(35,82,110,0.18));
+  animation: calloutIn 0.18s ease-out;
+}
+
+@keyframes calloutIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Arrow pointing RIGHT (toward receipt) */
+.soa-callout-arrow {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid #0591D4;
+}
+
+/* Flip: arrow points LEFT when callout is on the right side */
+.soa-callout--flip {
+  right: auto;
+  left: calc(100% + 14px);
+}
+.soa-callout--flip .soa-callout-arrow {
+  right: auto;
+  left: -8px;
+  border-left: none;
+  border-right: 8px solid #0591D4;
+}
+
+.soa-callout-inner {
+  background: #fff;
+  border: 1.5px solid #0591D4;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.soa-callout-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 8px;
+  background: #0591D4;
+  color: #fff;
+}
+.soa-callout-num {
+  font-family: sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(255,255,255,0.25);
+  border-radius: 99px;
+  padding: 1px 7px;
+  flex-shrink: 0;
+}
+.soa-callout-label {
+  font-family: sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
   flex: 1;
   min-width: 0;
-  position: sticky;
-  top: 100px;
-  border-radius: 16px;
-  border: 1.5px solid #C4DAE7;
-  background: #F7FAFB;
-  min-height: 200px;
-  overflow: hidden;
-  transition: border-color 0.2s, background 0.2s;
+  line-height: 1.3;
 }
+.soa-callout-close {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.soa-callout-close:hover { background: rgba(255,255,255,0.35); }
 
-.soa-side-panel:has(.soa-side-inner) {
-  border-color: #0591D4;
-  background: #EEF7FD;
-}
-
-.soa-side-inner {
-  padding: 24px 20px 20px;
-  position: relative;
-}
-
-.soa-connector {
-  display: none; /* shown only when we can do the visual */
-}
-
-.soa-side-icon {
-  font-size: 32px;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-.soa-side-num {
+.soa-callout-desc {
   font-family: sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #0591D4;
-  margin-bottom: 4px;
-}
-.soa-side-title {
-  font-family: sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 12px;
-  line-height: 1.25;
-}
-.soa-side-desc {
-  font-family: sans-serif;
-  font-size: 13.5px;
-  line-height: 1.7;
+  font-size: 11.5px;
+  line-height: 1.65;
   color: #374151;
-  margin-bottom: 20px;
+  padding: 10px 12px;
+  max-height: 160px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #C4DAE7 transparent;
 }
-.soa-side-nav {
+
+.soa-callout-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  border-top: 1px solid #C4DAE7;
-  padding-top: 14px;
+  padding: 8px 12px;
+  border-top: 1px solid #E8EEF2;
+  background: #F7FAFB;
 }
-.soa-side-btn {
+.soa-callout-btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   font-family: sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: #0591D4;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px 0;
+  padding: 2px 0;
   transition: opacity 0.15s;
-  white-space: nowrap;
 }
-.soa-side-btn:disabled { opacity: 0.3; cursor: default; }
-.soa-side-dots {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px;
-  justify-content: center;
-}
-
-.soa-side-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 40px 24px;
-  gap: 12px;
-}
-.soa-side-empty-icon { font-size: 36px; }
-.soa-side-empty-text {
+.soa-callout-btn:disabled { opacity: 0.3; cursor: default; }
+.soa-callout-counter {
   font-family: sans-serif;
-  font-size: 13px;
-  color: #64748B;
-  line-height: 1.6;
-  max-width: 220px;
+  font-size: 10px;
+  color: #94A3B8;
+  font-weight: 600;
 }
 
-/* Show side panel on desktop */
-@media (min-width: 720px) and (hover: hover) and (pointer: fine) {
-  .soa-side-panel { display: block; }
-  .soa-img-wrap   { flex: 0 0 360px; width: 360px; }
-}
-
-/* Dot indicators */
-.soa-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #CBD5E1;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.15s, transform 0.15s;
-}
-.soa-dot--on {
-  background: #0591D4;
-  transform: scale(1.5);
+/* Show callout on desktop mouse devices */
+@media (min-width: 600px) and (hover: hover) and (pointer: fine) {
+  .soa-callout { display: block; }
+  .soa-root    { max-width: 520px; }
 }
 
 /* Hint text */
@@ -1122,7 +1135,7 @@ html.a11y-reduce-motion *::after {
   color: #2A2A29;
   opacity: 0.4;
   text-align: center;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 /* ── Mobile bottom sheet ── */
@@ -1130,9 +1143,6 @@ html.a11y-reduce-motion *::after {
 .soa-sheet    { display: none; }
 
 @media (hover: none), (pointer: coarse) {
-  .soa-desktop-layout { flex-direction: column; }
-  .soa-img-wrap { flex: unset; width: 100%; }
-
   .soa-backdrop {
     display: block;
     position: fixed;
@@ -1171,7 +1181,6 @@ html.a11y-reduce-motion *::after {
     gap: 12px;
     margin-bottom: 12px;
   }
-  .soa-sheet-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
   .soa-sheet-title-wrap { flex: 1; min-width: 0; }
   .soa-sheet-num {
     display: block;
@@ -1239,3 +1248,46 @@ html.a11y-reduce-motion *::after {
     justify-content: center;
   }
 }
+
+/* Dots */
+.soa-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #CBD5E1;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s, transform 0.15s;
+}
+.soa-dot--on { background: #0591D4; transform: scale(1.5); }
+
+/* ── SOA Language Toggle ── */
+.soa-lang-toggle {
+  display: inline-flex;
+  border-radius: 99px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.35);
+  flex-shrink: 0;
+}
+.soa-lang-btn {
+  padding: 2px 7px;
+  font-family: sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1.6;
+}
+.soa-lang-btn--on {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+}
+.soa-lang-btn:hover:not(.soa-lang-btn--on) { color: #fff; }
+
+/* Mobile sheet — dark on light */
+.soa-sheet .soa-lang-toggle { border-color: #C4DAE7; }
+.soa-sheet .soa-lang-btn { color: #64748B; }
+.soa-sheet .soa-lang-btn--on { background: #0591D4; color: #fff; }
