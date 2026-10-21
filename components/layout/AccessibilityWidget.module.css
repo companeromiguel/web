@@ -2,7 +2,7 @@
 /* (set via JS drag logic; CSS only provides stacking context)        */
 .root {
   position: fixed;
-  z-index: 45;
+  z-index: 55;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -84,21 +84,13 @@
   overflow-y: auto;
 }
 
-@media (min-width: 1024px) {
-  .panel {
-    bottom: auto;
-    top: 35%;
-    transform: translateY(-50%);
-  }
+@media (max-width: 360px) {
+  .panel { width: calc(100vw - 60px); }
 }
 
 @keyframes a11y-panel-in {
   from { opacity: 0; transform: translateX(10px); }
   to   { opacity: 1; transform: translateX(0); }
-}
-
-@media (max-width: 360px) {
-  .panel { width: calc(100vw - 60px); }
 }
 
 /* ── Panel header ───────────────────────────────────────────────── */

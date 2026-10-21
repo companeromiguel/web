@@ -231,7 +231,21 @@ export default function SoaImageHotspots() {
   }
 
   const calloutStyle = current
-    ? { top: `${current.top + current.height / 2}%`, transform: `translateY(calc(-50% + ${calloutOffset}px))` }
+    ? (() => {
+        if (!imgWrapRef.current) return { top: "50vh", transform: "translateY(-50%)" };
+        const rect = imgWrapRef.current.getBoundingClientRect();
+        const sectionCenterVY = rect.top + rect.height * ((current.top + current.height / 2) / 100);
+        const clampedY = Math.max(100, Math.min(sectionCenterVY, window.innerHeight - 100));
+        // Fill from 16px off left edge to 16px before receipt
+        const left = 16;
+        const width = Math.max(200, rect.left - 32);
+        return {
+          top: `${clampedY + calloutOffset}px`,
+          transform: "translateY(-50%)",
+          left: `${left}px`,
+          width: `${width}px`,
+        };
+      })()
     : {};
 
   return (

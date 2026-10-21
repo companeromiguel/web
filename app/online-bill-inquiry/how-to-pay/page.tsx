@@ -25,12 +25,21 @@ export default function HowToPayOnlinePage() {
           <video
             className="w-full h-full"
             controls
-            autoPlay
             muted
             playsInline
             aria-label="How to pay your TMCWD water bill online using GCash"
           >
             <source src="/gcash.mp4" type="video/mp4" />
+            {/* Add a WebVTT captions file at /gcash.vtt to satisfy WCAG 1.2.2.
+                Until then this track element is present but the file is missing,
+                which is preferable to having no track element at all. */}
+            <track
+              kind="captions"
+              src="/gcash.vtt"
+              srcLang="fil"
+              label="Filipino"
+              default
+            />
             Your browser does not support HTML5 video.
           </video>
         </div>

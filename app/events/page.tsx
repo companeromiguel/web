@@ -23,7 +23,7 @@ export default function EventsPage() {
     <div className="relative z-10 mx-auto max-w-7xl space-y-8 px-4 py-10 sm:space-y-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
       <section aria-labelledby="featured-event-title" className="grid overflow-hidden rounded-3xl border border-[#C4DAE7] bg-white shadow-[0_12px_40px_rgba(35,82,110,0.12)] md:grid-cols-2">
         <div className="relative min-h-64 md:min-h-96">
-          <Image src={featured.image} alt="TMCWD fire drill during its 2019 disaster preparedness activities" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+          <Image src={featured.image} alt={featured.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
         </div>
         <div className="flex flex-col items-start justify-center p-6 sm:p-10 lg:p-12">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#087FB8]">Featured from the archive</p>

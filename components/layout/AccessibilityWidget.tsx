@@ -29,7 +29,8 @@ const DEFAULT_STATE: A11yState = {
 const STORAGE_KEY   = "tmcwd-a11y-v2";
 const POSITION_KEY  = "tmcwd-a11y-pos";
 const BUTTON_SIZE   = 44;
-const DRAG_THRESHOLD = 6;
+// Raised from 6 → 14 so minor finger wobble during a tap doesn't register as a drag
+const DRAG_THRESHOLD = 14;
 
 interface WidgetPos {
   edge: "left" | "right";
@@ -52,8 +53,8 @@ function loadPos(): WidgetPos {
     const raw = localStorage.getItem(POSITION_KEY);
     if (raw) {
       const saved = { ...defaultPos(), ...JSON.parse(raw) };
-      // Clamp in case it was saved before the nav guard was added
-      saved.top = Math.max(72 + BUTTON_SIZE / 2, saved.top);
+      // Clamp in case it was saved on a different screen size
+      saved.top = Math.max(72 + BUTTON_SIZE / 2, Math.min(window.innerHeight - BUTTON_SIZE / 2, saved.top));
       return saved;
     }
   } catch {}
@@ -194,7 +195,12 @@ export default function AccessibilityWidget() {
     const saved = load();
     setState(saved);
     applyState(saved);
-    setPos(loadPos());
+    const p = loadPos();
+    const minTop = 72 + BUTTON_SIZE / 2;
+    const maxTop = window.innerHeight - BUTTON_SIZE - 8;
+    p.top = Math.max(minTop, Math.min(maxTop, p.top));
+    savePos(p);
+    setPos(p);
   }, []);
 
   // Close panel on outside click or Escape
@@ -232,8 +238,10 @@ export default function AccessibilityWidget() {
 
   const onPointerMove = useCallback((e: React.PointerEvent<HTMLButtonElement>) => {
     if (!dragStart.current || !pos) return;
-    const dx = e.clientX - dragStart.current.px;
-    const dy = e.clientY - dragStart.current.py;
+    // Measure from the ORIGINAL pointer-down point so accumulated wobble
+    // during a slow tap never crosses the threshold.
+    const dx = e.clientX - dragStart.current.startX;
+    const dy = e.clientY - dragStart.current.startY;
 
     if (!hasMoved.current && Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
     hasMoved.current = true;
@@ -326,13 +334,34 @@ export default function AccessibilityWidget() {
     cursor: isDragging ? "grabbing" : "grab",
   };
 
-  const panelStyle: CSSProperties = {
-    position: "fixed",
-    top: Math.max(8, Math.min(window.innerHeight - 500, pos.top - BUTTON_SIZE / 2)),
-    left:  pos.edge === "right" ? undefined : BUTTON_SIZE + 8,
-    right: pos.edge === "right" ? BUTTON_SIZE + 8 : undefined,
-    borderRadius: pos.edge === "right" ? "14px 0 0 14px" : "0 14px 14px 0",
-  };
+  const panelStyle: CSSProperties = (() => {
+    const PANEL_WIDTH  = Math.min(260, window.innerWidth - BUTTON_SIZE - 16);
+    const PANEL_HEIGHT = 500; // approximate max
+    const margin       = 8;
+
+    // Vertical: align with button, clamped so panel stays inside viewport
+    const panelTop = Math.max(
+      margin,
+      Math.min(
+        pos.top - BUTTON_SIZE / 2,
+        window.innerHeight - PANEL_HEIGHT - margin
+      )
+    );
+
+    // Horizontal: on mobile there may not be room beside the button,
+    // so fall back to sitting just inside the viewport edge
+    const leftVal  = pos.edge === "right" ? undefined : BUTTON_SIZE + 8;
+    const rightVal = pos.edge === "right" ? BUTTON_SIZE + 8 : undefined;
+
+    return {
+      position: "fixed",
+      width: PANEL_WIDTH,
+      top: panelTop,
+      left:  leftVal,
+      right: rightVal,
+      borderRadius: pos.edge === "right" ? "14px 0 0 14px" : "0 14px 14px 0",
+    };
+  })();
 
   return (
     <div

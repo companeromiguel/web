@@ -2,12 +2,11 @@ import type { MetadataRoute } from "next";
 
 const BASE_URL = "https://tmcwd.gov.ph";
 
-// Known transparency slug pages
+// Known transparency slug pages — must match actual routes in app/transparency/[slug]/
+// Note: /transparency/seal/ and /transparency/bidding/ are listed in staticRoutes above.
 const transparencySlugs = [
-  "seal",
   "foi",
   "citizens-charter",
-  "procurement",
 ];
 
 // Known service slug pages
@@ -68,9 +67,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
-      url: `${BASE_URL}/board-meetings/`,
+      url: `${BASE_URL}/transparency/seal/`,
       lastModified: now,
-      changeFrequency: "monthly",
+      changeFrequency: "yearly",
       priority: 0.6,
     },
     {
