@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { primaryNav } from "@/lib/nav";
+import SearchBar from "@/components/layout/SearchBar";
 
 export default function Header() {
   const pathname = usePathname();
@@ -234,6 +235,11 @@ export default function Header() {
             })}
           </nav>
 
+          {/* Search bar — desktop only; hidden on mobile to save space */}
+          <div className="hidden lg:block ml-4">
+            <SearchBar />
+          </div>
+
           {/* Mobile toggle */}
           <button
             type="button"
@@ -264,6 +270,10 @@ export default function Header() {
           className="lg:hidden backdrop-blur-2xl bg-[#1a6a9a]/95 border-t border-white/10 max-h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain"
         >
           <ul className="w-full px-4 py-2 flex flex-col">
+            {/* Search — mobile */}
+            <li className="py-3 border-b border-white/10">
+              <SearchBar mobile />
+            </li>
             {primaryNav.map(({ label, href, children }) => {
               const hasChildren = children && children.length > 0;
               const active = href === "/" ? pathname === "/" : pathname.startsWith(href);

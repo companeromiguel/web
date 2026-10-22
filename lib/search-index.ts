@@ -30,7 +30,6 @@ export const searchIndex: SearchResult[] = [
   { kind: "page", title: "Gallery",               description: "Photos from TMCWD events and programs",                  href: "/gallery/",                   group: "Pages" },
   { kind: "page", title: "Contact",               description: "Office address, phone numbers, email, and map",          href: "/contact/",                   group: "Pages" },
   { kind: "page", title: "Water Quality",         description: "Consumer Confidence Reports and laboratory test results", href: "/water-quality/",             group: "Pages" },
-  { kind: "page", title: "Board Meetings",        description: "Board of Directors meeting records",                      href: "/board-meetings/",            group: "Pages" },
   { kind: "page", title: "Online Bill Inquiry",   description: "Check and pay your water bill online",                   href: "/online-bill-inquiry/how-to-pay/", group: "Pages" },
   { kind: "page", title: "Statement of Account",  description: "View your Statement of Account (SOA)",                   href: "/online-bill-inquiry/soa/",   group: "Pages" },
   { kind: "page", title: "How to Pay Online",     description: "GCash step-by-step payment guide video",                 href: "/online-bill-inquiry/how-to-pay/", group: "Pages" },

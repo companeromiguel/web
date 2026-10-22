@@ -316,6 +316,7 @@ export default function NotFound() {
           <h1
             className="font-heading font-bold leading-none text-white/90 tracking-tight"
             style={{ fontSize: "clamp(5rem, 18vw, 13rem)", textShadow: "0 0 60px rgba(5,145,212,0.7)" }}
+            aria-label="404 – Page not found"
           >
             404
           </h1>

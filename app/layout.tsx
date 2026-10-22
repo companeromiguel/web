@@ -3,7 +3,6 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import AlertBanner from "@/components/layout/AlertBanner";
 import DataPrivacyModal from "@/components/layout/DataPrivacyModal";
 import BackToTop from "@/components/layout/BackToTop";
 import AccessibilityWidget from "@/components/layout/AccessibilityWidget";
@@ -87,7 +86,6 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
         <DataPrivacyModal />
         <MaintenanceOverlay />
-        <AlertBanner />
         <Header />
         <main id="main-content" className="flex-1">
           {children}

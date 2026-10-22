@@ -45,6 +45,7 @@ export default function GlobalError({
                 fontSize: "clamp(8rem, 25vw, 20rem)",
                 textShadow: "0 0 60px rgba(55,10,119,0.8)",
               }}
+              aria-label="500 – Server error"
             >
               500
             </h1>

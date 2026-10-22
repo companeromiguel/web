@@ -12,7 +12,7 @@ export default function HowToPayOnlinePage() {
     <>
       <PageHeader
         title="How to Pay Online"
-        description="Watch the video guide below to learn how to pay your water bill online using GCash."
+        description="Watch the video guide below to learn how to pay your water bill online using GCash. Captions are included in the video."
       >
         <Breadcrumb
           items={[{ label: "Online Bill Inquiry", href: "/online-bill-inquiry/" }]}
@@ -30,16 +30,8 @@ export default function HowToPayOnlinePage() {
             aria-label="How to pay your TMCWD water bill online using GCash"
           >
             <source src="/gcash.mp4" type="video/mp4" />
-            {/* Add a WebVTT captions file at /gcash.vtt to satisfy WCAG 1.2.2.
-                Until then this track element is present but the file is missing,
-                which is preferable to having no track element at all. */}
-            <track
-              kind="captions"
-              src="/gcash.vtt"
-              srcLang="fil"
-              label="Filipino"
-              default
-            />
+            {/* Captions are burned into the video itself (open captions),
+                so no separate <track> element is needed. */}
             Your browser does not support HTML5 video.
           </video>
         </div>
