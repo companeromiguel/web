@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV === "development";
+
 const securityHeaders = [
   // Prevents the browser from guessing the content type (MIME sniffing attacks)
   {
@@ -36,8 +38,9 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      // Scripts: self + Next.js inline scripts (unsafe-inline needed for Next.js hydration)
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      // Scripts: self + Next.js inline scripts
+      // unsafe-eval only in dev (needed for source maps); removed in production
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
       // Styles: self + inline styles (Tailwind/CSS-in-JS needs unsafe-inline)
       "style-src 'self' 'unsafe-inline'",
       // Images: self + Facebook CDN + Google Maps tiles + data URIs
