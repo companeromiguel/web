@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { search, type SearchResult } from "@/lib/search-index";
 
-export default function SearchBar({ mobile = false }: { mobile?: boolean }) {
+export default function SearchBar({ mobile = false, onSelect }: { mobile?: boolean; onSelect?: () => void }) {
   const [query, setQuery]   = useState("");
   const [open, setOpen]     = useState(false);
   const results             = query.length >= 2 ? search(query) : [];
@@ -29,6 +29,7 @@ export default function SearchBar({ mobile = false }: { mobile?: boolean }) {
   function handleSelect() {
     setQuery("");
     setOpen(false);
+    onSelect?.();
   }
 
   return (
@@ -48,7 +49,7 @@ export default function SearchBar({ mobile = false }: { mobile?: boolean }) {
           onFocus={() => query.length >= 2 && setOpen(true)}
           placeholder="Search…"
           aria-label="Search site"
-          className="bg-transparent text-white placeholder-white/40 text-xs outline-none w-full"
+          className="bg-transparent text-white placeholder-white/40 text-xs outline-none w-full [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden"
         />
         {query && (
           <button

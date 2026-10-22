@@ -272,7 +272,7 @@ export default function Header() {
           <ul className="w-full px-4 py-2 flex flex-col">
             {/* Search — mobile */}
             <li className="py-3 border-b border-white/10">
-              <SearchBar mobile />
+              <SearchBar mobile onSelect={() => { setMenuOpen(false); setMobileOpen(null); }} />
             </li>
             {primaryNav.map(({ label, href, children }) => {
               const hasChildren = children && children.length > 0;
