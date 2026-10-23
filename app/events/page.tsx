@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function EventsPage() {
-  const featured = districtEvents[0];
+  const featured = districtEvents.find(e => e.image) ?? districtEvents[0];
   return <>
     <AnnouncementHero slug="events" eyebrow="News & Updates" title="Events"
       description="Community activities, shared milestones, and moments from the life of our water district."

@@ -29,7 +29,7 @@ export default function HeroBackground() {
         className="home-slideshow-image"
         style={{ position: "absolute", inset: 0, backgroundImage: `url('${src}')`, backgroundSize: "cover", backgroundPosition: position ?? "center", backgroundRepeat: "no-repeat", opacity: active === index ? 1 : 0, transition: "opacity 1s ease-in-out" }}
       />)}
-      <div className="home-slideshow-overlay" style={{ position: "absolute", inset: 0, background: "rgb(31 41 55 / 55%)" }} />
+      <div className="home-slideshow-overlay" />
     </div>
   </>;
 }

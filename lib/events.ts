@@ -4,7 +4,7 @@
   year: string;
   category: string;
   description: string;
-  image: string;
+  image: string; // empty string = no photo yet
 }
 
 // TMCWD district events and activities
@@ -15,7 +15,7 @@ export const districtEvents: DistrictEvent[] = [
     year: "2026",
     category: "Milestones",
     description: "The official launch of Project T.M.C.W.D, marking a new chapter in the district's commitment to improved water services and community development.",
-    image: "/gallery/2018 20TH FOUNDING ANNIVERSARY/img-3842_orig.jpg"
+    image: "",
   },
   {
     albumId: "28th-founding-anniversary-2026",
@@ -23,7 +23,7 @@ export const districtEvents: DistrictEvent[] = [
     year: "2026",
     category: "Milestones",
     description: "TMCWD celebrates its 28th founding anniversary on July 17, 2026, commemorating nearly three decades of dedicated water service to Trece Martires City.",
-    image: "/gallery/2018 20TH FOUNDING ANNIVERSARY/img-3855_orig.jpg"
+    image: "",
   },
   {
     albumId: "civil-service-anniversary-2026",
@@ -31,7 +31,7 @@ export const districtEvents: DistrictEvent[] = [
     year: "2026",
     category: "Government",
     description: "TMCWD participates in the 126th Philippine Civil Service Anniversary celebration on September 28, 2026, honoring public service excellence.",
-    image: "/gallery/2019 DISASTER PREPAREDNESS AND AWARENESS/img-6957_orig.jpg"
+    image: "",
   },
   {
     albumId: "quarterly-joint-meeting-2026",
@@ -39,7 +39,7 @@ export const districtEvents: DistrictEvent[] = [
     year: "2026",
     category: "Government",
     description: "TMCWD hosts the third quarterly joint meeting of multiple environmental and public health committees on September 8, 2026, reinforcing collaborative governance.",
-    image: "/gallery/2019 DISASTER PREPAREDNESS AND AWARENESS/img-6965_orig.jpg"
+    image: "",
   },
   {
     albumId: "plumbing-training-cpawd-2026",
@@ -47,7 +47,7 @@ export const districtEvents: DistrictEvent[] = [
     year: "2026",
     category: "Training",
     description: "TMCWD hosts a comprehensive plumbing and pipe fitting training program for CPAWD from October 13–16, 2026, promoting skills development and inter-district cooperation.",
-    image: "/gallery/2019 DISASTER PREPAREDNESS AND AWARENESS/img-6966_orig.jpg"
+    image: "",
   },
   { albumId: "disaster-preparedness-2019", title: "Disaster Preparedness and Awareness", year: "2019", category: "Training", description: "A look back at TMCWD's disaster preparedness and awareness activities, including its fire drill. Explore moments from the district's safety activities.", image: "/gallery/2019 DISASTER PREPAREDNESS AND AWARENESS/firedrill_orig.jpg" },
   { albumId: "founding-anniversary-2018", title: "20th Founding Anniversary", year: "2018", category: "Milestones", description: "A milestone in the district's history. Revisit photographs from TMCWD's 20th founding anniversary celebration.", image: "/gallery/2018 20TH FOUNDING ANNIVERSARY/img-3842_orig.jpg" },

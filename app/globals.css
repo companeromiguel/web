@@ -556,7 +556,7 @@ html {
 /* Homepage image slideshow */
 .home-slideshow-background { position: absolute; inset: 0; z-index: 0; background: #123b60; pointer-events: none; }
 .home-slideshow-image { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; transition: opacity 1s ease-in-out; }
-.home-slideshow-overlay { position: absolute; inset: 0; background: rgb(31 41 55 / 55%); }
+.home-slideshow-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(55,10,119,0.55) 0%, rgba(31,41,55,0.45) 50%, rgba(10,20,40,0.35) 100%); }
 @media (prefers-reduced-motion: reduce) { .home-slideshow-image { transition: none; } }
 
 /* ── Accessibility widget — global overrides applied to <html> ──────── */

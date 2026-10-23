@@ -57,10 +57,16 @@ export default function HomePage() {
 
           {/* Bottom-right: headline + tagline + CTA */}
           <div className="absolute bottom-8 right-4 sm:right-6 lg:right-8 text-right max-w-xs sm:max-w-sm">
-            <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight mb-4">
+            <h1
+              className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight mb-4"
+              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.4)" }}
+            >
               Serbisyong Malinis,<br />Tapat, at Maaasahan.
             </h1>
-            <p className="text-sm text-white/70 leading-relaxed mb-8 text-balance">
+            <p
+              className="text-sm text-white/80 leading-relaxed mb-8 text-balance"
+              style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}
+            >
               Magandang serbisyo&apos;y maipagkakaloob, lalo na&apos;t kaagapay mamamayan ng lungsod
             </p>
             <div className="flex flex-wrap gap-4 items-center justify-end">
@@ -75,6 +81,9 @@ export default function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
                 </svg>
                 Online Bill Inquiry
+                <svg className="size-3.5 shrink-0 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
               </Link>
               {/* Secondary CTA — ghost */}
               <Link

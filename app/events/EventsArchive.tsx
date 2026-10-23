@@ -31,7 +31,16 @@ export default function EventsArchive({ events }: { events: DistrictEvent[] }) {
       {visible.map((event) => <li key={event.albumId}>
         <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#C4DAE7] bg-white shadow-[0_8px_24px_rgba(35,82,110,0.10)] transition-[border-color,box-shadow] duration-200 hover:border-[#83B8D5] hover:shadow-[0_14px_32px_rgba(35,82,110,0.16)]">
           <div className="relative aspect-[4/3] overflow-hidden bg-[#EAF5FB]">
-            <Image src={event.image} alt={event.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
+            {event.image ? (
+              <Image src={event.image} alt={event.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
+            ) : (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                <svg className="size-10 text-[#A1CBE1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                </svg>
+                <span className="text-xs text-[#A1CBE1] font-medium">Photo coming soon</span>
+              </div>
+            )}
             <time dateTime={event.year} className="absolute left-4 top-4 rounded-full border border-white/80 bg-white px-3 py-1.5 shadow-sm text-xs font-semibold text-[#294C61]">{event.year}</time>
           </div>
           <div className="flex flex-1 flex-col p-6">
