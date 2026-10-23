@@ -74,11 +74,40 @@ export const searchIndex: SearchResult[] = [
 
 export function search(query: string): SearchResult[] {
   const q = query.trim().toLowerCase();
-  if (q.length < 2) return [];
-  return searchIndex
-    .filter((item) =>
-      item.title.toLowerCase().includes(q) ||
-      item.description.toLowerCase().includes(q)
-    )
-    .slice(0, 12);
+  if (q.length < 1) return [];
+
+  const words = q.split(/\s+/).filter(Boolean);
+
+  const scored = searchIndex.map((item) => {
+    const title = item.title.toLowerCase();
+    const desc  = item.description.toLowerCase();
+    let score   = 0;
+
+    // Exact title match — highest priority
+    if (title === q) score += 100;
+    // Title starts with query
+    else if (title.startsWith(q)) score += 60;
+    // Title contains full query
+    else if (title.includes(q)) score += 40;
+
+    // Every word in the query appears somewhere in title
+    if (words.every((w) => title.includes(w))) score += 20;
+
+    // Description match
+    if (desc.includes(q)) score += 10;
+    if (words.every((w) => desc.includes(w))) score += 5;
+
+    // Partial word match — any word in query starts a word in title
+    words.forEach((w) => {
+      if (title.split(/\s+/).some((t) => t.startsWith(w))) score += 8;
+    });
+
+    return { item, score };
+  });
+
+  return scored
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 10)
+    .map(({ item }) => item);
 }
