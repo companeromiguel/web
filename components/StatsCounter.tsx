@@ -77,18 +77,49 @@ function VisitCounterItem({ animate }: { animate: boolean }) {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    fetch("/api/visit")
-      .then((res) => res.json())
-      .then((data: { value?: number }) => {
-        const count = data.value ?? 0;
-        if (count > 0) {
-          setVisits(count);
-          setLoaded(true);
-        }
-      })
-      .catch(() => {
-        // Silently fail — don't break the page if Redis is unreachable
-      });
+    const DEVICE_KEY = "tmcwd_device_id";
+    const SEEN_KEY   = "tmcwd_last_visit";
+    const TTL_MS     = 24 * 60 * 60 * 1000; // 24 hours
+
+    try {
+      // Generate or retrieve a stable random device ID
+      let deviceId = localStorage.getItem(DEVICE_KEY);
+      if (!deviceId) {
+        deviceId = crypto.randomUUID();
+        localStorage.setItem(DEVICE_KEY, deviceId);
+      }
+
+      const lastVisit  = parseInt(localStorage.getItem(SEEN_KEY) ?? "0", 10);
+      const now        = Date.now();
+      const isNewVisit = now - lastVisit > TTL_MS;
+
+      if (isNewVisit) {
+        // First visit from this device in 24 h — increment
+        localStorage.setItem(SEEN_KEY, String(now));
+        fetch("/api/visit", { method: "POST" })
+          .then((r) => r.json())
+          .then((d: { value?: number }) => {
+            if (d.value) { setVisits(d.value); setLoaded(true); }
+          })
+          .catch(() => {});
+      } else {
+        // Already counted — just read the current total
+        fetch("/api/visit")
+          .then((r) => r.json())
+          .then((d: { value?: number }) => {
+            if (d.value) { setVisits(d.value); setLoaded(true); }
+          })
+          .catch(() => {});
+      }
+    } catch {
+      // localStorage unavailable (private browsing on some browsers) — read-only
+      fetch("/api/visit")
+        .then((r) => r.json())
+        .then((d: { value?: number }) => {
+          if (d.value) { setVisits(d.value); setLoaded(true); }
+        })
+        .catch(() => {});
+    }
   }, []);
 
   const count = useCountUp(visits, 0, 1800, animate && loaded);
