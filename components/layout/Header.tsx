@@ -102,8 +102,8 @@ export default function Header() {
                       className={[
                         "flex items-center gap-1 text-sm transition-colors duration-150 whitespace-nowrap cursor-pointer",
                         active
-                          ? "text-white font-medium"
-                          : "text-white/60 hover:text-white/90 font-normal",
+                          ? "text-white font-semibold"
+                          : "text-white/85 hover:text-white font-medium",
                       ].join(" ")}
                     >
                       {label}
@@ -225,8 +225,8 @@ export default function Header() {
                   className={[
                     "text-sm transition-colors duration-150 whitespace-nowrap",
                     active
-                      ? "text-white font-medium"
-                      : "text-white/60 hover:text-white/90 font-normal",
+                      ? "text-white font-semibold"
+                      : "text-white/85 hover:text-white font-medium",
                   ].join(" ")}
                 >
                   {label}
@@ -290,7 +290,7 @@ export default function Header() {
                       aria-expanded={isOpen}
                       aria-controls={panelId}
                       onClick={() => setMobileOpen(isOpen ? null : label)}
-                      className="w-full flex items-center justify-between py-2.5 text-sm transition-colors border-b border-white/5 text-white/60 hover:text-white"
+                      className="w-full flex items-center justify-between py-2.5 text-sm transition-colors border-b border-white/5 text-white/85 hover:text-white font-medium"
                     >
                       <span className={active ? "text-white font-medium" : ""}>{label}</span>
                       <svg
@@ -328,7 +328,7 @@ export default function Header() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => { setMenuOpen(false); setMobileOpen(null); }}
-                                className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium transition-colors text-white/70 hover:text-white hover:bg-white/10"
+                                className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium transition-colors text-white/90 hover:text-white hover:bg-white/15"
                               >
                                 {item.label}
                               </a>
@@ -336,7 +336,7 @@ export default function Header() {
                             <Link
                               href={item.href}
                               onClick={() => { setMenuOpen(false); setMobileOpen(null); }}
-                              className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium transition-colors text-white/70 hover:text-white hover:bg-white/10"
+                              className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-medium transition-colors text-white/90 hover:text-white hover:bg-white/15"
                             >
                               {item.label}
                             </Link>
@@ -357,7 +357,7 @@ export default function Header() {
                     aria-current={active ? "page" : undefined}
                     className={[
                       "block py-2.5 text-sm transition-colors border-b border-white/5 last:border-0",
-                      active ? "text-white font-medium" : "text-white/60 hover:text-white",
+                      active ? "text-white font-semibold" : "text-white/85 hover:text-white",
                     ].join(" ")}
                   >
                     {label}

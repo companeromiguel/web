@@ -150,20 +150,20 @@ html {
 
 /* ── Services dropdown — liquid glass panel ───────────────────────── */
 .services-glass {
-  /* Prominent navy-blue tint — clearly frosted, still lets blur show through */
-  background: rgba(15, 60, 100, 0.55);
-  -webkit-backdrop-filter: blur(100px) saturate(180%) brightness(0.95);
-  backdrop-filter: blur(100px) saturate(180%) brightness(0.95);
+  /* Darker navy tint — clearly frosted, higher contrast against any background */
+  background: rgba(8, 40, 72, 0.82);
+  -webkit-backdrop-filter: blur(100px) saturate(180%) brightness(0.9);
+  backdrop-filter: blur(100px) saturate(180%) brightness(0.9);
   /* Brighter perimeter line to sell the glass edge */
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 18px;
   box-shadow:
     /* Outer depth */
-    0 12px 40px rgba(0, 0, 0, 0.35),
-    0 4px  12px rgba(0, 0, 0, 0.22),
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    0 4px  12px rgba(0, 0, 0, 0.30),
     /* Glass-edge double inset: strong top highlight + dark bottom rim */
-    inset 0  1px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -1px 0 rgba(0,   0,   0,   0.20);
+    inset 0  1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0,   0,   0,   0.25);
 }
 
 /* Caret / triangular pointer — rendered as a JSX sibling element (.dropdown-caret)
@@ -210,8 +210,8 @@ html {
   padding: 10px 12px;
   border-radius: 10px;
   font-size: 0.875rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.88);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.96);
   text-decoration: none;
   transition:
     background  120ms ease,
@@ -223,14 +223,13 @@ html {
 }
 
 .services-menu-item:hover {
-  /* Nav bar is #1a6a9a — low-opacity tint keeps the glass visible behind */
-  background: rgba(26, 106, 154, 0.25);
+  background: rgba(26, 106, 154, 0.45);
   transform: translateX(2px);
   color: #ffffff;
 }
 
 .services-menu-item:focus-visible {
-  background: rgba(26, 106, 154, 0.25);
+  background: rgba(26, 106, 154, 0.45);
   transform: translateX(2px);
   color: #ffffff;
   /* 2px solid brand-blue ring, inset so it doesn't overlap adjacent rows */
@@ -238,7 +237,7 @@ html {
 }
 
 .services-menu-item:active {
-  background: rgba(26, 106, 154, 0.42);
+  background: rgba(26, 106, 154, 0.60);
   transform: translateX(1px);
   color: #ffffff;
 }
@@ -261,16 +260,16 @@ html {
 .announcement-blur {
   position: absolute;
   inset: 0;
-  background: rgba(15, 60, 100, 0.55);
-  -webkit-backdrop-filter: blur(100px) saturate(180%) brightness(0.95);
-  backdrop-filter: blur(100px) saturate(180%) brightness(0.95);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(8, 40, 72, 0.82);
+  -webkit-backdrop-filter: blur(100px) saturate(180%) brightness(0.9);
+  backdrop-filter: blur(100px) saturate(180%) brightness(0.9);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 18px;
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.35),
-    0 4px  12px rgba(0, 0, 0, 0.22),
-    inset 0  1px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -1px 0 rgba(0,   0,   0,   0.20);
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    0 4px  12px rgba(0, 0, 0, 0.30),
+    inset 0  1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0,   0,   0,   0.25);
   z-index: 0;
 }
 
@@ -1033,3 +1032,306 @@ html.a11y-reduce-motion *::after {
 .soa-sheet .soa-lang-toggle { border-color: #C4DAE7; }
 .soa-sheet .soa-lang-btn { color: #64748B; }
 .soa-sheet .soa-lang-btn--on { background: #0591D4; color: #fff; }
+
+/* ── Charter tables ─────────────────────────────────────────────────────────
+   Shared styles for ServiceInfoTable, ChecklistTable, ProcessTable,
+   and WaterRatesTable.  Tailwind utilities handle colors and spacing;
+   this block covers the handful of things that can't be expressed inline:
+   tabular-nums, sticky columns, row hover, print breaks, and dark-mode overrides.
+──────────────────────────────────────────────────────────────────────────── */
+
+/* Scroll wrapper — card-like shell matching the site's card radius/shadow */
+.charter-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.07), 0 1px 2px -1px rgb(0 0 0 / 0.07);
+  border: 1px solid var(--color-brand-steel);
+  /* Right-edge fade — signals to mobile users that the table scrolls */
+  position: relative;
+}
+
+/* Fade mask on the right edge — only shown when table is wider than the wrapper */
+.charter-table-wrap::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2.5rem;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.85));
+  border-radius: 0 var(--radius) var(--radius) 0;
+  /* Only visible when the table overflows — JS-free approximation:
+     hide it on wide viewports where overflow is unlikely */
+  opacity: 1;
+  transition: opacity 150ms;
+}
+
+/* Hide the fade once the user has scrolled right (JS adds .scrolled class) */
+.charter-table-wrap.scrolled-right::after {
+  opacity: 0;
+}
+
+/* Base table reset */
+.charter-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* ── Mobile: tighter font + padding ──────────────────────────────────── */
+@media (max-width: 639px) {
+  .charter-table {
+    font-size: 0.8125rem; /* 13px — readable but compact */
+  }
+  .charter-table th,
+  .charter-table td {
+    padding: 0.375rem 0.5rem; /* tighter on narrow screens */
+  }
+}
+
+/* ── Caption ── */
+.charter-table caption {
+  caption-side: top;
+  /* padding-bottom rather than margin-bottom — caption ignores margin in most browsers */
+  padding: 0.625rem 1rem 0.75rem;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-brand-charcoal);    /* #2A2A29 */
+  text-align: left;
+  background: transparent;
+  /* Prevent caption text from inheriting table border-collapse oddities */
+  display: table-caption;
+}
+
+/* sr-only captions stay invisible */
+.charter-table caption.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Borders — all cells share brand-steel ── */
+.charter-table th,
+.charter-table td {
+  border: 1px solid var(--color-brand-steel);
+  padding: 0.5rem 0.75rem;
+  vertical-align: top;
+}
+
+/* ── Header rows ── */
+.charter-table thead tr.charter-thead-primary th {
+  background-color: var(--color-brand-blue);   /* #0591D4 — accent token */
+  color: #ffffff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  vertical-align: middle;
+}
+
+/* Sticky header — stays visible as user scrolls down through long tables */
+.charter-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.charter-table thead tr.charter-thead-secondary th {
+  background-color: var(--color-brand-sky);    /* #24B2EA — secondary accent */
+  color: #ffffff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+
+/* ── Row headers (th[scope=row]) ── */
+.charter-table th[scope="row"] {
+  background-color: var(--color-brand-ice);    /* #DEEEFA */
+  color: var(--color-brand-charcoal);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* ── Zebra striping — even rows white, odd rows card-bg ── */
+.charter-table tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+.charter-table tbody tr:nth-child(odd) {
+  background-color: var(--color-brand-ice) / 30%;   /* ~rgba(222,238,250,0.3) */
+  background-color: oklch(from var(--color-brand-ice) l c h / 0.35);
+}
+/* Fallback for browsers without oklch */
+@supports not (background-color: oklch(from white l c h / 1)) {
+  .charter-table tbody tr:nth-child(odd) {
+    background-color: #f4f9fd;
+  }
+}
+
+/* ── Row hover ── */
+.charter-table tbody tr:hover {
+  background-color: var(--color-brand-ice);    /* #DEEEFA — brand-ice */
+  transition: background-color 100ms ease;
+}
+
+/* ── Footer rows (TOTAL / END OF TRANSACTION) ── */
+.charter-table tfoot tr {
+  background-color: var(--color-brand-ice);
+}
+
+/* ── Numeric cells — tabular figures so columns align ── */
+.charter-table td.num,
+.charter-table th.num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.charter-table td.num-center,
+.charter-table th.num-center {
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+/* ── Sticky first column (WaterRatesTable category) ── */
+.charter-table th.sticky-col,
+.charter-table td.sticky-col {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  /* Solid background so content behind doesn't bleed through */
+  background-clip: padding-box;
+}
+/* Sticky col in header keeps header bg — z-index 4 beats the sticky-row z-index 3 */
+.charter-table thead th.sticky-col {
+  background-color: var(--color-brand-blue);
+  z-index: 4;
+}
+/* Sticky col in even/odd body rows */
+.charter-table tbody tr:nth-child(even) td.sticky-col,
+.charter-table tbody tr:nth-child(even) th.sticky-col {
+  background-color: #ffffff;
+}
+.charter-table tbody tr:nth-child(odd) td.sticky-col,
+.charter-table tbody tr:nth-child(odd) th.sticky-col {
+  background-color: #f4f9fd;
+}
+.charter-table tbody tr:hover td.sticky-col,
+.charter-table tbody tr:hover th.sticky-col {
+  background-color: var(--color-brand-ice);
+}
+/* Right-edge shadow to signal stickiness */
+.charter-table th.sticky-col,
+.charter-table td.sticky-col {
+  box-shadow: 2px 0 4px -1px rgb(0 0 0 / 0.08);
+}
+
+/* ── Dark mode — triggered by .dark class on a parent (site's custom variant) ── */
+:is(.dark *) .charter-table-wrap {
+  border-color: oklch(1 0 0 / 0.12);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.25);
+}
+:is(.dark *) .charter-table th,
+:is(.dark *) .charter-table td {
+  border-color: oklch(1 0 0 / 0.10);
+  color: oklch(0.92 0 0);
+}
+:is(.dark *) .charter-table caption {
+  color: oklch(0.92 0 0);
+}
+:is(.dark *) .charter-table thead tr.charter-thead-primary th {
+  background-color: #047ab5;   /* slightly darker blue for dark-bg contrast */
+}
+:is(.dark *) .charter-table thead tr.charter-thead-secondary th {
+  background-color: #1a94c4;
+}
+:is(.dark *) .charter-table th[scope="row"] {
+  background-color: oklch(0.25 0.04 230);
+  color: oklch(0.88 0 0);
+}
+:is(.dark *) .charter-table tbody tr:nth-child(even) {
+  background-color: oklch(0.18 0 0);
+}
+:is(.dark *) .charter-table tbody tr:nth-child(odd) {
+  background-color: oklch(0.21 0.02 230);
+}
+:is(.dark *) .charter-table tbody tr:hover {
+  background-color: oklch(0.26 0.04 230);
+}
+:is(.dark *) .charter-table tfoot tr {
+  background-color: oklch(0.24 0.04 230);
+}
+:is(.dark *) .charter-table tbody tr:nth-child(even) td.sticky-col,
+:is(.dark *) .charter-table tbody tr:nth-child(even) th.sticky-col {
+  background-color: oklch(0.18 0 0);
+}
+:is(.dark *) .charter-table tbody tr:nth-child(odd) td.sticky-col,
+:is(.dark *) .charter-table tbody tr:nth-child(odd) th.sticky-col {
+  background-color: oklch(0.21 0.02 230);
+}
+:is(.dark *) .charter-table tbody tr:hover td.sticky-col,
+:is(.dark *) .charter-table tbody tr:hover th.sticky-col {
+  background-color: oklch(0.26 0.04 230);
+}
+
+/* ── Print styles ── */
+@media print {
+  .charter-table-wrap {
+    overflow: visible;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .charter-table {
+    font-size: 9pt;
+  }
+
+  /* Repeat header rows on every printed page */
+  .charter-table thead {
+    display: table-header-group;
+  }
+  .charter-table tfoot {
+    display: table-footer-group;
+  }
+
+  /* Prevent any single row from splitting across a page break */
+  .charter-table tr {
+    break-inside: avoid;
+    page-break-inside: avoid;  /* legacy alias */
+  }
+
+  /* Strip background fills for ink economy — keep borders for legibility */
+  .charter-table thead tr.charter-thead-primary th,
+  .charter-table thead tr.charter-thead-secondary th {
+    background-color: #e0eff7 !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .charter-table th[scope="row"] {
+    background-color: #f0f6fa !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .charter-table tfoot tr {
+    background-color: #e8f3f9 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .charter-table tbody tr:nth-child(odd) {
+    background-color: #fafcfe !important;
+  }
+
+  /* Don't let the scroll wrapper hide overflow on paper */
+  .charter-table-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}

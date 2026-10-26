@@ -4,6 +4,47 @@ export interface SummaryCard {
   detail: string;
 }
 
+/* ── Charter table data types ─────────────────────────────────────────────── */
+
+export interface ServiceInfoData {
+  officeDivision: string;
+  classification: string;
+  typeOfTransaction: string;
+  whoMayAvail: string;
+}
+
+export interface ChecklistRowData {
+  requirement: string;
+  whereToSecure: string;
+}
+
+export interface ProcessRowData {
+  /** Text for the CLIENT STEPS cell. null = sub-row (cell covered by rowspan above). */
+  clientStep: string | null;
+  /** Rows this client-step cell spans. Set only on the first row of a group. */
+  clientStepRowspan?: number;
+  agencyAction: string;
+  feesToBePaid: string;
+  processingTime: string;
+  personResponsible: string;
+}
+
+export interface CharterTables {
+  serviceInfo: ServiceInfoData;
+  checklist: ChecklistRowData[];
+  process: ProcessRowData[];
+  processTotalFees: string;
+  processTotalTime: string;
+  /** Optional extra table shown after the process table (e.g. Payment Platforms). */
+  extraTable?: {
+    caption: string;
+    headers: string[];
+    rows: string[][];
+  };
+}
+
+/* ── Base service guide ───────────────────────────────────────────────────── */
+
 interface ServiceGuideBase {
   title: string;
   description: string;
@@ -12,7 +53,8 @@ interface ServiceGuideBase {
   steps: { title: string; detail: string }[];
   pages: number[];
   note?: string;
-  sourcePages?: { page: number; title: string; src: string; width: number; height: number }[];
+  /** Structured charter table data — replaces sourcePages image references. */
+  charterTables?: CharterTables;
   extraSection?: { title: string; description: string; items: { title: string; detail: string; note?: string }[] };
 }
 
@@ -40,13 +82,116 @@ export const serviceGuides: Record<string, ServiceGuide> = {
       { label: "At the office", title: "Submit and arrange inspection", detail: "Customer Service checks your documents, then an inspector visits the proposed connection site. The office advises you of the assessed charges before payment." },
       { label: "Fees and timing", title: "See the official schedule", detail: "The charter lists an estimated application amount of ₱5,000 and above and a total processing time of 10 hours and 54 minutes. Final charges depend on the inspection and materials required." },
     ],
-    sourcePages: [
-      { page: 5, title: "Application requirements", src: "/New%20Water/1.png", width: 948, height: 638 },
-      { page: 6, title: "Application process, part 1", src: "/New%20Water/2.png", width: 949, height: 617 },
-      { page: 7, title: "Application process, part 2", src: "/New%20Water/3.png", width: 950, height: 620 },
-      { page: 8, title: "Application process, part 3", src: "/New%20Water/4.png", width: 948, height: 627 },
-      { page: 9, title: "Schedule of water rates", src: "/New%20Water/5.png", width: 948, height: 627 },
-    ],
+    charterTables: {
+      serviceInfo: {
+        officeDivision:      "Customer Accounts and Services Division",
+        classification:      "Simple Transaction",
+        typeOfTransaction:   "G2C, G2B, G2G",
+        whoMayAvail:         "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. Valid ID with Signature (photocopy with specimen signature)",            whereToSecure: "1. BIR, Post Office, DFA, PSA, SSS, GSIS, Pag-Ibig, LTO, PHIC, Comelec, OWWA, other government agency that issues Identification Card" },
+        { requirement: "2. Barangay permit for water installation (original, photocopy)",           whereToSecure: "2. Barangay hall where the property is located" },
+        { requirement: "3. Official receipt or water bill of neighbor (photocopy)",                 whereToSecure: "3. Any neighbor near the house/establishment being applied" },
+        { requirement: "4. Proof of billing with the same address",                                 whereToSecure: "4. Concessionaire" },
+        { requirement: "5. Move in/title/deed of sale (photocopy)",                                 whereToSecure: "5. Developer of subdivision/personal record" },
+        { requirement: "6. Certification from NHA Dasmariñas (NHA Housing Project)",               whereToSecure: "6. NHA Dasmariñas" },
+        { requirement: "7. Certification from Crame (AFP/PNP Personnel)",                          whereToSecure: "7. Crame" },
+        { requirement: "8. HOA Certification",                                                      whereToSecure: "8. HOA Office where house is situated" },
+        { requirement: "9. Authorization letter from the owner (Renter/Representative)",            whereToSecure: "9. Owner of resident/establishment" },
+        { requirement: "10. Valid ID of authorized person with signature",                          whereToSecure: "10. Any government office that issue ID" },
+        { requirement: "11. Business Permit (Commercial)",                                          whereToSecure: "11. From City Hall - Treasurer's Office" },
+        { requirement: "12. Contract to Lease (Commercial)",                                        whereToSecure: "12. From owner of establishment" },
+        { requirement: "13. Request letter for additional water meter",                             whereToSecure: "13. From owner of residential house/establishment" },
+        { requirement: "14. Building Permit",                                                       whereToSecure: "14. From City Hall - City Engineer's Office" },
+        { requirement: "15. Location Map",                                                          whereToSecure: "15. From applicant/drawing" },
+        { requirement: "16. Contract number and email address",                                     whereToSecure: "16. From applicant" },
+      ],
+      process: [
+        {
+          clientStep:          "1. Fall in line thru the use of seating arrangement",
+          agencyAction:        "1. Queuing in the form of line",
+          feesToBePaid:        "None",
+          processingTime:      "1 minute",
+          personResponsible:   "Customer Service Assistant for New Water Application",
+        },
+        {
+          clientStep:          "2. Proceed to Customer Service Assistant once you are first in line. Concessionaires provide the necessary requirements for the water service application.",
+          clientStepRowspan:   2,
+          agencyAction:        "2.a The Customer Service Assistant will request the submission of requirements for a new application and verify the accuracy and completeness of the submitted documents.",
+          feesToBePaid:        "None",
+          processingTime:      "10 minutes",
+          personResponsible:   "Customer Service Assistant for New Water Application",
+        },
+        {
+          clientStep:          null,
+          agencyAction:        "2.b After confirming that all requirements are complete, the CSA will transmit the documents to the Customer Accounts Officer and prepare New Connection Job Order for inspection of Construction and Maintenance Division.",
+          feesToBePaid:        "None",
+          processingTime:      "5 minutes",
+          personResponsible:   "Customer Accounts Officer",
+        },
+        {
+          clientStep:          "3. Concessionaire will wait for the inspection of their applied account",
+          clientStepRowspan:   3,
+          agencyAction:        "3.a The Inspector or Maintenance personnel will visit the applicant's address to conduct an inspection and assess the materials required for the tapping. The details of the estimate will then be recorded on the Inspection Slip.",
+          feesToBePaid:        "None",
+          processingTime:      "2 hours",
+          personResponsible:   "Inspector/Maintenance Man",
+        },
+        {
+          clientStep:          null,
+          agencyAction:        "3.b Inspection slip will be submitted to CAO. CAO will retrieve the Job Order and encode the necessary list of fees and materials. After updating the Job Order, the client will be informed of the total amount due. Both the Kasunduan Para sa Pagpapakabit ng Tubig and the Service and Construction Order will be presented and explained to the customer for their signature. Once signed, payment will be ready to proceed.",
+          feesToBePaid:        "None",
+          processingTime:      "10 minutes",
+          personResponsible:   "Customer Accounts Officer",
+        },
+        {
+          clientStep:          null,
+          agencyAction:        "3.c Customer Accounts Officer will reach out to the applicant via their provided contact details to inform them that the water application is ready for payment.",
+          feesToBePaid:        "None",
+          processingTime:      "2 minutes",
+          personResponsible:   "Customer Accounts Officer",
+        },
+        {
+          clientStep:          "4. Fall in line thru the use of seating arrangement",
+          agencyAction:        "4. Queuing in the form of line for payment",
+          feesToBePaid:        "None",
+          processingTime:      "1 minute",
+          personResponsible:   "Customer Service Assistant",
+        },
+        {
+          clientStep:          "5. Proceed to the Cashier once you are first in line, pay the necessary fees for new service application.",
+          clientStepRowspan:   3,
+          agencyAction:        "5.a Cashier will receive payment for the new application and issue the official receipt for the payment made by client",
+          feesToBePaid:        "Estimated amount of Php5,000 and above",
+          processingTime:      "5 minutes",
+          personResponsible:   "Cashier",
+        },
+        {
+          clientStep:          null,
+          agencyAction:        "5.b Cashier will notify the Customer Accounts Officer once the payment has been completed. CAO will update the Job Order status to \"For Installation\" and forward the List of Material for Tapping/Inspection Slip and Xerox copy of OR to Supplies Custodian",
+          feesToBePaid:        "None",
+          processingTime:      "18 minutes",
+          personResponsible:   "Customer Accounts Officer",
+        },
+        {
+          clientStep:          null,
+          agencyAction:        "5.c Supplies Custodian shall get and release the materials needed including the job order and forward it to Maintenance Men. Maintenance men sign a log book for proof of receipt of materials and job order",
+          feesToBePaid:        "None",
+          processingTime:      "2 minutes",
+          personResponsible:   "Supplies Custodian, Maintenance Men",
+        },
+        {
+          clientStep:          "6. Assist the maintenance man in locating the area of the water installation",
+          agencyAction:        "6. Maintenance men shall install new water meter taking note of the meter number. Job order will be returned to Customer Accounts Officer for closing of transaction and recording of meter number",
+          feesToBePaid:        "None",
+          processingTime:      "8 hours",
+          personResponsible:   "Maintenance Men, Customer Accounts Officer",
+        },
+      ],
+      processTotalFees: "Estimated amount of Php5,000 and above",
+      processTotalTime: "10 hours and 54 minutes",
+    },
   },
   "meter-reading": {
     title: "Meter Reading & Statement",
@@ -64,10 +209,35 @@ export const serviceGuides: Record<string, ServiceGuide> = {
       { label: "Your statement", title: "Check the details", detail: "When you receive your Statement of Account, check the meter reading, consumption, and due date. Ask about any reading or charge that looks unexpected." },
       { label: "Requirements and time", title: "No documents or fee", detail: "The Citizen's Charter lists no requirements or separate fee for this service. It gives a total processing time of five minutes." },
     ],
-    sourcePages: [
-      { page: 10, title: "Meter reading", src: "/Meter%20Reading/1.png", width: 1684, height: 1191 },
-      { page: 11, title: "Issuance of Statement of Account", src: "/Meter%20Reading/2.png", width: 1684, height: 1191 },
-    ],
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. None", whereToSecure: "1. None" },
+      ],
+      process: [
+        {
+          clientStep:        "1. Client must be aware of the schedule of reading days in their area, reading is done once a month",
+          agencyAction:      "1. Meter readers will read the water consumption of each meter of the concessionaire.",
+          feesToBePaid:      "None",
+          processingTime:    "3 minutes",
+          personResponsible: "Meter Reader",
+        },
+        {
+          clientStep:        "2. Receive the Statement of Account from the meter reader, double check the necessary data in the SOA including the reading of water meter, the client can be double check it especially if he/she has questions in their consumption. Check also due date so that it will not incur penalty.",
+          agencyAction:      "2. Statement of Account will be given once printed by the Meter Reader. For accounts with normal consumption, it will be given during the reading. As per accounts with findings (with sudden increase or decrease in consumption) it shall be given the same or the following day.",
+          feesToBePaid:      "None",
+          processingTime:    "2 minutes",
+          personResponsible: "Meter Reader",
+        },
+      ],
+      processTotalFees: "None",
+      processTotalTime: "5 minutes",
+    },
   },
   payment: {
     title: "Payment of Water Bill",
@@ -96,10 +266,64 @@ export const serviceGuides: Record<string, ServiceGuide> = {
         { title: "Online payment", detail: "The charter lists GCash as an online payment partner through its mobile application." },
       ],
     },
-    sourcePages: [
-      { page: 12, title: "On-site payment process", src: "/Payment%20of%20Water%20Bill/1.png", width: 1684, height: 1191 },
-      { page: 13, title: "Payment platforms", src: "/Payment%20of%20Water%20Bill/2.png", width: 1684, height: 1191 },
-    ],
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. Statement of account or water bill",  whereToSecure: "1. SOA issued to customer during reading" },
+        { requirement: "2 Old receipts in absence of SOA",       whereToSecure: "2 Personal copy of customer" },
+      ],
+      process: [
+        {
+          clientStep:        "1. Move to the Cashier area and take a seat in the designated seating arrangement to maintain the queue.",
+          agencyAction:      "None",
+          feesToBePaid:      "None",
+          processingTime:    "1 minute",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        "2. Proceed to the Cashier once you are first in line and give your Statement of Account to the cashier. If SOA is not available, provide complete name and address of account.",
+          agencyAction:      "2. Cashier will receive the payment for water bill and issue the Official Receipt",
+          feesToBePaid:      "Php 170.00 and above.",
+          processingTime:    "7 minutes",
+          personResponsible: "Cashier",
+        },
+        {
+          clientStep:        "3. Check the accuracy of the Official Receipt issued and count the change, if there are any",
+          agencyAction:      "",
+          feesToBePaid:      "None",
+          processingTime:    "",
+          personResponsible: "",
+        },
+      ],
+      processTotalFees: "Php 170.00 and above.",
+      processTotalTime: "7 Minutes",
+      extraTable: {
+        caption: "TABLE 2. Payment Platforms",
+        headers: ["Platform", "Location", "Schedule of Availability"],
+        rows: [
+          [
+            "1. TMCWD Cashier (On-site)",
+            "2nd Floor, Trece Martires City Water District, Brgy. San Agustin, Trece Martires City, Cavite",
+            "8:00 AM to 4:30 PM, Monday to Friday except Holidays",
+          ],
+          [
+            "2. ECPAY Collecting Partners",
+            "Nationwide thru 7-11, Cebuana Lhuillier, Home Credit, Tambunting, Palaway Pay",
+            "Store Hours",
+          ],
+          [
+            "3. Online Payment Partners",
+            "Nationwide thru GCash",
+            "Online thru the downloadable mobile application",
+          ],
+        ],
+      },
+    },
   },
   "change-ball-valve": {
     title: "Change Ball Valve",
@@ -113,6 +337,67 @@ export const serviceGuides: Record<string, ServiceGuide> = {
     fee: "Weighted average cost of the ball valve at payment, plus 10%",
     time: "3 hours and 25 minutes",
     pages: [14, 15],
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. Statement of account or water bill",                                                                          whereToSecure: "1. SOA issued to customer during reading" },
+        { requirement: "2. Information of service connection such as Account Name, Account Number, Address, Location",                   whereToSecure: "2. Customer Service Area, 2nd Floor, TMCWD Building" },
+        { requirement: "3. Service Request Form - General Services (1 original)",                                                        whereToSecure: "3. Customer Service Area, 2nd Floor, TMCWD Building" },
+      ],
+      process: [
+        {
+          clientStep:        "1.a Proceed to the Customer Service Area",
+          clientStepRowspan: 3,
+          agencyAction:      "1.a Receive the request for change ball valve with lockwing and interview the concessionaire for the details of the account",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Services Assistant",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.b Answer the message or call promptly. Interview and ask the concessionaire regarding the details of the request",
+          feesToBePaid:      "",
+          processingTime:    "",
+          personResponsible: "",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.c Prepare the Service Request Form - General Services. Forward the request to Construction and Maintenance.",
+          feesToBePaid:      "None",
+          processingTime:    "10 minutes",
+          personResponsible: "Customer Services Assistant",
+        },
+        {
+          clientStep:        "2. Proceed to the cashier area to complete the payment process for the ball valve with lockwing",
+          clientStepRowspan: 3,
+          agencyAction:      "2.a Issue Sales Invoice corresponding to the inspection slip. Forward the xerox copy of Sales invoice to Supplies Custodian for releasing of materials.",
+          feesToBePaid:      "Weighted average cost of ball valve at the time of payment plus 10%",
+          processingTime:    "5 minutes",
+          personResponsible: "Cashier",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.b Release the lockwing to the Construction and Maintenance Division",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Supplies Custodian",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.c Acknowledge release of materials and proceed to the replacement of defective ball valve with lockwing to address the service request.",
+          feesToBePaid:      "None",
+          processingTime:    "3 hours",
+          personResponsible: "Water Maintenance Man",
+        },
+      ],
+      processTotalFees: "Weighted average cost of ball valve at the time of payment plus 10%",
+      processTotalTime: "3 hours and 25 minutes",
+    },
   },
   "leak-repair": {
     title: "Leak Repair Request",
@@ -127,6 +412,74 @@ export const serviceGuides: Record<string, ServiceGuide> = {
     time: "8 hours and 35 minutes",
     pages: [16, 17],
     note: "The charter lists two hours for a service line leak and eight hours for a main line leak.",
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. Statement of account or water bill",                                                                        whereToSecure: "1. SOA issued to customer during reading" },
+        { requirement: "2. Information of service connection such as Account Name, Account Number, Address, Location",                 whereToSecure: "2. Customer Service Area, 2nd Floor, TMCWD Building" },
+        { requirement: "3. Service Request Form - General Services (1 original)",                                                      whereToSecure: "3. Customer Service Area, 2nd Floor, TMCWD Building" },
+      ],
+      process: [
+        {
+          clientStep:        "1.a Proceed to the Customer Service Area",
+          clientStepRowspan: 4,
+          agencyAction:      "1.a Interview and ask the concessionaire regarding the details the account",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Services Assistant",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.b Answer the message or call promptly. Interview and ask the concessionaire regarding the details of the request",
+          feesToBePaid:      "",
+          processingTime:    "",
+          personResponsible: "",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.c Prepare the Service Request Form - General Services and create Leak Repair Job Order. Forward the request and Job Order to Construction and Maintenance Division.",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.d Assess the service request and fill up the Requisition and Issue Slip with the materials needed for the repair of leak. Forward the RIS to Supplies Custodian.",
+          feesToBePaid:      "None",
+          processingTime:    "10 minutes",
+          personResponsible: "Water Maintenance Man",
+        },
+        {
+          clientStep:        "2. Assist the Water Maintenance Man in locating the area of the leak",
+          clientStepRowspan: 3,
+          agencyAction:      "2.b Release the materials needed in accordance to the RIS",
+          feesToBePaid:      "None",
+          processingTime:    "10 minutes",
+          personResponsible: "Supplies Custodian",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.c Acknowledge release of materials and proceed to the leak repair to address the service request. Accomplish the Job Order with full documentation and submit the JO to Customer Services Assistant. Service Line Leak - 2 hours\nMain Line Leak - 8 hours",
+          feesToBePaid:      "None",
+          processingTime:    "8 hours",
+          personResponsible: "Water Maintenance Man",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.d Acknowledge the accomplished JO and close the Job Order in the system",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Services Assistant",
+        },
+      ],
+      processTotalFees: "None",
+      processTotalTime: "8 hours and 35 minutes",
+    },
   },
   "water-supply": {
     title: "Water Supply Operation",
@@ -141,6 +494,59 @@ export const serviceGuides: Record<string, ServiceGuide> = {
     time: "4 hours and 15 minutes",
     pages: [18, 19],
     note: "The process also says to pay any necessary fee if applicable; no specific amount is given.",
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. Statement of account or water bill",                                                                        whereToSecure: "1. SOA issued to customer during reading" },
+        { requirement: "2. Information of service connection such as Account Name, Account Number, Address, Location",                 whereToSecure: "2. Customer Service Area, 2nd Floor, TMCWD Building" },
+        { requirement: "3. Service Request Form - General Services (1 original)",                                                      whereToSecure: "3. Customer Service Area, 2nd Floor, TMCWD Building" },
+      ],
+      process: [
+        {
+          clientStep:        "1.a Proceed to the Customer Service Area",
+          clientStepRowspan: 3,
+          agencyAction:      "1.a Interview and ask the concessionaire regarding the details of the request",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Services Assistant",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.b Answer the message or call promptly. Interview and ask the concessionaire regarding the details of the request",
+          feesToBePaid:      "",
+          processingTime:    "",
+          personResponsible: "",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.c Prepare the Service Request Form - General Services and create Job Order for inspection. Forward the request and Job Order to Construction and Maintenance Division for dispatch of Inspection Team.",
+          feesToBePaid:      "None",
+          processingTime:    "10 minutes",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        "2. Assist the Inspection Team",
+          agencyAction:      "2. Site inspection in the concerned area. Inform the concessionaire on the results of the inspection.",
+          feesToBePaid:      "None",
+          processingTime:    "4 hours",
+          personResponsible: "Water Maintenance Man, Pump Operator, Cashier",
+        },
+        {
+          clientStep:        "3. Proceed to cashier and pay necessary fee if there are any",
+          agencyAction:      "3. For Water Quality Issue: Flushing activity in the service area will be performed.\nFor Low/High Pressure/No Water: Pump operator will check if the pumping station in area is operational",
+          feesToBePaid:      "None",
+          processingTime:    "",
+          personResponsible: "",
+        },
+      ],
+      processTotalFees: "None",
+      processTotalTime: "4 hours and 15 minutes",
+    },
   },
   "temporary-disconnection": {
     title: "Temporary Disconnection",
@@ -154,6 +560,67 @@ export const serviceGuides: Record<string, ServiceGuide> = {
     fee: "Any unsettled water bill, if applicable",
     time: "55 minutes",
     pages: [22, 23],
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. Information of service connection such as Account Name, Account Number, Address, Location", whereToSecure: "1. Customer Service Area, 2nd Floor, TMCWD Building" },
+        { requirement: "2. Current/Previous Water Bill (if available)",                                                whereToSecure: "2. Concessionaire" },
+        { requirement: "3. Service Request Form - Other Services",                                                     whereToSecure: "3. Customer Service Area, 2nd Floor, TMCWD Building" },
+      ],
+      process: [
+        {
+          clientStep:        "1. Proceed to Customer Service Assistant once your first in line. Present water bill, or other information needed for the request",
+          clientStepRowspan: 2,
+          agencyAction:      "1.a Customer Service Assistant will ask for the details of the concessionaire's account. Verify the status of the account in the system and check if there is unsettled bill. Concessionaire shall pay first the balance or unsettled bill",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.b Prepare and fill out Service Request Form - Other Services and have it signed by the concessionaire.",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        "2. Proceed to the Cashier once you are first in line. Submit the Service Request Form and settle any outstanding water bills, if applicable",
+          clientStepRowspan: 4,
+          agencyAction:      "2.a Cashier will receive payment for the unsettled bill and issue the official receipt for the payment made by client. Cashier will forward the xerox copy of the Official Receipt and Service Request Form to Customer Accounts Officer.",
+          feesToBePaid:      "Unsettled bill if applicable",
+          processingTime:    "7 minutes",
+          personResponsible: "Cashier",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.b Customer Accounts Officer will create a Temporary Disconnection Job Order based on the Service Request and forward to Construction and Maintenance Division for disconnection of water service",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Accounts Officer",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.c Disconnect the water service connection by applying a bolt seal or twist seal, then submit the finalized Job Order to the Customer Accounts Officer for processing.",
+          feesToBePaid:      "None",
+          processingTime:    "30 minutes",
+          personResponsible: "Maintenance Men, Meter Reader",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.d Update concessionaires' information on the system upon receipt of accomplished job order",
+          feesToBePaid:      "None",
+          processingTime:    "3 minutes",
+          personResponsible: "Customer Accounts Officer",
+        },
+      ],
+      processTotalFees: "Unsettled bill if applicable",
+      processTotalTime: "55 minutes",
+    },
   },
   reconnection: {
     title: "Reconnection Service",
@@ -168,6 +635,66 @@ export const serviceGuides: Record<string, ServiceGuide> = {
     fee: "₱350 reconnection fee, plus outstanding water bill and other charges, if any",
     time: "28 minutes",
     pages: [20, 21],
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. Official Receipt",                      whereToSecure: "1. None" },
+        { requirement: "2. Service Request Form - General Services", whereToSecure: "2. Customer Service Area, 2nd Floor, TMCWD Building" },
+      ],
+      process: [
+        {
+          clientStep:        "1. Proceed to Customer Service Assistant once your first in line. Present water bill, or other information needed for the request for reconnection.",
+          clientStepRowspan: 2,
+          agencyAction:      "1.a Customer Service Assistant will ask for the details of the concessionaire's account. Verify the status of the account in the system and inform the concessionaire regarding the payment details.",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.b Prepare and fill out Service Request Form - General Services and have it signed by the concessionaire.",
+          feesToBePaid:      "None",
+          processingTime:    "3 minutes",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        "2. Proceed to the Cashier once you are first in line. Submit the Service Request Form and pay the necessary water bill and fees for reconnection.",
+          clientStepRowspan: 4,
+          agencyAction:      "2.a Cashier will receive payment for the reconnection and water bill and issue the official receipt for the payment made by client. Cashier will forward the xerox copy of the Official Receipt and Service Request Form to Customer Accounts Officer.",
+          feesToBePaid:      "Reconnection Fee - Php350.00 plus outstanding water bill balance and other charges if there are any.",
+          processingTime:    "7 minutes",
+          personResponsible: "Cashier",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.b Customer Accounts Officer will create a Reconnection Job Order and forward it to Maintenance men for Reconnection.",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Accounts Officer",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.c Maintenance Men will reconnect the water service.",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Maintenance Man",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.c Maintenance Men will return the Job Order to the CAO once reconnection is done. CAO will then change the status of the account in the system only if the water service is physically connected.",
+          feesToBePaid:      "None",
+          processingTime:    "3 minutes",
+          personResponsible: "Customer Accounts Officer, Maintenance Man",
+        },
+      ],
+      processTotalFees: "Reconnection Fee - Php350.00 plus outstanding water bill balance and other charges if there are any.",
+      processTotalTime: "28 minutes",
+    },
   },
   "change-name-address": {
     title: "Change Name/Address",
@@ -181,6 +708,48 @@ export const serviceGuides: Record<string, ServiceGuide> = {
     fee: "None listed",
     time: "15 minutes",
     pages: [24, 25],
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. Information of service connection such as Account Name, Account Number, Address, Location", whereToSecure: "1. Concessionaire" },
+        { requirement: "2. Land Title/Deed of Sale/Land Award or any proof of ownership/proof of relationship to the owner", whereToSecure: "2. Concessionaire/Local Assessor's Office" },
+        { requirement: "3. Government Issued ID",                                                                        whereToSecure: "3. BIR, Post Office, DFA, PSA, SSS, GSIS, Pag-Ibig, LTO, PHIC, Comelec, OWWA" },
+        { requirement: "4. Service Request Form - Other Services",                                                       whereToSecure: "4. Customer Service Area, 2nd Floor, TMCWD Building" },
+        { requirement: "5. Current/Previous Water Bill (if available)",                                                  whereToSecure: "5. Concessionaire" },
+        { requirement: "6. Authority to move in from HDMF (1 photocopy)",                                               whereToSecure: "6. HDMF" },
+      ],
+      process: [
+        {
+          clientStep:        "1. Proceed to Customer Service Assistant once your first in line. Present water bill, or other information needed for the request",
+          clientStepRowspan: 2,
+          agencyAction:      "1.a Customer Service Assistant will ask for the details of the concessionaire's account. Verify the status of the account in the system.",
+          feesToBePaid:      "None",
+          processingTime:    "3 minutes",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.b Prepare and fill out Service Request Form - Other Services and have it signed by the concessionaire. Inform the concessionaire regarding the requirements",
+          feesToBePaid:      "None",
+          processingTime:    "2 minutes",
+          personResponsible: "Customer Accounts Officer",
+        },
+        {
+          clientStep:        "2. Proceed to the Customer Accounts Officer and submit the Service Request Form and all the necessary requirements",
+          agencyAction:      "2.a Accept Service Request Form and verify the submitted requirements. Update in the information in the system according to the service request",
+          feesToBePaid:      "None",
+          processingTime:    "10 minutes",
+          personResponsible: "Customer Accounts Officer",
+        },
+      ],
+      processTotalFees: "None",
+      processTotalTime: "15 minutes",
+    },
   },
   "change-meter": {
     title: "Change Meter Request",
@@ -194,6 +763,82 @@ export const serviceGuides: Record<string, ServiceGuide> = {
     fee: "Weighted average meter cost at payment, plus 10%, less accumulated meter maintenance fees paid",
     time: "4 hours and 27 minutes",
     pages: [26, 27, 28],
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. Information of service connection such as Account Name, Account Number, Address, Location", whereToSecure: "1. Concessionaire" },
+        { requirement: "2. Service Request Form - Other Services",                                                     whereToSecure: "2. Customer Service Area, 2nd Floor, TMCWD Building" },
+        { requirement: "3. Current/Previous Water Bill (if available)",                                                whereToSecure: "3. Concessionaire" },
+      ],
+      process: [
+        {
+          clientStep:        "1. Proceed to Customer Service Assistant once your first in line. Present water bill, or other information needed for the request",
+          clientStepRowspan: 2,
+          agencyAction:      "1.a Customer Service Assistant will ask for the details of the concessionaire's account. Verify the status of the account in the system.",
+          feesToBePaid:      "None",
+          processingTime:    "3 minutes",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "1.b Prepare and fill out Service Request Form - Other Services and have it signed by the concessionaire. Inform the concessionaire regarding the requirements",
+          feesToBePaid:      "None",
+          processingTime:    "2 minutes",
+          personResponsible: "Customer Accounts Officer",
+        },
+        {
+          clientStep:        "2. Proceed to the Customer Accounts Officer and submit the Service Request Form and all the necessary requirements",
+          clientStepRowspan: 2,
+          agencyAction:      "2.a Accept Service Request Form and verify the submitted requirements. Customer Accounts Officer will create a Change Meter Job Order based on the Service Request and forward it to Construction and Maintenance Division for inspection",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Accounts Officer",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.b Inspect and validate the change meter request job order.",
+          feesToBePaid:      "None",
+          processingTime:    "2 hours",
+          personResponsible: "Maintenance Men",
+        },
+        {
+          clientStep:        "3. Proceed to the cashier area to complete the payment process for the water meter",
+          clientStepRowspan: 4,
+          agencyAction:      "3.a Issue Sales Invoice. Forward the xerox copy of Sales invoice to Supplies Custodian for releasing of water meter.",
+          feesToBePaid:      "Weighted average cost of the water meter at the time of payment, plus an additional 10%, minus the total accumulated water meter maintenance fees paid by the concessionaire",
+          processingTime:    "7 minutes",
+          personResponsible: "Cashier",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "3.b Receive xerox copy of Sales Invoice and release water meter to Maintenance Men for installation",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Supplies Custodian",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "3.c Install water meter and remove old water meter replacement. Record the meter number of the newly installed water meter and forward it to Customer Accounts Officer",
+          feesToBePaid:      "None",
+          processingTime:    "2 hours",
+          personResponsible: "Maintenance Men",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "3.d Update the system to reflect the new water meter number by recording it in the account information of the concessionaire",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Accounts Officer",
+        },
+      ],
+      processTotalFees: "Weighted average cost of the water meter at the time of payment, plus an additional 10%, minus the total accumulated water meter maintenance fees paid by the concessionaire",
+      processTotalTime: "4 hours and 27 minutes",
+    },
   },
   "senior-citizen-discount": {
     title: "Senior Citizen Discount",
@@ -208,6 +853,56 @@ export const serviceGuides: Record<string, ServiceGuide> = {
     fee: "None listed",
     time: "17 minutes",
     pages: [31, 32],
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "1. Senior Citizen Discount Availment Form (1 original)",                                          whereToSecure: "1. Customer Services Area, 2nd Floor, TMCWD Building" },
+        { requirement: "2. Valid Senior Citizen ID (1 photocopy)",                                                        whereToSecure: "2. Senior Citizen Concessionaire" },
+        { requirement: "3. Latest Picture (any size, 1 original)",                                                        whereToSecure: "3. Senior Citizen Concessionaire" },
+        { requirement: "4. Barangay Clearance/Proof of residence",                                                        whereToSecure: "4. Barangay Hall of concessionaire's residence" },
+        { requirement: "5. Authorization Letter (if applying through representative)",                                     whereToSecure: "5. Senior Citizen Concessionaire" },
+        { requirement: "6. Government Issued ID of the representative (if applying through representative, 1 photocopy)", whereToSecure: "6. BIR, Post Office, DFA, PSA, SSS, GSIS, Pag-Ibig, LTO, PHIC, Comelec, OWWA, other government agency that issues ID" },
+        { requirement: "Conditions: 1. Water meter registration should be in the name of the senior citizen for a period of 1 year. 2. The Senior Citizen must be a resident of the household. 3. Consumption should not exceed 30 cubic meter to avail the discount. 4. Discount is granted per household regardless of the number of Senior Citizens living therein. 5. A Senior Citizen can only avail of one service connection discount. 6. Water connection must be residential. 7. Valid Senior Citizen ID must be presented upon payment.", whereToSecure: "7. Customer Services Area, 2nd Floor, TMCWD Building" },
+      ],
+      process: [
+        {
+          clientStep:        "1. Proceed to the Customer Service Area and fill up the Senior Citizen Discount Availment Form",
+          agencyAction:      "1. Provide Senior Citizen Discount Availment Form with the list of requirements and discuss to the client on how to avail the discount",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        "2. Submit the form together with the requirements",
+          clientStepRowspan: 3,
+          agencyAction:      "2. Accept and check the completeness of the Senior Citizen Discount Availment Form and the necessary requirements. Record the application to the Logbook of Service Request and submit to the CASD head for approval of the application",
+          feesToBePaid:      "None",
+          processingTime:    "5 minutes",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.b Approve the application of the concessionaire and forward to Customer Accounts Officer",
+          feesToBePaid:      "None",
+          processingTime:    "3 minutes",
+          personResponsible: "CASD Head",
+        },
+        {
+          clientStep:        null,
+          agencyAction:      "2.c Register and update the concessionaire's account in the system.",
+          feesToBePaid:      "None",
+          processingTime:    "4 minutes",
+          personResponsible: "Customer Accounts Officer",
+        },
+      ],
+      processTotalFees: "None",
+      processTotalTime: "17 minutes",
+    },
   },
   feedback: {
     pageType: "informational",
@@ -226,5 +921,57 @@ export const serviceGuides: Record<string, ServiceGuide> = {
     ],
     pages: [44, 45, 46],
     note: "Contact information and procedures shown here are from the 2025 Citizen's Charter.",
+    charterTables: {
+      serviceInfo: {
+        officeDivision:    "Customer Accounts and Services Division",
+        classification:    "Simple",
+        typeOfTransaction: "G2C, G2B, G2G",
+        whoMayAvail:       "Concessionaires/client of Trece Martires City Water District",
+      },
+      checklist: [
+        { requirement: "Facebook: TMCWD CMU Help Desk (https://www.facebook.com/tmcwdCMUHelpDesk)", whereToSecure: "Direct message through official Facebook Page" },
+        { requirement: "Email: tmcwd@yahoo.com or tmcwd98@gmail.com",                               whereToSecure: "Electronic mail" },
+        { requirement: "Written letter to the Office of the General Manager",                        whereToSecure: "Endorsed to the secretary of the OGM" },
+        { requirement: "Feedback Form at the PACD drop box (Customer Services Area)",               whereToSecure: "Public Assistance & Complaints Desk (PACD)" },
+        { requirement: "Hotlines: 0917-805-0391 and landline (046) 419-2664",                       whereToSecure: "Call or text" },
+      ],
+      process: [
+        {
+          clientStep:        "Submit feedback or a complaint",
+          agencyAction:      "Through Official Facebook Page: Dedicated Customer Services Assistant checks and answers all Facebook messages before the day ends and will be endorsed to the Management or to the concerned Division. Through electronic mail: CSA will collate feedbacks for documentation and endorsed the documents to the Office of the General Manager.",
+          feesToBePaid:      "None",
+          processingTime:    "",
+          personResponsible: "Customer Service Assistant",
+        },
+        {
+          clientStep:        "File a complaint (walk-in)",
+          agencyAction:      "Walk-in concessionaires may file complaint personally to the PACD Officer on duty who will document the concessionaire's statement. The personnel will then print and let the concessionaire sign the printed complaint. Submit written complaint to PACD Officer addressed to the General Manager, which will be endorsed to the secretary of the OGM.",
+          feesToBePaid:      "None",
+          processingTime:    "",
+          personResponsible: "PACD Officer",
+        },
+        {
+          clientStep:        "Investigation and response",
+          agencyAction:      "CSA checks all FB messages, records and initially verifies complaints. Initially verified complaints will be endorsed to the concerned Division. The concerned division will conduct investigation and provide appropriate response. The CSA will then update/respond to the complaint of the concessionaire.",
+          feesToBePaid:      "None",
+          processingTime:    "",
+          personResponsible: "Customer Service Assistant, Concerned Division",
+        },
+      ],
+      processTotalFees: "None",
+      processTotalTime: "Varies by channel",
+      extraTable: {
+        caption: "Contact Information — CCB, PCC, ARTA",
+        headers: ["Agency", "Channel", "Details"],
+        rows: [
+          ["Contact Center ng Bayan (CCB)", "Mag-text sa", "0908-881-6565 (Lunes–Biyernes, 8am–5pm)"],
+          ["Presidential Complaints Center (PCC)", "E-mail", "pcc@malacanang.gov.ph"],
+          ["Presidential Complaints Center (PCC)", "Postal Office", "PCC Official address: Bahay Ugnayan, J.P. Laurel Street, Malacañang, Manila"],
+          ["Presidential Complaints Center (PCC)", "Fax", "(02)-8736-8621"],
+          ["Presidential Complaints Center (PCC)", "Tumawag sa", "(02)-8736-8645 / (02)-8736-8603 / (02)-8736-8629 / (02)-8736-8621"],
+          ["Anti-Red Tape Authority (ARTA)", "Tumawag sa", "(02)-8478-5091 / (02)-8478-5093 / (02)-8478-5099"],
+        ],
+      },
+    },
   },
 };
