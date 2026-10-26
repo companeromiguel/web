@@ -15,8 +15,8 @@ const govLogos = [
 // Source: https://tmcwaterdistrict.weebly.com/history-of-tmcwd.html
 const ESTABLISHED_YEAR = 1997;
 
-// Unique key for this site's visit counter via countapi.mileshilliard.com
-const VISIT_COUNTER_KEY = "tmcwd-website-visits-2025";
+// Unique key stored in Redis — not used client-side anymore but kept for reference
+// const VISIT_COUNTER_KEY = "tmcwd-website-visits-2025";
 
 interface Stat {
   value: number;
@@ -74,21 +74,20 @@ function VisitCounterItem({ animate }: { animate: boolean }) {
   const hasFetched = useRef(false);
 
   useEffect(() => {
-    // Only fetch once per page load
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    fetch(`https://countapi.mileshilliard.com/api/v1/hit/${VISIT_COUNTER_KEY}`)
+    fetch("/api/visit")
       .then((res) => res.json())
-      .then((data) => {
-        const count = parseInt(data.value, 10);
-        if (!isNaN(count)) {
+      .then((data: { value?: number }) => {
+        const count = data.value ?? 0;
+        if (count > 0) {
           setVisits(count);
           setLoaded(true);
         }
       })
       .catch(() => {
-        // Silently fail — don't break the page if the API is down
+        // Silently fail — don't break the page if Redis is unreachable
       });
   }, []);
 
