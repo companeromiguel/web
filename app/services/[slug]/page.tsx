@@ -6,6 +6,7 @@ import ServiceInfoTable from "@/components/services/ServiceInfoTable";
 import ChecklistTable from "@/components/services/ChecklistTable";
 import ProcessTable from "@/components/services/ProcessTable";
 import WaterRatesTable from "@/components/services/WaterRatesTable";
+import NewWaterChecklist from "@/components/services/NewWaterChecklist";
 import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
 import { serviceGuides } from "@/lib/service-charter";
 
@@ -55,31 +56,39 @@ export default async function ServicePage({ params }: PageProps) {
                   : "Documents and account information listed in the Citizen's Charter."}
               </p>
             </div>
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {guide.requirements.map((requirement) => (
-                <li
-                  key={requirement}
-                  className="flex gap-3 border border-[#E8EEF2] bg-white p-4 text-sm leading-relaxed text-[#2A2A29]/75 shadow-sm"
-                >
-                  <span aria-hidden="true" className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#0591D4]" />
-                  {slug === "feedback" && requirement.startsWith("Facebook:") ? (
-                    <a
-                      href="https://www.facebook.com/tmcwdCMUHelpDesk/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#0591D4] underline underline-offset-4 hover:text-[#0473A8] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0591D4]"
+
+            {/* New water application gets the full expandable checklist by applicant type */}
+            {slug === "new-water-application" ? (
+              <NewWaterChecklist />
+            ) : (
+              <>
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {guide.requirements.map((requirement) => (
+                    <li
+                      key={requirement}
+                      className="flex gap-3 border border-[#E8EEF2] bg-white p-4 text-sm leading-relaxed text-[#2A2A29]/75 shadow-sm"
                     >
-                      {requirement}
-                      <span className="sr-only"> (opens in a new tab)</span>
-                    </a>
-                  ) : requirement}
-                </li>
-              ))}
-            </ul>
-            {guide.requirementsNote && (
-              <p className="mt-4 bg-[#F7FAFB] px-4 py-3 text-sm leading-relaxed text-[#2A2A29]/70">
-                {guide.requirementsNote}
-              </p>
+                      <span aria-hidden="true" className="mt-1.5 size-1.5 shrink-0 rounded-full bg-[#0591D4]" />
+                      {slug === "feedback" && requirement.startsWith("Facebook:") ? (
+                        <a
+                          href="https://www.facebook.com/tmcwdCMUHelpDesk/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#0591D4] underline underline-offset-4 hover:text-[#0473A8] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0591D4]"
+                        >
+                          {requirement}
+                          <span className="sr-only"> (opens in a new tab)</span>
+                        </a>
+                      ) : requirement}
+                    </li>
+                  ))}
+                </ul>
+                {guide.requirementsNote && (
+                  <p className="mt-4 bg-[#F7FAFB] px-4 py-3 text-sm leading-relaxed text-[#2A2A29]/70">
+                    {guide.requirementsNote}
+                  </p>
+                )}
+              </>
             )}
           </section>
 

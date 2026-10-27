@@ -48,24 +48,39 @@ export default function AboutScroller({ syncRef }: { syncRef?: React.RefObject<H
         </div>
       ) : (
         /* ── Default: auto-scrolling window ── */
-        <div
-          className="about-scroller-window"
-          style={windowHeight ? { height: windowHeight } : undefined}
-        >
-          <div className="about-scroller-track">
-            {[0, 1].map((copy) => (
-              <div
-                key={copy}
-                aria-hidden={copy === 1 ? "true" : undefined}
-                className="about-scroller-copy text-sm text-white/85 leading-relaxed space-y-4"
-              >
-                {paragraphs.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
-            ))}
+        <>
+          {/*
+            Screen-reader summary: one paragraph so AT users get context
+            without traversing all 16 paragraphs in the clipped overflow.
+          */}
+          <div className="sr-only">
+            {paragraphs[0]}
+            <span> Read more about TMCWD history using the button below.</span>
           </div>
-        </div>
+
+          {/*
+            Visual scroller — aria-hidden so screen readers skip the
+            animation loop entirely (the sr-only summary above covers it).
+          */}
+          <div
+            aria-hidden="true"
+            className="about-scroller-window"
+            style={windowHeight ? { height: windowHeight } : undefined}
+          >
+            <div className="about-scroller-track">
+              {[0, 1].map((copy) => (
+                <div
+                  key={copy}
+                  className="about-scroller-copy text-sm text-white/85 leading-relaxed space-y-4"
+                >
+                  {paragraphs.map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
       )}
 
       {/* Toggle button */}

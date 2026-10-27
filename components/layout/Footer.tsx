@@ -50,7 +50,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-[11px] text-white/40 leading-relaxed max-w-xs mb-3">
-              Government-owned corporation under P.D. 198, serving Trece Martires City, Cavite.
+              Serving Trece Martires City, Cavite.
             </p>
             <address className="not-italic text-[11px] text-white/50 space-y-0.5">
               <p>2nd Flr., TMCWD Bldg., Governor&apos;s Drive, Brgy. San Agustin, Trece Martires City, Cavite 4109</p>

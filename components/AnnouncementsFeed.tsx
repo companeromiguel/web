@@ -52,6 +52,18 @@ export default function AnnouncementsFeed() {
     );
   }
 
+  /* ── Empty state (API returned 0 posts) ── */
+  if (status === "ok" && items.length === 0) {
+    return (
+      <p className="py-6 text-sm text-[#2A2A29]/40">
+        No announcements at the moment.{" "}
+        <a href="https://www.facebook.com/tmcwdCMUHelpDesk" target="_blank" rel="noopener noreferrer" className="text-[#0591D4] hover:underline">
+          Check our Facebook page →
+        </a>
+      </p>
+    );
+  }
+
   /* ── Card carousel / grid ── */
   return (
     <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-5 overflow-x-auto snap-x snap-mandatory pb-3 sm:pb-0 sm:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0">
