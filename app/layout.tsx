@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     "water service",
     "government",
   ],
-  metadataBase: new URL("https://tmcwd.gov.ph"),
+  metadataBase: new URL("https://www.tmcwd.gov.ph"),
   verification: {
     google: "4j1wF_pAsF52nzOS_XCbtiULQx7jjSKeFGTsoYVV7Tc",
   },
