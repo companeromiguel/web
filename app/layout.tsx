@@ -54,6 +54,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    url: "https://www.tmcwd.gov.ph/",
     locale: "en_PH",
     siteName: "Trece Martires City Water District",
     images: [
@@ -64,6 +65,9 @@ export const metadata: Metadata = {
         alt: "Trece Martires City Water District — Serbisyong Malinis, Tapat, at Maaasahan.",
       },
     ],
+  },
+  other: {
+    "fb:app_id": "2195398564653661",
   },
   twitter: {
     card: "summary_large_image",
