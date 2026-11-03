@@ -2,10 +2,12 @@
 
 // ─────────────────────────────────────────────────────────────
 // MAINTENANCE MODE
-// Set MAINTENANCE_MODE to true to show the overlay.
-// Set it to false to disable and restore the site.
+// Controlled via the NEXT_PUBLIC_MAINTENANCE_MODE environment variable.
+// Set it to "true" in Vercel's dashboard (Project → Settings → Environment
+// Variables) to show the overlay without a code deploy.
+// Set it to "false" (or leave it unset) to keep the site live.
 // ─────────────────────────────────────────────────────────────
-const MAINTENANCE_MODE = false;
+const MAINTENANCE_MODE = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true";
 
 export default function MaintenanceOverlay() {
   if (!MAINTENANCE_MODE) return null;

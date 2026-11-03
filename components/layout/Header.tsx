@@ -9,10 +9,11 @@ import SearchBar from "@/components/layout/SearchBar";
 
 export default function Header() {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen]       = useState(false);
-  const [desktopOpen, setDesktopOpen] = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen]   = useState<string | null>(null);
-  const [scrolled, setScrolled]       = useState(false);
+  const [menuOpen, setMenuOpen]           = useState(false);
+  const [desktopOpen, setDesktopOpen]     = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen]       = useState<string | null>(null);
+  const [scrolled, setScrolled]           = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const isHome = pathname === "/";
 
   useEffect(() => {
@@ -240,6 +241,48 @@ export default function Header() {
             <SearchBar />
           </div>
 
+          {/* Facebook icon link */}
+          <a
+            href="https://www.facebook.com/tmcwdCMUHelpDesk"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="TMCWD on Facebook"
+            className="ml-3 text-white/70 hover:text-white transition-colors p-1 shrink-0"
+          >
+            <svg
+              className="size-5"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12Z" />
+            </svg>
+          </a>
+
+          {/* Mobile search toggle — visible only on mobile */}
+          <button
+            type="button"
+            aria-label={mobileSearchOpen ? "Close search" : "Open search"}
+            aria-expanded={mobileSearchOpen}
+            aria-controls="mobile-search-bar"
+            onClick={() => {
+              setMobileSearchOpen((v) => !v);
+              // close nav menu when opening search
+              if (!mobileSearchOpen) setMenuOpen(false);
+            }}
+            className="lg:hidden ml-2 text-white/70 hover:text-white transition-colors p-1 shrink-0"
+          >
+            {mobileSearchOpen ? (
+              <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+              </svg>
+            )}
+          </button>
+
           {/* Mobile toggle */}
           <button
             type="button"
@@ -262,6 +305,23 @@ export default function Header() {
         </div>
       </div>
 
+      {/* ── Mobile search bar ────────────────────────────────── */}
+      {mobileSearchOpen && (
+        <div
+          id="mobile-search-bar"
+          className="lg:hidden backdrop-blur-2xl bg-[#1a6a9a]/95 border-t border-white/10 px-4 py-3"
+        >
+          <SearchBar
+            mobile
+            onSelect={() => {
+              setMobileSearchOpen(false);
+              setMenuOpen(false);
+              setMobileOpen(null);
+            }}
+          />
+        </div>
+      )}
+
       {/* ── Mobile menu ──────────────────────────────────────── */}
       {menuOpen && (
         <nav
@@ -270,10 +330,6 @@ export default function Header() {
           className="lg:hidden backdrop-blur-2xl bg-[#1a6a9a]/95 border-t border-white/10 max-h-[calc(100dvh-3.5rem)] overflow-y-auto overscroll-contain"
         >
           <ul className="w-full px-4 py-2 flex flex-col">
-            {/* Search — mobile */}
-            <li className="py-3 border-b border-white/10">
-              <SearchBar mobile onSelect={() => { setMenuOpen(false); setMobileOpen(null); }} />
-            </li>
             {primaryNav.map(({ label, href, children }) => {
               const hasChildren = children && children.length > 0;
               const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
