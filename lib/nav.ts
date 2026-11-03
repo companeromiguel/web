@@ -41,7 +41,7 @@ export const primaryNav: NavItem[] = [
     label: "Online Services",
     href: "/online-bill-inquiry/",
     children: [
-      { label: "Online Bill Inquiry", href: "https://bills.pinas.app/portal", external: true },
+      { label: "Online Bill Inquiry", href: "https://bills.pinas.app/tmcwd", external: true },
       { label: "How to Pay Online",   href: "/online-bill-inquiry/how-to-pay/" },
       { label: "Customer's Section",      href: "/online-bill-inquiry/soa/" },
     ],

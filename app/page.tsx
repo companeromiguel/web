@@ -72,7 +72,7 @@ export default function HomePage() {
             <div className="flex flex-wrap gap-4 items-center justify-end">
               {/* Primary CTA — solid */}
               <Link
-                href="https://bills.pinas.app/tmcwd/?src=tmcwdgovph&utm_source=tmcwdgovph"
+                href="https://bills.pinas.app/tmcwd"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg bg-[#0591D4] hover:bg-[#0480bc] px-6 py-3 text-base font-semibold text-white shadow-lg shadow-black/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"

@@ -97,7 +97,7 @@ export default function DataPrivacyModal() {
             <h3 className="font-semibold text-gray-900 mb-1">Website Notice</h3>
             <p className="text-xs text-gray-600 leading-relaxed">
               The <strong className="text-gray-800">Online Bill Inquiry</strong> feature on this website
-              links to <span className="font-medium text-gray-800">bills.pinas.app</span>, a third-party
+              links to <span className="font-medium text-gray-800">bills.pinas.app/tmcwd</span>, a third-party
               service operated independently of TMCWD. Any information you enter there is subject to
               that service&apos;s own privacy policy. TMCWD does not collect or store your billing
               credentials. This website also uses Google Maps and the Facebook Graph API to display
