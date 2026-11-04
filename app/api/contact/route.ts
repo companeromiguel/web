@@ -104,9 +104,9 @@ export async function POST(req: NextRequest) {
 
   try {
     await resend.emails.send({
-      from: "TMCWD Website <onboarding@resend.dev>", // replace with a verified domain sender once your domain is set up in Resend
-      to:   ["customercare.tmcwd@gmail.com"],
-      replyTo: undefined, // no reply-to — residents should call or email directly
+      from: "TMCWD Website <onboarding@resend.dev>",
+      to:   ["tmcwdadmin@gmail.com"],
+      replyTo: undefined,
       subject,
       html: htmlBody,
     });
