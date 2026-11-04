@@ -129,6 +129,16 @@ export default function ContactForm() {
             autoComplete="email"
             placeholder="you@example.com"
             className={inputClass}
+            onBlur={(e) => {
+              const val = e.target.value.trim();
+              if (val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+                e.target.setCustomValidity("Please enter a valid email address with @.");
+                e.target.reportValidity();
+              } else {
+                e.target.setCustomValidity("");
+              }
+            }}
+            onInput={(e) => (e.target as HTMLInputElement).setCustomValidity("")}
           />
         </div>
 
