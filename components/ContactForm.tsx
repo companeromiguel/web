@@ -116,6 +116,22 @@ export default function ContactForm() {
           />
         </div>
 
+        {/* Email */}
+        <div>
+          <label htmlFor="cf-email" className={labelClass}>
+            Email Address <span className="text-red-500" aria-hidden="true">*</span>
+          </label>
+          <input
+            id="cf-email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder="you@example.com"
+            className={inputClass}
+          />
+        </div>
+
         {/* Account number */}
         <div>
           <label htmlFor="cf-account" className={labelClass}>

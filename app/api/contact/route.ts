@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, accountNumber, concernType, message, honeypot } =
+  const { name, email, accountNumber, concernType, message, honeypot } =
     body as Record<string, string>;
 
   // Honeypot — bots fill hidden fields; humans don't
@@ -110,9 +110,17 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (!name?.trim() || !concernType?.trim() || !message?.trim()) {
+  if (!name?.trim() || !email?.trim() || !concernType?.trim() || !message?.trim()) {
     return NextResponse.json(
-      { error: "Name, concern type, and message are required." },
+      { error: "Name, email, concern type, and message are required." },
+      { status: 422 }
+    );
+  }
+
+  // Basic email format check
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    return NextResponse.json(
+      { error: "Please enter a valid email address." },
       { status: 422 }
     );
   }
@@ -151,6 +159,10 @@ export async function POST(req: NextRequest) {
             <td style="padding:8px 0;font-weight:600;">${escapeHtml(name.trim())}</td>
           </tr>
           <tr style="border-top:1px solid #EEF4F8;">
+            <td style="padding:8px 0;color:#52616B;vertical-align:top;">Email</td>
+            <td style="padding:8px 0;font-weight:600;"><a href="mailto:${escapeHtml(email.trim())}" style="color:#0591D4;">${escapeHtml(email.trim())}</a></td>
+          </tr>
+          <tr style="border-top:1px solid #EEF4F8;">
             <td style="padding:8px 0;color:#52616B;vertical-align:top;">Account No.</td>
             <td style="padding:8px 0;font-weight:600;">${accountNumber?.trim() ? escapeHtml(accountNumber.trim()) : "<em style='color:#94A3B8;font-weight:400;'>Not provided</em>"}</td>
           </tr>
@@ -174,7 +186,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: "TMCWD Website <onboarding@resend.dev>",
       to:   ["customercare.tmcwd@gmail.com"],
-      replyTo: undefined,
+      replyTo: email.trim(),
       subject,
       html: htmlBody,
     });
