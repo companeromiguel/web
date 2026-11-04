@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, email, accountNumber, concernType, message, honeypot } =
+  const { name, email, accountNumber, concernType, message, honeypot, deviceToken } =
     body as Record<string, string>;
 
   // Honeypot — bots fill hidden fields; humans don't
@@ -101,7 +101,10 @@ export async function POST(req: NextRequest) {
     req.headers.get("x-real-ip") ??
     "unknown";
 
-  const { allowed, retryAfter } = await checkRateLimit(ip);
+  // Combine IP + device token so different devices on the same
+  // network (same IP) each get their own independent limit bucket.
+  const rateLimitKey = `${ip}:${deviceToken?.trim() || "unknown"}`;
+  const { allowed, retryAfter } = await checkRateLimit(rateLimitKey);
   if (!allowed) {
     const minutes = Math.ceil((retryAfter ?? RATE_WINDOW_SEC) / 60);
     return NextResponse.json(

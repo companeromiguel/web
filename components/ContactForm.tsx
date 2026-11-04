@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -17,9 +17,30 @@ const inputClass =
 
 const labelClass = "block text-xs font-semibold text-[#294C61] mb-1.5";
 
+const DEVICE_TOKEN_KEY = "tmcwd-cf-token";
+
+/** Get or create a random persistent device token stored in localStorage */
+function getDeviceToken(): string {
+  try {
+    const existing = localStorage.getItem(DEVICE_TOKEN_KEY);
+    if (existing) return existing;
+    const token = crypto.randomUUID();
+    localStorage.setItem(DEVICE_TOKEN_KEY, token);
+    return token;
+  } catch {
+    return "unknown";
+  }
+}
+
 export default function ContactForm() {
   const [status, setStatus]     = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const deviceTokenRef          = useRef<string>("");
+
+  // Initialise device token once on mount (client-only)
+  useEffect(() => {
+    deviceTokenRef.current = getDeviceToken();
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,7 +48,10 @@ export default function ContactForm() {
     setErrorMsg("");
 
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form));
+    const data = {
+      ...Object.fromEntries(new FormData(form)),
+      deviceToken: deviceTokenRef.current,
+    };
 
     try {
       const res = await fetch("/api/contact", {
