@@ -186,12 +186,84 @@ export async function POST(req: NextRequest) {
   `;
 
   try {
+    // Send inquiry to TMCWD staff
     await resend.emails.send({
       from: "TMCWD Website <onboarding@resend.dev>",
       to:   ["customercare.tmcwd@gmail.com"],
       replyTo: email.trim(),
       subject,
       html: htmlBody,
+    });
+
+    // Send confirmation copy to the resident
+    const confirmSubject = `Your inquiry has been received — ${concernLabel}`;
+    const confirmBody = `
+      <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#2A2A29;">
+        <div style="background:#0591D4;padding:20px 24px;border-radius:8px 8px 0 0;">
+          <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:0.1em;text-transform:uppercase;">
+            Trece Martires City Water District
+          </p>
+          <h1 style="margin:6px 0 0;font-size:20px;color:#fff;">We received your inquiry</h1>
+        </div>
+        <div style="border:1px solid #C4DAE7;border-top:none;border-radius:0 0 8px 8px;padding:24px;">
+          <p style="margin:0 0 16px;font-size:14px;line-height:1.7;">
+            Dear <strong>${escapeHtml(name.trim())}</strong>,
+          </p>
+          <p style="margin:0 0 16px;font-size:14px;line-height:1.7;">
+            Thank you for reaching out to the Trece Martires City Water District. We have received your inquiry and will get back to you during office hours <strong>(Monday – Friday, 8:00 AM – 5:00 PM)</strong>.
+          </p>
+
+          <div style="background:#F8FBFD;border:1px solid #C4DAE7;border-radius:8px;padding:20px;margin:0 0 20px;">
+            <p style="margin:0 0 12px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#94A3B8;">
+              Copy of your submission
+            </p>
+            <table style="width:100%;border-collapse:collapse;font-size:13px;">
+              <tr>
+                <td style="padding:6px 0;color:#52616B;width:120px;vertical-align:top;">Concern</td>
+                <td style="padding:6px 0;font-weight:600;">${escapeHtml(concernLabel)}</td>
+              </tr>
+              ${accountNumber?.trim() ? `
+              <tr style="border-top:1px solid #EEF4F8;">
+                <td style="padding:6px 0;color:#52616B;vertical-align:top;">Account No.</td>
+                <td style="padding:6px 0;font-weight:600;">${escapeHtml(accountNumber.trim())}</td>
+              </tr>` : ""}
+              <tr style="border-top:1px solid #EEF4F8;">
+                <td style="padding:6px 0;color:#52616B;vertical-align:top;">Message</td>
+                <td style="padding:6px 0;white-space:pre-wrap;">${escapeHtml(message.trim())}</td>
+              </tr>
+              <tr style="border-top:1px solid #EEF4F8;">
+                <td style="padding:6px 0;color:#52616B;vertical-align:top;">Submitted</td>
+                <td style="padding:6px 0;">${new Date().toLocaleString("en-PH", { timeZone: "Asia/Manila" })}</td>
+              </tr>
+            </table>
+          </div>
+
+          <p style="margin:0 0 16px;font-size:14px;line-height:1.7;">
+            For urgent concerns, you may reach us directly:
+          </p>
+          <ul style="margin:0 0 20px;padding-left:20px;font-size:14px;line-height:2;">
+            <li>Telephone: <a href="tel:+63464192664" style="color:#0591D4;">(046) 419-2664</a></li>
+            <li>Cell Phone: <a href="tel:+639178050391" style="color:#0591D4;">0917-805-0391</a></li>
+            <li>Email: <a href="mailto:customercare.tmcwd@gmail.com" style="color:#0591D4;">customercare.tmcwd@gmail.com</a></li>
+          </ul>
+
+          <p style="margin:0 0 4px;font-size:14px;">Thank you for your patience.</p>
+          <br/>
+          <p style="margin:0;font-weight:600;font-size:13px;">Customer Service Department</p>
+          <p style="margin:2px 0 0;font-weight:700;font-size:13px;color:#0591D4;">TRECE MARTIRES CITY WATER DISTRICT</p>
+          <p style="margin:4px 0 0;font-size:12px;color:#94A3B8;">
+            Sent from the TMCWD website contact form · ${new Date().toLocaleString("en-PH", { timeZone: "Asia/Manila" })}
+          </p>
+        </div>
+      </div>
+    `;
+
+    await resend.emails.send({
+      from:    "TMCWD Customer Service <onboarding@resend.dev>",
+      to:      [email.trim()],
+      replyTo: "customercare.tmcwd@gmail.com",
+      subject: confirmSubject,
+      html:    confirmBody,
     });
 
     return NextResponse.json({ ok: true });
