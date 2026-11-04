@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, email, accountNumber, concernType, message, honeypot, deviceToken } =
+  const { name, email, accountNumber, concernType, message, honeypot, deviceToken, otherConcern } =
     body as Record<string, string>;
 
   // Honeypot — bots fill hidden fields; humans don't
@@ -144,7 +144,9 @@ export async function POST(req: NextRequest) {
   }
 
   // ── Send email ───────────────────────────────────────────────────
-  const concernLabel = CONCERN_LABELS[concernType] ?? concernType;
+  const concernLabel = concernType === "other" && otherConcern?.trim()
+    ? `Other — ${otherConcern.trim()}`
+    : (CONCERN_LABELS[concernType] ?? concernType);
   const subject = `[Website Inquiry] ${concernLabel} — ${name.trim()}`;
 
   const htmlBody = `

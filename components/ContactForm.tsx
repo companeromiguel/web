@@ -44,6 +44,7 @@ export default function ContactForm() {
   const [status, setStatus]         = useState<Status>("idle");
   const [errorMsg, setErrorMsg]     = useState("");
   const [submitted, setSubmitted]   = useState<SubmissionData | null>(null);
+  const [concernType, setConcernType] = useState("");
   const deviceTokenRef              = useRef<string>("");
 
   // Initialise device token once on mount (client-only)
@@ -79,7 +80,9 @@ export default function ContactForm() {
         name:          formData.name,
         email:         formData.email,
         accountNumber: formData.accountNumber || undefined,
-        concernType:   formData.concernType,
+        concernType:   formData.concernType === "other" && formData.otherConcern
+                         ? `Other — ${formData.otherConcern}`
+                         : formData.concernType,
         message:       formData.message,
       });
       setStatus("success");
@@ -229,7 +232,8 @@ export default function ContactForm() {
             id="cf-concern"
             name="concernType"
             required
-            defaultValue=""
+            value={concernType}
+            onChange={(e) => setConcernType(e.target.value)}
             className={`${inputClass} cursor-pointer`}
           >
             <option value="" disabled>Select a concern…</option>
@@ -238,6 +242,24 @@ export default function ContactForm() {
             ))}
           </select>
         </div>
+
+        {/* Other concern — shown only when "Other" is selected */}
+        {concernType === "other" && (
+          <div>
+            <label htmlFor="cf-other" className={labelClass}>
+              Please specify your concern <span className="text-red-500" aria-hidden="true">*</span>
+            </label>
+            <input
+              id="cf-other"
+              name="otherConcern"
+              type="text"
+              required
+              placeholder="Briefly describe your concern…"
+              className={inputClass}
+              autoFocus
+            />
+          </div>
+        )}
 
         {/* Message */}
         <div>
