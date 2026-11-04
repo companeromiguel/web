@@ -163,7 +163,7 @@ export async function POST(req: NextRequest) {
           </tr>
           <tr style="border-top:1px solid #EEF4F8;">
             <td style="padding:8px 0;color:#52616B;vertical-align:top;">Email</td>
-            <td style="padding:8px 0;font-weight:600;"><a href="mailto:${escapeHtml(email.trim())}" style="color:#0591D4;">${escapeHtml(email.trim())}</a></td>
+            <td style="padding:8px 0;font-weight:600;"><a href="mailto:${escapeHtml(email.trim())}?subject=${encodeURIComponent(`Re: [Website Inquiry] ${concernLabel} — ${name.trim()}`)}" style="color:#0591D4;">${escapeHtml(email.trim())}</a></td>
           </tr>
           <tr style="border-top:1px solid #EEF4F8;">
             <td style="padding:8px 0;color:#52616B;vertical-align:top;">Account No.</td>
@@ -181,33 +181,6 @@ export async function POST(req: NextRequest) {
         <p style="margin:24px 0 0;font-size:12px;color:#94A3B8;">
           Sent from the TMCWD website contact form · ${new Date().toLocaleString("en-PH", { timeZone: "Asia/Manila" })}
         </p>
-
-        <!-- Reply template separator -->
-        <div style="margin-top:32px;padding-top:24px;border-top:2px solid #EEF4F8;">
-          <p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#94A3B8;">
-            Suggested reply to ${escapeHtml(name.trim())}
-          </p>
-          <div style="background:#F8FBFD;border:1px solid #C4DAE7;border-radius:8px;padding:20px;font-size:14px;line-height:1.8;color:#2A2A29;">
-            <p style="margin:0 0 12px;">Dear ${escapeHtml(name.trim())},</p>
-            <p style="margin:0 0 12px;">Thank you for reaching out to the Trece Martires City Water District. We have received your inquiry regarding <strong>${escapeHtml(concernLabel)}</strong> and will attend to it accordingly.</p>
-            <p style="margin:0 0 12px;">Should you have further questions or concerns, please do not hesitate to contact us through the following:</p>
-            <ul style="margin:0 0 12px;padding-left:20px;">
-              <li>Telephone: (046) 419-2664</li>
-              <li>Cell Phone: 0917-805-0391</li>
-              <li>Email: <a href="mailto:customercare.tmcwd@gmail.com" style="color:#0591D4;">customercare.tmcwd@gmail.com</a></li>
-            </ul>
-            <p style="margin:0 0 4px;">Thank you for your patience and cooperation.</p>
-            <p style="margin:0;">We look forward to serving you.</p>
-            <br/>
-            <p style="margin:0;font-weight:600;">Customer Service Department</p>
-            <p style="margin:0;font-weight:700;color:#0591D4;">TRECE MARTIRES CITY WATER DISTRICT</p>
-            <p style="margin:4px 0 0;font-size:12px;color:#52616B;">
-              Front of Quintana Executive Homes, Brgy. San Agustin, Trece Martires City, Cavite<br/>
-              Tel: (046) 419-2664 &nbsp;|&nbsp; Cell: 0917-805-0391<br/>
-              <a href="mailto:customercare.tmcwd@gmail.com" style="color:#0591D4;">customercare.tmcwd@gmail.com</a>
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   `;
@@ -219,10 +192,6 @@ export async function POST(req: NextRequest) {
       replyTo: email.trim(),
       subject,
       html: htmlBody,
-      headers: {
-        // Pre-fills the subject when staff hits Reply in Gmail
-        "X-Reply-Subject": `Re: ${subject}`,
-      },
     });
 
     return NextResponse.json({ ok: true });
