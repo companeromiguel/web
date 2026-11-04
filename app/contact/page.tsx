@@ -2,6 +2,7 @@
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import AnnouncementHero from "@/components/layout/AnnouncementHero";
 import TransparencyWaveBackground from "@/components/TransparencyWaveBackground";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact & Service Area",
@@ -67,6 +68,56 @@ export default function ContactPage() {
               <iframe title="Trece Martires City Water District office location" src="https://maps.google.com/maps?cid=10092507030261381943&output=embed" width="100%" height="420" className="min-h-72 flex-1 border-0" loading="lazy" allowFullScreen referrerPolicy="no-referrer-when-downgrade" />
               <div className="border-t border-[#E0EBF2] p-5">
                 <a href="https://www.google.com/maps?cid=10092507030261381943" target="_blank" rel="noopener noreferrer" className={`${linkClass} inline-flex items-center gap-2 text-sm font-semibold`}>Open in Google Maps <ArrowUpRight size={16} aria-hidden="true" /></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Inquiry form ── */}
+        <section aria-labelledby="inquiry-heading">
+          <h2 id="inquiry-heading" className="mb-6 font-heading text-2xl font-semibold text-[#087FB8]">Send us an inquiry</h2>
+          <div className="grid gap-6 lg:grid-cols-2">
+            <ContactForm />
+
+            {/* Right column — what to expect + common concerns */}
+            <div className="space-y-6">
+              <div className={panelClass}>
+                <h3 className="font-heading text-base font-semibold text-[#087FB8] mb-4">What to expect</h3>
+                <ul className="space-y-3 text-sm text-[#52616B]">
+                  {[
+                    "We respond to inquiries within 1–2 business days.",
+                    "For urgent concerns (no water, active leak), please call us directly.",
+                    "Include your account number for billing questions — it speeds up our response.",
+                    "Office hours: Monday – Friday, 8:00 AM – 5:00 PM.",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#0591D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className={panelClass}>
+                <h3 className="font-heading text-base font-semibold text-[#087FB8] mb-4">Common concerns</h3>
+                <ul className="space-y-2 text-sm">
+                  {[
+                    { label: "How do I pay my bill?",              href: "/services/payment/" },
+                    { label: "How do I apply for a new connection?", href: "/services/new-water-application/" },
+                    { label: "How do I request a reconnection?",   href: "/services/reconnection/" },
+                    { label: "Senior citizen discount eligibility", href: "/services/senior-citizen-discount/" },
+                    { label: "Freedom of Information requests",    href: "/transparency/foi/" },
+                  ].map(({ label, href }) => (
+                    <li key={href}>
+                      <a href={href} className={`${linkClass} flex items-center justify-between gap-2`}>
+                        {label}
+                        <ArrowUpRight size={14} className="shrink-0 opacity-50" aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>

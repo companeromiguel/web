@@ -23,13 +23,13 @@ export default function GlobalError({
             <div className="absolute left-[88%] bottom-0 w-3 h-3 rounded-full bg-white/10 animate-[bubble1_5s_ease-in_2s_infinite]" />
 
             {/* Waves */}
-            <svg className="absolute bottom-0 left-0 w-[200%] animate-[wave-slow_8s_linear_infinite]" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="absolute bottom-0 left-0 w-[200%] h-[120px] animate-wave-slow" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.06)" />
             </svg>
-            <svg className="absolute bottom-0 left-0 w-[200%] animate-[wave-fast_5s_linear_infinite]" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="absolute bottom-0 left-0 w-[200%] h-[90px] animate-wave-fast" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0,45 C180,80 360,10 540,45 C720,80 900,10 1080,45 C1260,80 1440,10 1440,45 L1440,90 L0,90 Z" fill="rgba(255,255,255,0.04)" />
             </svg>
-            <svg className="absolute bottom-0 left-0 w-[200%] animate-[wave-mid_6.5s_linear_0.5s_infinite]" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="absolute bottom-0 left-0 w-[200%] h-[70px] animate-wave-mid" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0,35 C360,65 720,5 1080,35 C1260,50 1380,25 1440,35 L1440,70 L0,70 Z" fill="rgba(55,10,119,0.12)" />
             </svg>
           </div>
@@ -77,31 +77,6 @@ export default function GlobalError({
               Trece Martires City Water District
             </p>
           </div>
-
-          <style>{`
-            @keyframes bubble1 {
-              0%   { transform: translateY(0) scale(1);   opacity: 0.15; }
-              50%  { opacity: 0.25; }
-              100% { transform: translateY(-100vh) scale(1.4); opacity: 0; }
-            }
-            @keyframes bubble2 {
-              0%   { transform: translateY(0) scale(1);   opacity: 0.1; }
-              50%  { opacity: 0.2; }
-              100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
-            }
-            @keyframes wave-slow {
-              0%   { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            @keyframes wave-fast {
-              0%   { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            @keyframes wave-mid {
-              0%   { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-          `}</style>
         </div>
       </body>
     </html>

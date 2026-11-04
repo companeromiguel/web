@@ -9,7 +9,7 @@ import styles from "./GalleryAlbums.module.css";
 export interface GalleryImage { src: string; alt: string; }
 export interface GallerySection { id: string; title: string; images: GalleryImage[]; }
 
-const filters = ["All", "2019", "2018", "2017", "Earlier"] as const;
+const filters = ["All", "2026", "2019", "2018", "2017", "Earlier"] as const;
 const albumYear = (title: string) => title.match(/\b(20\d{2})\b/)?.[1] ?? "Archive";
 const displayTitle = (title: string) => title.replace(/^20\d{2}\s+/, "");
 

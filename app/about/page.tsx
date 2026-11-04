@@ -55,10 +55,11 @@ function Heading({ number, title, description }: { number: string; title: string
 function Portrait({ name, role, photo }: { name: string; role: string; photo?: string }) {
   return <article className={styles.portraitCard}>
     <div className={styles.portrait}>
-      {photo ? <Image src={photo} alt={name} fill sizes="140px" className={styles.leaderPhoto} /> : <UserRound size={56} strokeWidth={1} aria-hidden="true" />}
+      {photo ? <Image src={photo} alt={name || role} fill sizes="140px" className={styles.leaderPhoto} /> : <UserRound size={56} strokeWidth={1} aria-hidden="true" />}
     </div>
     {!photo && <span className={styles.photoLabel}>Official portrait to follow</span>}
-    <h3>{name}</h3><p>{role}</p>
+    {name && <h3>{name}</h3>}
+    <p>{role}</p>
   </article>;
 }
 
@@ -164,7 +165,7 @@ export default function AboutPage() {
           <Heading number="05" title="The people behind our purpose" />
           <div className={styles.leaders}>
             <Portrait name="Ms. Narcisa L. Montano" role="Chairperson, Board of Directors" photo="/board/narcisa-montano.png" />
-            <Portrait name="Engr. Joel John M. Ulep" role="General Manager" photo="/board/gm.png" />
+            <Portrait name="" role="General Manager" photo="/NO_PROF.jpg" />
           </div>
           <div className={styles.directory}>
             <div>
@@ -196,19 +197,22 @@ export default function AboutPage() {
             </div>
             <div className={styles.directoryGrid}>
               {[
-                { name: "Mr. Lorenzo R. Sisante", role: "Division Manager", division: "Construction and Maintenance Division", photo: "/board/sironchie.png" },
+                { name: "Mr. Lorenzo R. Sisante", role: "Interim Officer in Charge", division: "Construction and Maintenance Division", photo: "/board/sironchie.png" },
                 { name: "Ms. Michelle V. Patanindagat", role: "Officer in Charge", division: "Human Resources Division", photo: "/board/mich.png" },
                 { name: "Ms. Elaine L. Liveta, CPA", role: "Officer in Charge", division: "Accounting and Cash Management Division", photo: "/board/maamelaine.png" },
                 { name: "Engr. Edvan Rhey O. Reyes", role: "Officer in Charge", division: "Administrative and General Services Division", photo: "/board/sired.png" },
               ].map(({ name, role, division, photo }) => (
-                <article key={name} className={styles.boardCard}>
+                <article key={`${name}-${division}`} className={styles.boardCard}>
                   <div className={styles.boardDetails}>
                     <span className={styles.directoryRole}>{role}</span>
-                    <h4>{name}</h4>
+                    {name && <h4>{name}</h4>}
                     <p>{division}</p>
                   </div>
                   <div className={styles.boardPhoto}>
-                    <Image src={photo} alt={name} fill sizes="(max-width: 600px) 90px, 110px" />
+                    {photo
+                      ? <Image src={photo} alt={name || role} fill sizes="(max-width: 600px) 90px, 110px" />
+                      : <UserRound size={40} strokeWidth={1} aria-hidden="true" />
+                    }
                   </div>
                 </article>
               ))}
