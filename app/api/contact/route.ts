@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
   try {
     await resend.emails.send({
       from: "TMCWD Website <onboarding@resend.dev>",
-      to:   ["tmcwdadmin@gmail.com"],
+      to:   ["customercare.tmcwd@gmail.com"],
       replyTo: undefined,
       subject,
       html: htmlBody,
