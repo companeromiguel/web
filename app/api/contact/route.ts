@@ -4,17 +4,70 @@
  * POST — receives the contact form submission, sends an email to
  * customercare.tmcwd@gmail.com via Resend, and returns a JSON result.
  *
- * Required env var:
- *   RESEND_API_KEY  — get one at https://resend.com (free tier: 100 emails/day)
+ * Rate limiting: 3 submissions per IP per hour via Upstash Redis.
  *
- * Rate-limiting is intentionally kept simple (one submission per request).
- * Add a Redis-based limiter if abuse becomes a concern.
+ * Required env vars:
+ *   RESEND_API_KEY          — get one at https://resend.com
+ *   UPSTASH_REDIS_REST_URL  — Upstash Redis REST URL
+ *   UPSTASH_REDIS_REST_TOKEN — Upstash Redis REST token
  */
 
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const REDIS_URL   = process.env.UPSTASH_REDIS_REST_URL;
+const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+const RATE_LIMIT      = 3;    // max submissions
+const RATE_WINDOW_SEC = 3600; // per hour (3600 seconds)
+
+/** Run a single Upstash Redis command via REST */
+async function redis<T>(command: unknown[]): Promise<T> {
+  const res = await fetch(REDIS_URL!, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${REDIS_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(command),
+    cache: "no-store",
+  });
+  const json = await res.json() as { result: T };
+  return json.result;
+}
+
+/**
+ * Check and increment the rate limit counter for a given IP.
+ * Returns { allowed: true } or { allowed: false, retryAfter: seconds }.
+ */
+async function checkRateLimit(ip: string): Promise<{ allowed: boolean; retryAfter?: number }> {
+  if (!REDIS_URL || !REDIS_TOKEN) return { allowed: true }; // skip if Redis not configured
+
+  const key = `contact:rl:${ip}`;
+
+  try {
+    // Increment counter — returns new value
+    const count = await redis<number>(["INCR", key]);
+
+    if (count === 1) {
+      // First request — set expiry window
+      await redis(["EXPIRE", key, RATE_WINDOW_SEC]);
+    }
+
+    if (count > RATE_LIMIT) {
+      // Get remaining TTL so we can tell the user how long to wait
+      const ttl = await redis<number>(["TTL", key]);
+      return { allowed: false, retryAfter: ttl > 0 ? ttl : RATE_WINDOW_SEC };
+    }
+
+    return { allowed: true };
+  } catch {
+    // If Redis is down, fail open — don't block legitimate users
+    return { allowed: true };
+  }
+}
 
 // Concern type labels — must match the values in ContactForm.tsx
 const CONCERN_LABELS: Record<string, string> = {
@@ -40,6 +93,21 @@ export async function POST(req: NextRequest) {
   // Honeypot — bots fill hidden fields; humans don't
   if (honeypot) {
     return NextResponse.json({ ok: true }); // silently drop
+  }
+
+  // ── Rate limiting ─────────────────────────────────────────────────
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    req.headers.get("x-real-ip") ??
+    "unknown";
+
+  const { allowed, retryAfter } = await checkRateLimit(ip);
+  if (!allowed) {
+    const minutes = Math.ceil((retryAfter ?? RATE_WINDOW_SEC) / 60);
+    return NextResponse.json(
+      { error: `Too many submissions. Please wait ${minutes} minute${minutes !== 1 ? "s" : ""} before trying again.` },
+      { status: 429, headers: { "Retry-After": String(retryAfter ?? RATE_WINDOW_SEC) } }
+    );
   }
 
   if (!name?.trim() || !concernType?.trim() || !message?.trim()) {
