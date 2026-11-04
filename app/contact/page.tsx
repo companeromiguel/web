@@ -79,27 +79,8 @@ export default function ContactPage() {
           <div className="grid gap-6 lg:grid-cols-2">
             <ContactForm />
 
-            {/* Right column — what to expect + common concerns */}
+            {/* Right column — common concerns */}
             <div className="space-y-6">
-              <div className={panelClass}>
-                <h3 className="font-heading text-base font-semibold text-[#087FB8] mb-4">What to expect</h3>
-                <ul className="space-y-3 text-sm text-[#52616B]">
-                  {[
-                    "We respond to inquiries within 1–2 business days.",
-                    "For urgent concerns (no water, active leak), please call us directly.",
-                    "Include your account number for billing questions — it speeds up our response.",
-                    "Office hours: Monday – Friday, 8:00 AM – 5:00 PM.",
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#0591D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
               <div className={panelClass}>
                 <h3 className="font-heading text-base font-semibold text-[#087FB8] mb-4">Common concerns</h3>
                 <ul className="space-y-2 text-sm">
