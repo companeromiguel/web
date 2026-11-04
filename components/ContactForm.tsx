@@ -4,6 +4,14 @@ import { useEffect, useRef, useState } from "react";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
+interface SubmissionData {
+  name: string;
+  email: string;
+  accountNumber?: string;
+  concernType: string;
+  message: string;
+}
+
 const CONCERN_OPTIONS = [
   { value: "billing",       label: "Billing & Account" },
   { value: "leak",          label: "Leak / Water Supply Concern" },
@@ -33,9 +41,10 @@ function getDeviceToken(): string {
 }
 
 export default function ContactForm() {
-  const [status, setStatus]     = useState<Status>("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-  const deviceTokenRef          = useRef<string>("");
+  const [status, setStatus]         = useState<Status>("idle");
+  const [errorMsg, setErrorMsg]     = useState("");
+  const [submitted, setSubmitted]   = useState<SubmissionData | null>(null);
+  const deviceTokenRef              = useRef<string>("");
 
   // Initialise device token once on mount (client-only)
   useEffect(() => {
@@ -48,10 +57,8 @@ export default function ContactForm() {
     setErrorMsg("");
 
     const form = e.currentTarget;
-    const data = {
-      ...Object.fromEntries(new FormData(form)),
-      deviceToken: deviceTokenRef.current,
-    };
+    const formData = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    const data = { ...formData, deviceToken: deviceTokenRef.current };
 
     try {
       const res = await fetch("/api/contact", {
@@ -68,6 +75,13 @@ export default function ContactForm() {
         return;
       }
 
+      setSubmitted({
+        name:          formData.name,
+        email:         formData.email,
+        accountNumber: formData.accountNumber || undefined,
+        concernType:   formData.concernType,
+        message:       formData.message,
+      });
       setStatus("success");
       form.reset();
     } catch {
@@ -76,25 +90,50 @@ export default function ContactForm() {
     }
   }
 
-  if (status === "success") {
+  if (status === "success" && submitted) {
+    const concernLabel = CONCERN_OPTIONS.find(o => o.value === submitted.concernType)?.label ?? submitted.concernType;
     return (
-      <div className="rounded-2xl border border-[#C4DAE7] bg-white p-8 shadow-[0_8px_24px_rgba(35,82,110,0.10)] text-center">
-        {/* Check icon */}
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#DEEEFA]">
-          <svg className="h-7 w-7 text-[#0591D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-          </svg>
+      <div className="rounded-2xl border border-[#C4DAE7] bg-white p-6 shadow-[0_8px_24px_rgba(35,82,110,0.10)] sm:p-8">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-6">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#DEEEFA]">
+            <svg className="h-5 w-5 text-[#0591D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="font-heading text-lg font-semibold text-[#087FB8]">Message sent!</h3>
+            <p className="text-xs text-[#52616B]">We'll get back to you during office hours (Mon–Fri, 8 AM–5 PM).</p>
+          </div>
         </div>
-        <h3 className="font-heading text-lg font-semibold text-[#087FB8] mb-2">
-          Message sent!
-        </h3>
-        <p className="text-sm text-[#52616B] leading-relaxed max-w-xs mx-auto">
-          We received your inquiry and will get back to you as soon as possible during office hours (Mon–Fri, 8 AM–5 PM).
+
+        {/* Submission summary */}
+        <div className="rounded-xl bg-[#F8FBFD] border border-[#C4DAE7] p-4 mb-5">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[#52616B]/60 mb-3">Copy of your submission</p>
+          <dl className="space-y-2 text-sm">
+            {[
+              { label: "Name",         value: submitted.name },
+              { label: "Email",        value: submitted.email },
+              { label: "Account No.",  value: submitted.accountNumber || "Not provided" },
+              { label: "Concern",      value: concernLabel },
+              { label: "Message",      value: submitted.message },
+            ].map(({ label, value }) => (
+              <div key={label} className="grid grid-cols-[100px_1fr] gap-2">
+                <dt className="text-[#52616B]">{label}</dt>
+                <dd className="font-medium text-[#2A2A29] break-words whitespace-pre-wrap">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <p className="text-[11px] text-[#52616B]/50 text-center mb-4">
+          Screenshot or note this down for your reference.
         </p>
+
         <button
           type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-6 text-xs font-semibold text-[#0591D4] hover:underline"
+          onClick={() => { setStatus("idle"); setSubmitted(null); }}
+          className="w-full rounded-xl border border-[#C4DAE7] bg-white hover:bg-[#F1F7FA] px-6 py-2.5 text-xs font-semibold text-[#087FB8] transition-colors"
         >
           Send another message
         </button>
