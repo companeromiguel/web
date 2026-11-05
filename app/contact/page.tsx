@@ -86,7 +86,7 @@ export default function ContactPage() {
                 <ul className="space-y-2 text-sm">
                   {[
                     { label: "How do I pay my bill?",                href: "/services/payment/",                  external: false },
-                    { label: "How do I check my bill online?",       href: "https://bills.pinas.app/tmcwd",        external: true  },
+                    { label: "Where can I check my bill online?",     href: "https://bills.pinas.app/tmcwd",        external: true  },
                     { label: "How do I apply for a new connection?", href: "/services/new-water-application/",    external: false },
                     { label: "How do I request a reconnection?",     href: "/services/reconnection/",             external: false },
                     { label: "Senior citizen discount eligibility",  href: "/services/senior-citizen-discount/",  external: false },
