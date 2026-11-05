@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // ── Tweak this to change minimum display time ─────────────────────────
-const MIN_DISPLAY_MS = 3000;
+const MIN_DISPLAY_MS = 1200;
 // ─────────────────────────────────────────────────────────────────────
 
 const HG          = 140; // glass interior height px
@@ -38,7 +38,7 @@ export default function PageLoader() {
       sceneRef.current.classList.remove("pl-open");
       sceneRef.current.classList.add("pl-closed");
     }
-    setTimeout(() => setHidden(true), 800 + 700); // stream drains + fade
+    setTimeout(() => setHidden(true), 800 + 300); // stream drains + fade
   }
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function PageLoader() {
       const elapsed = now - startRef.current;
       const ready   = pageLoadedRef.current && elapsed >= MIN_DISPLAY_MS;
       const t       = Math.max(0, elapsed - 600);
-      const target  = ready ? 100 : 88 * (1 - Math.exp(-t / 1500));
+      const target  = ready ? 100 : 88 * (1 - Math.exp(-t / 800));
       pRef.current += (target - pRef.current) * (1 - Math.exp(-(ready ? 2.2 : 2.6) * dt));
       render(pRef.current);
       if (ready && pRef.current > 99.7) { render(100); finish(); return; }
