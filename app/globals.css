@@ -1335,3 +1335,224 @@ html.a11y-reduce-motion *::after {
     max-width: 100% !important;
   }
 }
+
+/* ── Page Loader ─────────────────────────────────────────────────────
+   Flat faucet-fills-glass loader.
+   To customise:
+     Background:    --bg inside #page-loader
+     Text color:    --text inside #page-loader
+     Water front:   --water inside #page-loader
+     Water back:    --water-back inside #page-loader
+     Brass light:   #d4a23a hard-coded in faucet SVG fill attrs
+     Brass dark:    #b5832a hard-coded in faucet SVG fill attrs
+     Min display:   MIN_DISPLAY_MS in components/layout/PageLoader.tsx
+     Fill speed:    the 1500 value in the target= line in PageLoader.tsx
+──────────────────────────────────────────────────────────────────────── */
+
+#page-loader {
+  --bg:         #0a4a8a;
+  --text:       #ffffff;
+  --water:      #2d9bf0;
+  --water-back: #8fd0ff;
+
+  position:        fixed;
+  inset:           0;
+  z-index:         9999;
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  gap:             16px;
+  background:      var(--bg);
+  transition:      opacity 0.7s ease, visibility 0.7s ease;
+}
+
+#page-loader.hide {
+  opacity:    0;
+  visibility: hidden;
+}
+
+/* ── Scene container ── */
+.pl-scene {
+  position: relative;
+  width:    220px;
+  height:   290px;
+}
+
+/* ── Faucet ── */
+.pl-faucet {
+  position: absolute;
+  left:     0;
+  top:      0;
+  width:    220px;
+  height:   100px;
+  overflow: visible;
+}
+
+.pl-knob {
+  transform-box:    fill-box;
+  transform-origin: center;
+  transition:       transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pl-open  .pl-knob { transform: scaleX(0.3); }
+
+/* ── Stream ── */
+.pl-stream {
+  position:         absolute;
+  left:             107px;
+  top:              73px;
+  width:            6px;
+  height:           0;
+  transform:        scaleY(0);
+  transform-origin: top;
+  transition:       transform 0.45s ease-out;
+}
+
+.pl-stream i {
+  display:       block;
+  width:         100%;
+  height:        100%;
+  border-radius: 3px;
+  background:    var(--water);
+  animation:     pl-flow 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pl-flow {
+  from { transform: scaleX(0.8);  }
+  to   { transform: scaleX(1.1); }
+}
+
+.pl-open   .pl-stream { transform: scaleY(1); transform-origin: top;    transition: transform 0.45s ease-out; }
+.pl-closed .pl-stream { transform: scaleY(0); transform-origin: bottom; transition: transform 0.5s ease-in;  }
+
+/* ── Glass wrapper ── */
+.pl-glass-wrap {
+  position: absolute;
+  left:     55px;
+  top:      150px;
+  width:    110px;
+  height:   140px;
+}
+
+/* ── Glass body (clipped) ── */
+.pl-glass {
+  position:  absolute;
+  inset:     0;
+  clip-path: path("M0 0 H110 L100 134 Q99 140 93 140 H17 Q11 140 10 134 Z");
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Glass outline SVG ── */
+.pl-outline {
+  position:       absolute;
+  left:           0;
+  top:            0;
+  width:          110px;
+  height:         140px;
+  overflow:       visible;
+  pointer-events: none;
+}
+
+.pl-outline path {
+  fill:             none;
+  stroke:           #ffffff;
+  stroke-opacity:   0.75;
+  stroke-width:     3;
+  stroke-linecap:   round;
+  stroke-linejoin:  round;
+}
+
+/* ── Water level (JS-driven translateY) ── */
+.pl-level {
+  position:   absolute;
+  left:       0;
+  top:        0;
+  width:      110px;
+  height:     140px;
+  transform:  translateY(140px);
+  will-change: transform;
+}
+
+/* ── Wave layers ── */
+.pl-layer {
+  position: absolute;
+  left:     0;
+  top:      0;
+  width:    100%;
+  height:   100%;
+}
+
+.pl-back  { transform: translateY(-3px); --c: var(--water-back); }
+.pl-front { --c: var(--water); }
+
+.pl-wave {
+  position: absolute;
+  left:     0;
+  top:      0;
+  width:    200%;
+  height:   40px;
+}
+
+.pl-wave path { fill: var(--c); }
+
+.pl-back  .pl-wave { animation: pl-slide 5s linear infinite reverse; }
+.pl-front .pl-wave { animation: pl-slide 7s linear infinite; }
+
+/* Solid fill body — never scaled, always reaches bottom */
+.pl-fill {
+  position:   absolute;
+  left:       0;
+  top:        24px;
+  width:      100%;
+  height:     320px;
+  background: var(--c);
+}
+
+@keyframes pl-slide {
+  from { transform: translateX(0);    }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Ripple rings ── */
+.pl-ripple {
+  position:      absolute;
+  left:          55px;
+  top:           12px;
+  width:         10px;
+  height:        3px;
+  border-radius: 50%;
+  border:        2px solid #ffffff;
+  opacity:       0;
+  transform:     translate(-50%, -50%);
+  animation:     pl-ripple 1.2s ease-out infinite;
+  animation-delay: 0.5s;
+}
+
+.pl-r2 { animation-delay: 1.1s; }
+
+.pl-closed .pl-ripple { animation: none; opacity: 0; }
+
+@keyframes pl-ripple {
+  0%   { opacity: 0.9; width: 10px; height: 3px; }
+  100% { opacity: 0;   width: 64px; height: 9px; }
+}
+
+/* ── Loading text ── */
+.pl-loading-text {
+  margin-top:     6px;
+  color:          var(--text);
+  font-weight:    700;
+  letter-spacing: 0.16em;
+  font-size:      14px;
+  text-transform: uppercase;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .pl-wave,
+  .pl-stream i,
+  .pl-ripple {
+    animation-duration: 12s;
+  }
+}
