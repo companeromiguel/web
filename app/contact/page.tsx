@@ -85,14 +85,15 @@ export default function ContactPage() {
                 <h3 className="font-heading text-base font-semibold text-[#087FB8] mb-4">Common concerns</h3>
                 <ul className="space-y-2 text-sm">
                   {[
-                    { label: "How do I pay my bill?",              href: "/services/payment/" },
-                    { label: "How do I apply for a new connection?", href: "/services/new-water-application/" },
-                    { label: "How do I request a reconnection?",   href: "/services/reconnection/" },
-                    { label: "Senior citizen discount eligibility", href: "/services/senior-citizen-discount/" },
-                    { label: "Freedom of Information requests",    href: "/transparency/foi/" },
-                  ].map(({ label, href }) => (
+                    { label: "How do I pay my bill?",                href: "/services/payment/",                  external: false },
+                    { label: "How do I check my bill online?",       href: "https://bills.pinas.app/tmcwd",        external: true  },
+                    { label: "How do I apply for a new connection?", href: "/services/new-water-application/",    external: false },
+                    { label: "How do I request a reconnection?",     href: "/services/reconnection/",             external: false },
+                    { label: "Senior citizen discount eligibility",  href: "/services/senior-citizen-discount/",  external: false },
+                    { label: "Freedom of Information requests",      href: "/transparency/foi/",                  external: false },
+                  ].map(({ label, href, external }) => (
                     <li key={href}>
-                      <a href={href} className={`${linkClass} flex items-center justify-between gap-2`}>
+                      <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className={`${linkClass} flex items-center justify-between gap-2`}>
                         {label}
                         <ArrowUpRight size={14} className="shrink-0 opacity-50" aria-hidden="true" />
                       </a>
