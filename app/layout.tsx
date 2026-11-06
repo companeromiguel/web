@@ -8,7 +8,6 @@ import BackToTop from "@/components/layout/BackToTop";
 import AccessibilityWidget from "@/components/layout/AccessibilityWidget";
 import MaintenanceOverlay from "@/components/layout/MaintenanceOverlay";
 import NavigationProgress from "@/components/layout/NavigationProgress";
-import PageLoader from "@/components/layout/PageLoader";
 
 /* ── Fonts ─────────────────────────────────────────────────────────────
    next/font self-hosts both — no runtime requests to Google.
@@ -90,7 +89,6 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/imgv3.jpg" fetchPriority="high" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
-        <PageLoader />
         <NavigationProgress />
         <DataPrivacyModal />
         <MaintenanceOverlay />
