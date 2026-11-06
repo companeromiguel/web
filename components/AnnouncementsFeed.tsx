@@ -11,6 +11,19 @@ function formatDate(dateStr: string): string {
 function formatDateIso(dateStr: string): string {
   try { return new Date(dateStr).toISOString().split("T")[0]; } catch { return ""; }
 }
+function relativeDate(dateStr: string): string {
+  try {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins  = Math.floor(diff / 60000);
+    const hours = Math.floor(diff / 3600000);
+    const days  = Math.floor(diff / 86400000);
+    if (mins < 60)  return mins <= 1 ? "Just now" : `${mins} minutes ago`;
+    if (hours < 24) return hours === 1 ? "1 hour ago" : `${hours} hours ago`;
+    if (days === 1) return "Yesterday";
+    if (days < 7)   return `${days} days ago`;
+    return formatDate(dateStr);
+  } catch { return formatDate(dateStr); }
+}
 
 export default function AnnouncementsFeed() {
   const [items, setItems]   = useState<FeedItem[]>([]);
@@ -85,8 +98,12 @@ export default function AnnouncementsFeed() {
             </div>
           )}
           <div className="flex flex-col flex-1 p-4 gap-2">
-            <time className="text-[11px] text-[#2A2A29]/35 tabular-nums" dateTime={formatDateIso(item.pubDate)}>
-              {formatDate(item.pubDate)}
+            <time
+              className="text-[11px] font-medium text-[#0591D4]/80 tabular-nums"
+              dateTime={formatDateIso(item.pubDate)}
+              title={formatDate(item.pubDate)}
+            >
+              {relativeDate(item.pubDate)}
             </time>
             <p className="text-sm font-medium text-[#2A2A29] group-hover:text-[#0591D4] transition-colors leading-snug line-clamp-2">
               {item.title}
